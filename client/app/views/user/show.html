@@ -1,0 +1,34 @@
+<form name="userForm" class="form-horizontal" ng-submit="update(userForm)" novalidate>
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="email">Email</label>
+    <div class="col-md-5">
+      <input id="email" name="email" type="text" class="form-control input-md" ng-model="user.email" disabled />
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="name">Name</label>
+    <div class="col-md-5">
+      <input id="name" name="name" type="text" class="form-control input-md" ng-model="user.name" disabled />
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="firstname">Firstname</label>
+    <div class="col-md-5">
+      <input id="firstname" name="firstname" type="text" class="form-control input-md" ng-model="user.firstname" />
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="lastname">Lastname</label>
+    <div class="col-md-5">
+      <input id="lastname" name="lastname" type="text" class="form-control input-md" ng-model="user.lastname" />
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="login"></label>
+    <div class="col-md-5">
+      <button id="updateBtn" type="submit" class="btn btn-success btn-block">Update</button>
+      <button id="cancelBtn" type="button" class="btn btn-success btn-block" ng-click="cancel()">Cancel</button>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,5 @@
+.tmp
+.sass-cache
+node_modules
+client/app/bower_components
+.DS_Store

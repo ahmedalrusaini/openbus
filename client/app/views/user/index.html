@@ -1,0 +1,14 @@
+<table class="table table-striped table-bordered">
+  <tr>
+    <th>Email</th>
+    <th>Role</th>
+    <th>Firstname</th>
+    <th>Lastname</th>
+  </tr>
+  <tr ng-repeat="user in users">
+    <td><a ng-href="/users/{{user._id}}">{{user.email}}</a></td>
+    <td>{{user.role}}</td>
+    <td>{{user.firstname}}</td>
+    <td>{{user.lastname}}</td>
+  </tr>
+</table>

@@ -1,0 +1,28 @@
+<div class="navbar navbar-default navbar-static-top header" ng-controller="NavbarCtrl" >
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" data-toggle="collapse" 
+              ng-init="isCollapsed = true" ng-click="isCollapsed = !isCollapsed">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="/" class="navbar-brand">openbus <i class="fa fa-at"></i> {{pageTitle}}</a>
+    </div>
+    <div ng-class="{collapse: isCollapsed}" class="navbar-collapse collapse" id="navbar-main">
+      <ul class="nav navbar-nav navbar-right" ng-show="isLoggedIn()">
+        <li ng-repeat="item in menu" ng-class="{active: isActive(item.link)}">
+            <a ng-href="{{item.link}}">{{item.title}}</a>
+        </li>
+
+        <li role="presentation" ng-class="{active: isActive('/')}"><a ng-href="/">Home</a></li>
+        <li role="presentation" ng-class="{active: isActive('/users')}"><a href="/users">Users</a></li>
+      
+        <li ng-show="isAdmin()" ng-class="{active: isActive('/admin')}"><a href="/admin">Admin</a></li>
+        <li role="presentation"><a href="/" ng-click="logout()"><i class="fa fa-sign-out"></i>&nbsp;</a></li>        
+      </ul>
+      <ul class="nav navbar-nav navbar-right" ng-show="!isLoggedIn()">
+        <li role="presentation" class="active"><a href="/" ng-click="login()"><i class="fa fa-sign-in"></i>&nbsp;</a></li>
+      </ul>
+    </div>
+</div>
