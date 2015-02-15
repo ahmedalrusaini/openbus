@@ -16,7 +16,8 @@ module.exports = function (grunt) {
     cdnify: 'grunt-google-cdn',
     protractor: 'grunt-protractor-runner',
     buildcontrol: 'grunt-build-control',
-    compass: 'grunt-compass-contrib'
+    compass: 'grunt-compass-contrib',
+    injector: 'grunt-asset-injector'
   });
 
   // Time how long tasks take. Can help when optimizing build times
@@ -54,16 +55,10 @@ module.exports = function (grunt) {
       }
     },
     watch: {
-      bower: {
-        files: ['<%= yeoman.client %>/bower.json'],
-        tasks: ['wiredep']
-      },
       injectJS: {
         files: [
-          '<%= yeoman.client %>/app/**/*.js',
-          '!<%= yeoman.client %>/app/**/*.spec.js',
-          '!<%= yeoman.client %>/app/**/*.mock.js',
-          '!<%= yeoman.client %>/app/scripts/app.js'],
+          '<%= yeoman.client %>/app/vendor/scripts/*.js'
+        ],
         tasks: ['injector:scripts']
       },
       mochaTest: {
@@ -205,6 +200,27 @@ module.exports = function (grunt) {
               }, 500);
             });
           }
+        }
+      }
+    },
+    
+    injector: {
+      options: {
+
+      },
+      // Inject application script files into index.html (doesn't include bower)
+      scripts: {
+        options: {
+          transform: function(filePath) {
+            filePath = filePath.replace('/./client/app/', '');
+            filePath = filePath.replace('/.tmp/', '');
+            return '<script src="' + filePath + '"></script>';
+          },
+          starttag: '<!-- injector:js -->',
+          endtag: '<!-- endinjector -->'
+        },
+        files: {
+          '<%= yeoman.client %>/app/index.html': ['<%= yeoman.client %>/app/vendor/scripts/*.js']
         }
       }
     },
@@ -529,6 +545,7 @@ module.exports = function (grunt) {
       return grunt.task.run([
         'clean:server',
         'env:all',
+        'injector',
         'concurrent:server',
         'wiredep',
         'autoprefixer',
@@ -541,6 +558,7 @@ module.exports = function (grunt) {
       'clean:server',
       'env:all',
       'concurrent:server',
+      'injector',
       'wiredep',
       'autoprefixer',
       'express:dev',
@@ -569,6 +587,7 @@ module.exports = function (grunt) {
         'clean:server',
         'env:all',
         'concurrent:test',
+        'injector',
         'autoprefixer',
         'karma'
       ]);
@@ -597,6 +616,7 @@ module.exports = function (grunt) {
   grunt.registerTask('build', [
     'clean:dist',
     'concurrent:dist',
+    'injector',
     'wiredep',
     'useminPrepare',
     'autoprefixer',
@@ -608,7 +628,8 @@ module.exports = function (grunt) {
     'cssmin',
     'uglify',
     'rev',
-    'usemin'
+    'usemin',
+    'htmlmin'
   ]);
 
   grunt.registerTask('default', [
