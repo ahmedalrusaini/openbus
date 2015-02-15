@@ -12,5 +12,5 @@ angular.module('openbusApp')
     return $resource('/api/users/:id', { id: '@_id' }, {
       me: { method: 'GET', params: { id: 'me' } },
       update: { method: 'PUT' }
-    });
+    })
   });

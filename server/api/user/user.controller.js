@@ -1,7 +1,6 @@
 'use strict';
 
 var User = require('./user.model');
-var passport = require('passport');
 var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
 
@@ -16,7 +15,7 @@ var validationError = function(res, err) {
 exports.index = function(req, res) {
   User.find({}, '-salt -hashedPassword', function (err, users) {
     if(err) return res.send(500, err);
-    res.json(200, users);
+    res.status(200).json(users);
   });
 };
 
@@ -39,11 +38,11 @@ exports.create = function (req, res, next) {
  */
 exports.show = function (req, res, next) {
   var userId = req.params.id;
-
+  
   User.findById(userId, function (err, user) {
     if (err) return next(err);
     if (!user) return res.send(401);
-    res.json(user.profile);
+    res.json(user);
   });
 };
 
@@ -62,16 +61,17 @@ exports.destroy = function(req, res) {
  * Update user
  */
 exports.update = function(req, res, next) {
-  var userId = req.user._id;
-  
-  console.log("userId" + userId);
+  var userId = req.params.id;
   
   User.findById(userId, function (err, user) {
-    user.firstname = req.user.firstnamte;
-    user.lastname = req.user.lastname;
+    user.firstname = req.body.firstname;
+    user.lastname = req.body.lastname;
+    user.age = req.body.age;
+    user.birthdate = req.body.birthdate;
+    console.log("user birthdate + " + req.body.birthdate);
     user.save(function(err) {
       if (err) return validationError(res, err);
-      res.send(200);
+      res.send(user);
     });
   });
 };
@@ -102,6 +102,7 @@ exports.changePassword = function(req, res, next) {
  */
 exports.me = function(req, res, next) {
   var userId = req.user._id;
+  
   User.findOne({
     _id: userId
   }, '-salt -hashedPassword', function(err, user) { // don't ever give out the password or salt

@@ -3,9 +3,13 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var crypto = require('crypto');
+var _ = require('lodash');
 
 var UserSchema = new Schema({
-  name: String,
+  firstname: String,
+  lastname: String,
+  age: Number,
+  birthdate: Date,
   email: { type: String, lowercase: true },
   role: {
     type: String,
@@ -14,6 +18,10 @@ var UserSchema = new Schema({
   hashedPassword: String,
   provider: String,
   salt: String
+},{
+  toJSON: {
+    virtuals: true
+  }
 });
 
 /**
@@ -35,9 +43,19 @@ UserSchema
   .virtual('profile')
   .get(function() {
     return {
-      'name': this.name,
-      'role': this.role
+      '_id': this._id,
+      'email': this.email,
+      'firstname': this.firstname,
+      'lastname': this.lastname,
+      'role': this.role,
+      'fullname': this.fullname
     };
+  });
+
+UserSchema
+  .virtual('fullname')
+  .get(function(){
+    return (this.firstname || '') + " " + (this.lastname || '');
   });
 
 // Non-sensitive info we'll be putting in the token

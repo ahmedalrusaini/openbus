@@ -55,7 +55,7 @@ module.exports = function (grunt) {
     },
     watch: {
       bower: {
-        files: ['bower.json'],
+        files: ['<%= yeoman.client %>/bower.json'],
         tasks: ['wiredep']
       },
       injectJS: {

@@ -10,12 +10,14 @@
 angular.module('openbusApp')
   .controller('UserCtrl', function ($scope, $rootScope, $routeParams, $location, User) {
     $rootScope.pageTitle = "user";
+     
     $scope.user = User.get({ id: $routeParams.id });
-    console.log($scope.user);
+    
     $scope.update = function(form) {
       $scope.user.$update({},
-        function(value, responseHeaders){
-          $scope.user = value;
+        function(user, responseHeaders){
+          $scope.user = user;
+          $scope.messages
         },
         function(httpResponse){
 
@@ -23,6 +25,6 @@ angular.module('openbusApp')
     },
     
     $scope.cancel = function() {
-
+      $scope.user = User.get({ id: $routeParams.id });
     }
   });

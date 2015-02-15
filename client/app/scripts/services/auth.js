@@ -5,7 +5,6 @@ angular.module('openbusApp')
     var currentUser = {};
     if($cookieStore.get('token')) {
       currentUser = User.me();
-      console.log("[Auth] currentUser.hasOwnProperty('role'): " + currentUser.hasOwnProperty('role')); 
     }
 
     return {  
@@ -20,9 +19,7 @@ angular.module('openbusApp')
       login: function(user, callback) {
         var cb = callback || angular.noop;
         var deferred = $q.defer();
-        
-        console.log("loggin in " + user.email)
-        
+      
         $http.post('/auth/local', {
           email: user.email,
           password: user.password

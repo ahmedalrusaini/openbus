@@ -31,9 +31,6 @@ angular
         templateUrl: 'views/login.html',
         controller: 'LoginCtrl'
       })
-      .when('/logout', {
-        controller: 'LoginCtrl'
-      })
       .when('/users/:id', {
         templateUrl: 'views/user/show.html',
         controller: 'UserCtrl'
@@ -41,6 +38,10 @@ angular
       .when('/users', {
         templateUrl: 'views/user/index.html',
         controller: 'UsersCtrl'
+      })
+      .when('/ob_users', {
+        templateUrl: 'views/ob_users.html',
+        controller: 'ObUsersCtrl'
       })
       .otherwise({
         redirectTo: '/'
@@ -63,7 +64,6 @@ angular
 
       // Intercept 401s and redirect you to login
       responseError: function(response) {
-        console.log("[app.js] authInterceptor responseError");
         if(response.status === 401) {
           $location.path('/login');
           // remove any stale tokens
