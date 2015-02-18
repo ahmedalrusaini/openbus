@@ -1,10 +1,12 @@
-@import "variables";
+@import "bootstrap-sass-official/assets/stylesheets/bootstrap/_variables.scss";
+
 $navbar-default-bg:                $body-bg;
 $navbar-default-link-active-bg:    $body-bg;
 $navbar-height:                    35px;
 $navbar-padding-vertical:          (($navbar-height - $line-height-computed) / 2);
 
-//$icon-font-path: "../bower_components/font-awesome/fonts";
+//$icon-font-path: "/bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
+$fa-font-path: "../bower_components/font-awesome/fonts";
 // bower:scss
 @import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
 // endbower

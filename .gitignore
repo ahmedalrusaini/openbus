@@ -1,5 +1,12 @@
+.DS_Store
 .tmp
 .sass-cache
 node_modules
-client/app/bower_components
-.DS_Store
+client/app/bower_components/*
+!client/app/bower_components/angular-bootstrap-datetimepicker
+client/app/bower_components/angular-bootstrap-datetimepicker/src/css
+client/app/bower_components/angular-bootstrap-datetimepicker/README.md
+client/app/bower_components/angular-bootstrap-datetimepicker/LICENSE
+client/app/bower_components/angular-bootstrap-datetimepicker/contributing.md
+client/app/bower_components/angular-bootstrap-datetimepicker/bower.json
+client/app/bower_components/angular-bootstrap-datetimepicker/.bower.json

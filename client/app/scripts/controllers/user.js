@@ -22,9 +22,13 @@ angular.module('openbusApp')
         function(httpResponse){
 
         });
-    },
+    };
     
     $scope.cancel = function() {
       $scope.user = User.get({ id: $routeParams.id });
-    }
+    };
+    
+    $scope.beforeRender = function($view, $dates, $leftDate, $upDate, $rightDate) {
+      
+    };
   });

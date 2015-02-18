@@ -1,4 +1,3 @@
-
 <form name="userForm" class="form-horizontal" ng-submit="update(userForm)" novalidate>
   <div class="form-group">
     <label class="col-md-4 control-label" for="email">Email</label>
@@ -27,14 +26,24 @@
   <div class="form-group">
     <label class="col-md-4 control-label" for="birthdate">Birthdate</label>
     <div class="col-md-5">
-      <div class="input-group">
-          <input id="birthdate" name="birthdate" type="text" class="form-control input-md" ng-model="user.birthdate" />        <span class="input-group-btn">
-          <button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>
-        </span>
-      </div>      
+      <div class="dropdown">
+        <a class="dropdown-toggle" id="dropdown1" role="button" data-toggle="dropdown" data-target="#" href="#">
+          <div class="input-group">
+            <input id="birthdate" name="birthdate" type="date" class="form-control input-md" data-ng-model="user.birthdate" />
+            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+          </div>
+        </a>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+          <datetimepicker data-ng-model="user.birthdate" 
+                          data-datetimepicker-config="{ 
+                            dropdownSelector: '#dropdown1',
+                            startView:'day', minView:'day'
+                          }"
+                          data-on-time-set = "formatDate"></datetimepicker>
+        </ul>
+      </div>
     </div>
   </div>
-  
   <div class="form-group">
     <label class="col-md-4 control-label" for="login"></label>
     <div class="col-md-5">

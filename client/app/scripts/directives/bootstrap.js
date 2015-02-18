@@ -36,5 +36,5 @@ angular.module('openbusApp')
         spacerCol: '@',
         buttonCol: '@',
       }
-    };
+    }
   });
