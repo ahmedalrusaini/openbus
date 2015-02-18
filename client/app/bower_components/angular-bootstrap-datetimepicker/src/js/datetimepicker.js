@@ -344,8 +344,6 @@
               if (configuration.dropdownSelector) {
                 jQuery(configuration.dropdownSelector).dropdown('toggle');
               }
-              
-              newDate.format('L');
 
               scope.onSetTime({newDate: newDate, oldDate: oldDate});
 

@@ -10,14 +10,16 @@
 angular.module('openbusApp')
   .controller('UserCtrl', function ($scope, $rootScope, $routeParams, $location, User) {
     $rootScope.pageTitle = "user";
-     
+    $scope.alerts = [];
+    
     $scope.user = User.get({ id: $routeParams.id });
     
     $scope.update = function(form) {
       $scope.user.$update({},
         function(user, responseHeaders){
+          console.log("user saved");
           $scope.user = user;
-          $scope.messages
+          $scope.alerts.push({type: 'success', message: 'User saved'});
         },
         function(httpResponse){
 
@@ -28,7 +30,8 @@ angular.module('openbusApp')
       $scope.user = User.get({ id: $routeParams.id });
     };
     
-    $scope.beforeRender = function($view, $dates, $leftDate, $upDate, $rightDate) {
-      
+    $scope.closeAlert = function(index) {
+      $scope.alerts.splice(index, 1);
     };
+    
   });
