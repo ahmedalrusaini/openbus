@@ -17,11 +17,11 @@
     </div>    
   </div>
   <div ng-show="!user.id">
-    <div class="form-group" ng-class="{ 'has-error': userForm.email.$invalid && submitted }" >
+    <div class="form-group" ng-class="{ 'has-error': userForm.password.$invalid && submitted }" >
       <label class="col-sm-4 control-label" for="password">Password</label>
       <div class="col-sm-5">
         <input id="password" name="password" type="password" class="form-control" ng-model="user.password" ng-required="!user.id"/>
-        <div ng-messages="userForm.password_confirmation.$error" ng-show="userForm.password_confirmation.$invalid && submitted" class="help-block">
+        <div ng-messages="userForm.password.$error" ng-show="userForm.password.$invalid && submitted" class="help-block">
           <div ng-message="required">Required</div>
         </div>
       </div>
@@ -29,7 +29,7 @@
     <div class="form-group" ng-class="{ 'has-error': userForm.password_confirmation.$invalid && submitted }" >
       <label class="col-sm-4 control-label" for="password">Password confirmation</label>
       <div class="col-sm-5">
-        <input id="password_confirmation" name="password_confirmation" type="password" class="form-control" ng-model="password_confirmation" ng-required="!user.id" />
+        <input id="password_confirmation" name="password_confirmation" type="password" class="form-control" ng-model="user.password_confirmation" ng-required="!user.id" />
         <div ng-messages="userForm.password_confirmation.$error" ng-show="userForm.password_confirmation.$invalid && submitted" class="help-block">
           <div ng-message="required">Required</div>
           <div ng-message="match">Password does not match</div>

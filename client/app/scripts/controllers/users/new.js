@@ -8,14 +8,17 @@
  * Controller of the openbusApp
  */
 angular.module('openbusApp')
-  .controller('UsersNewCtrl', function ($scope, User) {
+  .controller('UsersNewCtrl', function ($scope, $location, User) {
     $scope.user = {}
     $scope.submitted = false;
+    $scope.editMode = true;
   
     $scope.submit = function(form) {      
       $scope.alerts = [];
       $scope.submitted = true;
       
+      console.log($scope.user.password_confirmation);
+      console.log($scope.user.password);
       if($scope.user.password !== $scope.user.password_confirmation) {
         form.password_confirmation.$setValidity("match", false);
       }
@@ -23,8 +26,7 @@ angular.module('openbusApp')
       if(form.$valid) {        
         User.save($scope.user, 
           function(user, responseHeaders){
-            $scope.user = user;
-            $scope.alerts.push({type: 'success', message: 'User created'});
+            $location.path("/users/"+user.id);
           },
           function(httpResponse){
             var message = httpResponse.data.message || "User creation failed";
