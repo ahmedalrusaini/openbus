@@ -32,17 +32,17 @@ angular
         templateUrl: 'views/login.html',
         controller: 'LoginCtrl'
       })
-      .when('/users/:id', {
-        templateUrl: 'views/user/show.html',
-        controller: 'UserCtrl'
-      })
       .when('/users', {
-        templateUrl: 'views/user/index.html',
-        controller: 'UsersCtrl'
+        templateUrl: 'views/users/index.html',
+        controller: 'UsersIndexCtrl'
       })
-      .when('/ob_users', {
-        templateUrl: 'views/ob_users.html',
-        controller: 'ObUsersCtrl'
+      .when('/users/new', {
+        templateUrl: 'views/users/new.html',
+        controller: 'UsersNewCtrl'
+      })
+      .when('/users/:id', {
+        templateUrl: 'views/users/show.html',
+        controller: 'UsersShowCtrl'
       })
       .otherwise({
         redirectTo: '/'

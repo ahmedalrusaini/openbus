@@ -11,20 +11,18 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'client/bower_components/jquery/dist/jquery.js',
-      'client/bower_components/angular/angular.js',
-      'client/bower_components/angular-mocks/angular-mocks.js',
-      'client/bower_components/angular-resource/angular-resource.js',
-      'client/bower_components/angular-cookies/angular-cookies.js',
-      'client/bower_components/angular-sanitize/angular-sanitize.js',
-      'client/bower_components/angular-route/angular-route.js',
-      'client/bower_components/lodash/dist/lodash.compat.js',
-      'client/bower_components/angular-socket-io/socket.js',
+      'client/app/bower_components/jquery/dist/jquery.js',
+      'client/app/bower_components/angular/angular.js',
+      'client/app/bower_components/angular-mocks/angular-mocks.js',
+      'client/app/bower_components/angular-resource/angular-resource.js',
+      'client/app/bower_components/angular-cookies/angular-cookies.js',
+      'client/app/bower_components/angular-sanitize/angular-sanitize.js',
+      'client/app/bower_components/angular-route/angular-route.js',
+      'client/app/bower_components/lodash/dist/lodash.compat.js',
+      'client/app/bower_components/angular-socket-io/socket.js',
       'client/app/scripts/app.js',
       'client/app/**/*.js',
-      'client/components/**/*.js',
-      'client/app/**/*.html',
-      'client/components/**/*.html'
+      'client/app/**/*.html'
     ],
 
     preprocessors: {
@@ -50,7 +48,8 @@ module.exports = function(config) {
     // level of logging
     // possible values: LOG_DISABLE || LOG_ERROR || LOG_WARN || LOG_INFO || LOG_DEBUG
     logLevel: config.LOG_INFO,
-
+    
+    colors: true,
 
     // enable / disable watching file and executing tests whenever any file changes
     autoWatch: false,

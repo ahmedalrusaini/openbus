@@ -55,6 +55,9 @@ UserSchema
 UserSchema
   .virtual('fullname')
   .get(function(){
+    if(!this.firstname || !this.lastname) {
+      return "";
+    }
     return (this.firstname || '') + " " + (this.lastname || '');
   });
 

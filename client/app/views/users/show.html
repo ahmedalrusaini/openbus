@@ -1,0 +1,10 @@
+<div class="page-header">
+  <h4>
+    User: {{user.fullname || user.email}}
+    <span class="pull-right">
+      <a href="#" ng-show="!editMode" ng-click="toggleEditMode()"><i class="fa fa-edit"></i></a>
+    </span>
+  </h4>
+</div>
+<ng-include src="'views/users/_show.html'" ng-hide="editMode"></ng-include>
+<ng-include src="'views/users/_form.html'" ng-show="editMode"></ng-include>

@@ -2,15 +2,13 @@
 
 /**
  * @ngdoc function
- * @name openbusApp.controller:AboutCtrl
+ * @name openbusApp.controller:UsersIndexCtrl
  * @description
- * # AboutCtrl
+ * # UsersIndexCtrl
  * Controller of the openbusApp
  */
 angular.module('openbusApp')
-  .controller('UsersCtrl', function ($rootScope, $scope, User) {
+  .controller('UsersIndexCtrl', function ($rootScope, $scope, User) {
     $rootScope.pageTitle = 'users';
-    
     $scope.users = User.query();
-        
   });

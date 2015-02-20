@@ -17,6 +17,14 @@ angular.module('openbusApp')
     
     $scope.menu = $rootScope.menu || {};
     
+    var submenu = function() {
+      $scope.submenu = [];
+      if($location.path().match(/\/users/)) {
+        $scope.submenu.push({url: "/users", title: "List"});
+        $scope.submenu.push({url: "/users/new", title: "Create"});
+      }
+    };
+  
     $scope.isCollapsed = true;
     $scope.isLoggedIn = Auth.isLoggedIn;
     $scope.isAdmin = Auth.isAdmin;
@@ -24,7 +32,29 @@ angular.module('openbusApp')
     $scope.logout = Auth.logout;
 
     $scope.isActive = function(route) {
-      return route === $location.path();
+      if(route === '/') {
+        return route === $location.path();
+      } else {
+        return $location.path().match(new RegExp(route));
+      }
     };
+  
+    $scope.isSubActive = function(route) {
+      if(route === '/') {
+        return route === $location.path();
+      } else {
+        return $location.path().match(new RegExp(route+"$"));
+      }
+    };
+  
+    $scope.isHome = function() {
+      return $location.path() === '/';
+    }
+  
+    $rootScope.$on('$routeChangeStart', function(event, next) {
+      submenu();
+    });
+  
+    submenu();
         
   });

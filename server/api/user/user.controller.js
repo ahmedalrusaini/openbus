@@ -5,7 +5,8 @@ var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
 
 var validationError = function(res, err) {
-  return res.json(422, err);
+  var theErr = { message: err.message };
+  return res.status(422).json(theErr);
 };
 
 /**
@@ -14,7 +15,7 @@ var validationError = function(res, err) {
  */
 exports.index = function(req, res) {
   User.find({}, '-salt -hashedPassword', function (err, users) {
-    if(err) return res.send(500, err);
+    if(err) return res.status(500).json(err);
     res.status(200).json(users);
   });
 };
@@ -25,11 +26,11 @@ exports.index = function(req, res) {
 exports.create = function (req, res, next) {
   var newUser = new User(req.body);
   newUser.provider = 'local';
-  newUser.role = 'user';
+  newUser.role = newUser.role || 'user';
+  
   newUser.save(function(err, user) {
     if (err) return validationError(res, err);
-    var token = jwt.sign({_id: user._id }, config.secrets.session, { expiresInMinutes: 60*5 });
-    res.json({ token: token });
+    res.json(user);
   });
 };
 
@@ -52,7 +53,7 @@ exports.show = function (req, res, next) {
  */
 exports.destroy = function(req, res) {
   User.findByIdAndRemove(req.params.id, function(err, user) {
-    if(err) return res.send(500, err);
+    if(err) return res.status(500).json(err);
     return res.send(204);
   });
 };
@@ -62,18 +63,26 @@ exports.destroy = function(req, res) {
  */
 exports.update = function(req, res, next) {
   var userId = req.params.id;
+
+  var props = req.body;
+  delete props._id;
   
-  User.findById(userId, function (err, user) {
-    user.firstname = req.body.firstname;
-    user.lastname = req.body.lastname;
-    user.age = req.body.age;
-    user.birthdate = req.body.birthdate;
-    console.log("user birthdate + " + req.body.birthdate);
-    user.save(function(err) {
-      if (err) return validationError(res, err);
-      res.send(user);
-    });
-  });
+  User.findByIdAndUpdate({_id: userId}, { $set: props}, function(err, user){
+    if (err) return validationError(res, err);
+    res.send(user);
+  })
+  
+//  User.findById(userId, function (err, user) {
+//    user.firstname = req.body.firstname;
+//    user.lastname = req.body.lastname;
+//    user.age = req.body.age;
+//    user.birthdate = req.body.birthdate;
+//    
+//    user.save(function(err) {
+//      if (err) return validationError(res, err);
+//      res.send(user);
+//    });
+//  });
 };
 
 /**

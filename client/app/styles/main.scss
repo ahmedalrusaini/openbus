@@ -6,7 +6,8 @@ $navbar-height:                    35px;
 $navbar-padding-vertical:          (($navbar-height - $line-height-computed) / 2);
 
 //$icon-font-path: "/bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
-$fa-font-path: "../bower_components/font-awesome/fonts";
+//$fa-font-path: "../bower_components/font-awesome/fonts";
+
 // bower:scss
 @import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
 // endbower
@@ -20,8 +21,8 @@ $fa-font-path: "../bower_components/font-awesome/fonts";
 
 /* Space out content a bit */
 body {
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -33,30 +34,55 @@ body {
 }
 
 /* Custom page header */
-.header {
+.navbar.header,
+.navbar.subheader{
+  margin-bottom: 0px;
+  
   ul {
     li.active {
-      border-bottom: 5px solid $component-active-bg;
-//      background: -webkit-linear-gradient($body-bg, $navbar-default-link-active-bg, $body-bg); /* For Safari 5.1 to 6.0 */
-//      background: -o-linear-gradient($body-bg, $navbar-default-link-active-bg, $body-bg); /* For Opera 11.1 to 12.0 */
-//      background: -moz-linear-gradient($body-bg, $navbar-default-link-active-bg, $body-bg); /* For Firefox 3.6 to 15 */
-//      background: linear-gradient($body-bg, $navbar-default-link-active-bg, $body-bg); /* Standard syntax */
+      border-bottom: 3px solid $component-active-bg;
     }
   }
 }
 
+.navbar.subheader {
+  background-color: darken($body-bg, 2%);
+  padding-top: 0px;
+  margin-top: 0px;
+  margin-bottom: 20px !important;
+  
+  ul {
+    li.active {
+      a,
+      a:hover {
+        background-color: darken($body-bg, 2%);
+      }
+    }
+  }
+}
+
+input:disabled {
+  background-color: lighten($gray-lighter,3%) !important;
+  cursor: default !important;
+}
+
 /* Custom page footer */
 .footer {
-  padding-top: 19px;
-  color: #777;
-  border-top: 1px solid #e5e5e5;
+  padding-top: 20px;
+  color: $gray-light;
+  border-top: 1px solid $gray-lighter;
 }
 
-.container-narrow > hr {
-  margin: 30px 0;
+.page-header {
+  margin-top: 0px;
+  padding-bottom: 0px;
 }
 
-/* Main marketing message and sign up button */
+//.container-narrow > hr {
+//  margin: 30px 0;
+//}
+//
+///* Main marketing message and sign up button */
 .jumbotron {
   text-align: center;
   border-bottom: 1px solid #e5e5e5;
@@ -98,4 +124,3 @@ body {
     border-bottom: 0;
   }
 }
-
