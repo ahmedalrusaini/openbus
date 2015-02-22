@@ -17,7 +17,7 @@
           </li>
 
 <!--          <li role="presentation" ng-class="{active: isActive('/')}"><a ng-href="/">Home</a></li>-->
-          <li ng-show="isAdmin()" role="presentation" ng-class="{active: isActive('/users')}"><a href="/users">Users</a></li>
+          <li ng-show="isAdmin()" role="presentation" ng-class="{active: isActive('/users')}"><a href="/users">{{ 'menu.users.title' | translate }}</a></li>
 
           <li role="presentation"><a href="/" ng-click="logout()"><i class="fa fa-sign-out"></i>&nbsp;</a></li>
         </ul>
@@ -31,8 +31,13 @@
   <div class="navbar navbar-default navbar-static-top subheader">
     <ul class="nav navbar-nav" ng-show="isLoggedIn() && !isHome()">
       <li ng-repeat="item in submenu" ng-class="{active: isSubActive(item.url)}">
-        <a ng-href="{{item.url}}">{{item.title}}</a>
+        <a ng-href="{{item.url}}">{{item.title | translate}}</a>
       </li>
     </ul>
+  </div>
+</div>
+<div class="row messages" ng-controller="AlertsCtrl">
+  <div class="col-sm-offset-7 col-sm-5">
+    <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.message}}</alert>
   </div>
 </div>

@@ -4,7 +4,7 @@ angular.module('openbusApp')
   .factory('Auth', function Auth($location, $rootScope, $http, User, $cookieStore, $q) {
     var currentUser = {};
     if($cookieStore.get('token')) {
-      currentUser = User.me();
+      currentUser = User.api.me();
     }
 
     return {  
@@ -26,7 +26,7 @@ angular.module('openbusApp')
         }).
         success(function(data) {
           $cookieStore.put('token', data.token);
-          currentUser = User.me();
+          currentUser = User.api.me();
           deferred.resolve(data);
           return cb();
         }).

@@ -8,17 +8,26 @@
  * Controller of the openbusApp
  */
 angular.module('openbusApp')
-  .controller('UsersIndexCtrl', function ($rootScope, $scope, User) {
+  .controller('UsersIndexCtrl', function ($rootScope, $scope, User, $translate) {
     $rootScope.pageTitle = 'users';
-    $scope.users = User.query();
-  
-    $scope.delete = function(user, index) {
-      $scope.alerts = [];
-      User.delete(user, function(){
-        $scope.alerts.push({type: "success", message:"User " + user.email + " deleted"});
-        $scope.users.splice(index);
-      }, function(err){
-        $scope.alerts.push({type: "danger", message:"User deletion failed"});
-      })
-    }
+    $scope.users = User.api.query();
+
+    $scope.delete = function (user, index) {
+      if (confirm("Delete user?")) {
+        $rootScope.initAlerts()
+        User.api.delete(user, function () {
+          $scope.users.splice(index, 1);
+          
+          $translate('messages.user.success.deleted', {
+              user: user.fullname || user.email
+            })
+            .then(function (msg) {
+              $rootScope.addAlert('success', msg);
+            });
+          
+        }, function (err) {
+          $rootScope.addAlert('danger', 'messages.user.danger.deleted');
+        });
+      }
+    };
   });

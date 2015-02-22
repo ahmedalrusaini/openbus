@@ -1,6 +1,7 @@
 <div class="page-header">
   <h4>
-    User: {{user.fullname || user.email}}
+<!--    {{'user.one' | translate}}: {{user.fullname || user.email}}-->
+    <span translate='user.header.title' translate-values="{user: user.fullname || user.email}"></span>
     <span class="pull-right">
       <a href="#" ng-show="!editMode" ng-click="toggleEditMode()"><i class="fa fa-edit"></i></a>
     </span>

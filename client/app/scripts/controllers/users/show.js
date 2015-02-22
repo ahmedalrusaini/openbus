@@ -8,38 +8,43 @@
  * Controller of the openbusApp
  */
 angular.module('openbusApp')
-  .controller('UsersShowCtrl', function ($scope, $rootScope, $routeParams, $location, User) {
+
+  .controller('UsersShowCtrl', function ($scope, $rootScope, $routeParams, $location, $translate, User) {
     $rootScope.pageTitle = "user";
+    $scope.editMode = $routeParams.action === 'edit';  
+    $scope.user = User.api.get({ id: $routeParams.id });
+    $scope.roles = User.roles;
     
-    $scope.editMode = false;
-    $scope.user = User.get({ id: $routeParams.id });
-    
-    $scope.submit = function(form) {
-      $scope.alerts = [];
+    $scope.submit = function (form) {
+      $rootScope.initAlerts();
       
-      if(form.$valid) {
+      if (form.$valid) {  
         $scope.user.$update({},
-          function(user, responseHeaders){
+          function (user, responseHeaders) {
+            $scope.submitted = false;
             $scope.user = user;
-            $scope.alerts.push({type: 'success', message: 'User saved'});
+            $translate('messages.user.success.updated', {
+                user: $scope.user.fullname || $scope.user.email
+              })
+              .then(function (msg) {
+                $rootScope.addAlert('success', msg);
+              });
           },
-          function(httpResponse){
-            $scope.alerts.push({type: 'danger', message: httpResponse.data.message || "User update failed"});
-          }); 
+          function (httpResponse) {
+            $scope.errors = httpResponse.data.errors;
+            var message = httpResponse.data.message || 'User update failed';
+            $rootScope.addAlert('danger', message );
+          });
       }
-    };
-  
-    $scope.toggleEditMode = function() {
+    }
+
+    $scope.toggleEditMode = function () {
       $scope.editMode = !$scope.editMode;
     }
-    
-    $scope.cancel = function() {
+
+    $scope.cancel = function () {
       $scope.toggleEditMode();
-      $scope.user = User.get({ id: $routeParams.id });
+      $scope.user = User.api.get({ id: $routeParams.id });
     };
-    
-    $scope.closeAlert = function(index) {
-      $scope.alerts.splice(index, 1);
-    };
-    
+
   });

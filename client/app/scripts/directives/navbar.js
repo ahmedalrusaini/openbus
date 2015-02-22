@@ -20,8 +20,8 @@ angular.module('openbusApp')
     var submenu = function() {
       $scope.submenu = [];
       if($location.path().match(/\/users/)) {
-        $scope.submenu.push({url: "/users", title: "List"});
-        $scope.submenu.push({url: "/users/new", title: "Create"});
+        $scope.submenu.push({url: "/users", title: "menu.users.sub.index"});
+        $scope.submenu.push({url: "/users/new", title: "menu.users.sub.new"});
       }
     };
   

@@ -1,0 +1,14 @@
+{
+  "user": {
+    "errors": {
+      "email": {
+        "exists": "This email address is already in use",
+        "required": "Email cannot be blank"
+      },
+      "password": {
+        "required": "Password cannot be blank",
+        "invalid": "Invalid password"
+      }
+    }
+  }
+}

@@ -20,6 +20,7 @@
     "express": "~4.11.1",
     "express-jwt": "^1.0.0",
     "express-session": "^1.0.2",
+    "i18n": "^0.5.0",
     "jsonwebtoken": "^3.2.2",
     "lodash": "^2.4.1",
     "method-override": "^1.0.0",

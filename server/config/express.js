@@ -15,6 +15,7 @@ var errorHandler = require('errorhandler');
 var path = require('path');
 var config = require('./environment');
 var passport = require('passport');
+var i18n = require('i18n');
 
 module.exports = function(app) {
   var env = app.get('env');
@@ -44,4 +45,23 @@ module.exports = function(app) {
     app.use(morgan('dev'));
     app.use(errorHandler()); // Error handler - has to be last
   }
+  
+  i18n.configure({
+    locales: ['en', 'it'],
+    directory: config.root + '/server/config/i18n',
+    defaultLocale: 'en',
+    objectNotation: true,
+    updateFiles: false
+  });
+  
+  app.use(i18n.init);
+  
+  app.use(function(req, res, next) {
+    try {
+      var appLocale = require(config.root + "/client/app/scripts/i18n/locale.js");
+      res.setLocale(appLocale.language);  
+    } catch(e) {}
+    
+    next();
+  });
 };

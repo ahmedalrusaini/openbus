@@ -9,8 +9,19 @@
  */
 angular.module('openbusApp')
   .factory('User', function ($resource) {
-    return $resource('/api/users/:id', { id: '@_id' }, {
-      me: { method: 'GET', params: { id: 'me' } },
-      update: { method: 'PUT' }
-    })
+    return {
+      api: $resource('/api/users/:id', { id: '@_id' }, {
+        me: { method: 'GET', params: { id: 'me' } },
+        update: { method: 'PUT' }
+      }),
+      roles: [{
+          id: 'user',
+          name: 'user.roles.user'
+        }, {
+          id: 'admin',
+          name: 'user.roles.admin'
+        }
+        
+      ]
+    }
   });

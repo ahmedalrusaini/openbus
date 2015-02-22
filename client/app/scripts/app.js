@@ -19,10 +19,12 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'ui.bootstrap.datetimepicker'
+    'ui.bootstrap.datetimepicker',
+    'pascalprecht.translate',
+    'ui.select'
   ])
   
-  .config(function ($routeProvider, $locationProvider, $httpProvider) {
+  .config(function ($routeProvider, $locationProvider, $httpProvider, uiSelectConfig) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
@@ -44,12 +46,17 @@ angular
         templateUrl: 'views/users/show.html',
         controller: 'UsersShowCtrl'
       })
+      .when('/users/:id/:action', {
+        templateUrl: 'views/users/show.html',
+        controller: 'UsersShowCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
     
     $locationProvider.html5Mode(true);
     $httpProvider.interceptors.push('authInterceptor');
+    uiSelectConfig.theme = 'bootstrap';
   })
   
   .factory('authInterceptor', function ($rootScope, $q, $cookieStore, $location) {

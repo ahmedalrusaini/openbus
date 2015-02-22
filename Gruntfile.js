@@ -57,7 +57,7 @@ module.exports = function (grunt) {
     watch: {
       injectJS: {
         files: [
-          '<%= yeoman.client %>/app/vendor/scripts/*.js'
+          '<%= yeoman.client %>/app/scripts/i18n/*.js'
         ],
         tasks: ['injector:scripts']
       },
@@ -220,7 +220,9 @@ module.exports = function (grunt) {
           endtag: '<!-- endinjector -->'
         },
         files: {
-          '<%= yeoman.client %>/app/index.html': ['<%= yeoman.client %>/app/vendor/scripts/*.js']
+          '<%= yeoman.client %>/app/index.html': [
+            '<%= yeoman.client %>/app/scripts/i18n/*.js'
+          ]
         }
       }
     },

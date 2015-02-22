@@ -8,35 +8,41 @@
  * Controller of the openbusApp
  */
 angular.module('openbusApp')
-  .controller('UsersNewCtrl', function ($scope, $location, User) {
+  .controller('UsersNewCtrl', function ($rootScope, $scope, $location, User, $translate) {
     $scope.user = {}
     $scope.submitted = false;
     $scope.editMode = true;
-  
-    $scope.submit = function(form) {      
-      $scope.alerts = [];
+    $scope.roles = User.roles;
+
+    $scope.submit = function (form) {
+      $rootScope.initAlerts();
       $scope.submitted = true;
-      
-      console.log($scope.user.password_confirmation);
-      console.log($scope.user.password);
-      if($scope.user.password !== $scope.user.password_confirmation) {
+
+      if ($scope.user.password !== $scope.user.password_confirmation) {
         form.password_confirmation.$setValidity("match", false);
+      } else {
+        form.password_confirmation.$setValidity("match", true);
       }
-    
-      if(form.$valid) {        
-        User.save($scope.user, 
-          function(user, responseHeaders){
-            $location.path("/users/"+user.id);
+
+      if (form.$valid) {
+        User.api.save($scope.user,
+          function (user, responseHeaders) {
+            $scope.submitted = false;
+            
+            $translate('messages.user.success.created', {
+                user: $scope.user.fullname || $scope.user.email
+              })
+              .then(function (msg) {
+                $rootScope.addAlert('success', msg);
+              });
+
+            $location.path("/users/" + user.id);
           },
-          function(httpResponse){
-            var message = httpResponse.data.message || "User creation failed";
-            $scope.alerts.push({type: 'danger', message: message });
-          }); 
+          function (httpResponse) {
+            $scope.errors = httpResponse.data.errors;            
+            var message = httpResponse.data.message || 'User creation failed';
+            $rootScope.addAlert('danger', message );
+          });
       }
     };
-  
-    $scope.closeAlert = function(index) {
-      $scope.alerts.splice(index, 1);
-    };    
-
   });

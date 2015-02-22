@@ -1,0 +1,14 @@
+{
+  "user": {
+    "errors": {
+      "email": {
+        "exists": "Questa email è già utilizzata",
+        "required": "L'email non può essere vuota"
+      },
+      "password": {
+        "required": "La password non può essere vuota",
+        "invalid": "Password non valida"
+      }
+    }
+  }
+}

@@ -3,9 +3,25 @@
 var User = require('./user.model');
 var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
+var i18n = require('i18n');
+var lodash = require('lodash');
 
 var validationError = function(res, err) {
-  var theErr = { message: err.message };
+  if(err.errors) {
+    lodash.each(User.schema.paths, function(prop) {
+      if(err.errors.hasOwnProperty(prop.path)) {
+        var error = err.errors[prop.path];
+        if(error.message) {
+          error.message = res.__(error.message);  
+        }
+      }
+    })
+  }
+  
+  var theErr = {
+    message: err.message, //res.__(err.name),
+    errors: err.errors
+  };
   return res.status(422).json(theErr);
 };
 
@@ -70,19 +86,7 @@ exports.update = function(req, res, next) {
   User.findByIdAndUpdate({_id: userId}, { $set: props}, function(err, user){
     if (err) return validationError(res, err);
     res.send(user);
-  })
-  
-//  User.findById(userId, function (err, user) {
-//    user.firstname = req.body.firstname;
-//    user.lastname = req.body.lastname;
-//    user.age = req.body.age;
-//    user.birthdate = req.body.birthdate;
-//    
-//    user.save(function(err) {
-//      if (err) return validationError(res, err);
-//      res.send(user);
-//    });
-//  });
+  });
 };
 
 /**
