@@ -13,10 +13,10 @@ exports.setup = function (User, config) {
         if (err) return done(err);
 
         if (!user) {
-          return done(null, false, { message: 'This email is not registered.' });
+          return done(null, false, { message: "user.errors.login.notfound" });
         }
         if (!user.authenticate(password)) {
-          return done(null, false, { message: 'This password is not correct.' });
+          return done(null, false, { message: "user.errors.login.pwderr" });
         }
         return done(null, user);
       });

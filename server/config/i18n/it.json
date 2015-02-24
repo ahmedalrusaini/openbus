@@ -1,6 +1,13 @@
 {
+  "general": {
+    "error": "Sono stati riscontrati errori, si prega di riprovare"
+  },
   "user": {
     "errors": {
+      "login": {
+        "notfound": "Utente non registrato",
+        "pwderr": "La password è errata"
+      },
       "email": {
         "exists": "Questa email è già utilizzata",
         "required": "L'email non può essere vuota"

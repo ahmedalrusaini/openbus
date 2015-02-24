@@ -10,14 +10,13 @@
 angular.module('openbusApp')
   .controller('UsersNewCtrl', function ($rootScope, $scope, $location, User, $translate) {
     $scope.user = {}
-    $scope.submitted = false;
+
     $scope.editMode = true;
     $scope.roles = User.roles;
 
     $scope.submit = function (form) {
       $rootScope.initAlerts();
-      $scope.submitted = true;
-
+      
       if ($scope.user.password !== $scope.user.password_confirmation) {
         form.password_confirmation.$setValidity("match", false);
       } else {
@@ -26,9 +25,7 @@ angular.module('openbusApp')
 
       if (form.$valid) {
         User.api.save($scope.user,
-          function (user, responseHeaders) {
-            $scope.submitted = false;
-            
+          function (user, responseHeaders) {            
             $translate('messages.user.success.created', {
                 user: $scope.user.fullname || $scope.user.email
               })

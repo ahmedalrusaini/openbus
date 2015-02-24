@@ -1,14 +1,22 @@
 {
+  "general.error": {
+    "error": "Something went wrong, please try again"
+  },
   "user": {
     "errors": {
+      "login": {
+        "notfound": "Email is not registered",
+        "pwderr": "Password is not correct"
+      },
       "email": {
-        "exists": "This email address is already in use",
+        "exists": "Email is already in use",
         "required": "Email cannot be blank"
       },
       "password": {
         "required": "Password cannot be blank",
-        "invalid": "Invalid password"
-      }
+        "invalid": "Invalid password",
+        "change": "Current password is wrong"
+      } 
     }
   }
 }

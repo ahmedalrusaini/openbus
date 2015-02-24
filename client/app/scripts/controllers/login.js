@@ -10,20 +10,18 @@
 angular.module('openbusApp')
   .controller('LoginCtrl', function ($rootScope, $scope, $http, $location, Auth) {
     $rootScope.pageTitle = "login"
-    $scope.alerts = [];
     $scope.user = {};
-    $scope.submitted = false;
-  
+    
     $scope.login = function(form) {
-      $scope.alerts = [];
-      $scope.submitted = true;
+      $rootScope.initAlerts();
+      
       if(form.$valid) {
         Auth.login($scope.user)
         .then(function(data){
           $location.path('/');
         })
         .catch(function(err) {
-          $scope.alerts.push({type: 'danger', message: err.message});
+          $rootScope.addAlert('danger', err.message);
         });
       }
     };

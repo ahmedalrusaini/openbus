@@ -1,40 +1,30 @@
-<div class="row">
-  <div class="col-sm-offset-3 col-sm-7">
-    <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.message}}</alert>
-  </div>
-</div>
 <form name="loginForm" class="form-horizontal" ng-submit="login(loginForm)" novalidate>
   
-  <div class="form-group" ng-class="{ 'has-error': loginForm.email.$invalid && submitted }">
-    <label class="col-sm-4 control-label" for="firstname">
-      {{'user.email' | translate}}
-    </label>
-    <div class="col-sm-5">
+  <div class="form-group" ng-class="{ 'has-error': loginForm.email.$invalid && form.$submitted }">
+    <div class="col-sm-offset-4 col-sm-4">
         <div class="input-group">
-          <input id="email" name="email" type="text" class="form-control" ng-model="user.email" required />
+          <input id="email" name="email" type="text" class="form-control" ng-model="user.email" required placeholder="{{'user.email' | translate}}"/>
         <span class="input-group-btn">
           <button class="btn btn-default" type="button" ng-click="setUser('admin')"><i class="fa fa-user-plus"></i></button>
           <button class="btn btn-default" type="button" ng-click="setUser('user')"><i class="fa fa-user"></i></button>
         </span>
       </div>
-      <div ng-messages="loginForm.email.$error" ng-show="loginForm.email.$invalid && submitted" class="help-block">
+      <div ng-messages="loginForm.email.$error" ng-show="loginForm.email.$invalid && form.$submitted" class="help-block">
         <div ng-message="required">Required</div>
       </div>
     </div>
   </div>
     
-  <div class="form-group" ng-class="{ 'has-error': loginForm.password.$invalid && submitted }">
-    <label class="col-sm-4 control-label" for="password">{{'user.password' | translate}}</label>
-    <div class="col-sm-5">
-      <input id="password" name="password" type="password" class="form-control" ng-model="user.password" required/>
-      <div ng-messages="loginForm.password.$error" ng-show="loginForm.password.$invalid && submitted" class="help-block">
+  <div class="form-group" ng-class="{ 'has-error': loginForm.password.$invalid && form.$submitted }">
+    <div class="col-sm-offset-4 col-sm-4">
+      <input id="password" name="password" type="password" placeholder="{{'user.password' | translate}}" class="form-control" ng-model="user.password" required/>
+      <div ng-messages="loginForm.password.$error" ng-show="loginForm.password.$invalid && form.$submitted" class="help-block">
         <div ng-message="required">Required</div>
       </div>
     </div>
   </div>
   <div class="form-group">
-    <label class="col-sm-4 control-label" for="login"></label>
-    <div class="col-sm-5">
+    <div class=" col-sm-offset-4 col-sm-4">
       <button id="login" type="submit" class="btn btn-success btn-block">{{'login' | translate}}</button>
     </div>
   </div>

@@ -19,6 +19,11 @@ var en = {
       }
     }
   },
+  main: {
+    users: {
+      descr: "Manage your application users"
+    }
+  },
   user: {
     roles: {
       admin: "Administrator",
@@ -37,13 +42,15 @@ var en = {
     title: 'Title',
     email: 'Email',
     password: 'Password',
+    newPassword: 'New password',
     password_confirmation: 'Password confirmation',
     firstname: 'Firstname',
     lastname: 'Lastname',
     fullname: 'Name',
     age: 'Age',
     birthdate: 'Birthdate',
-    role: 'Role'
+    role: 'Role',
+    change_password: 'Change your password'
   },
   login: 'Login',
   messages: {
@@ -52,7 +59,8 @@ var en = {
         created: '{{user.one}} created successfully',
         updated: 'User {{user}} updated successfully',
         saved: 'User {{user}} saved successfully',
-        deleted: 'User {{user}} deleted successfully'
+        deleted: 'User {{user}} deleted successfully',
+        passwordChanged: 'Password changed'
       },
       danger: {
         created: 'User creation failed',

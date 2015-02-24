@@ -1,6 +1,6 @@
 function getLocale() {
   try {    
-    return "it";//navigator.language.substr(0,2); // TODO: navigator.userLanguage for IE?
+    return navigator.language.substr(0,2); // TODO: navigator.userLanguage for IE?
   } catch(e) {
     return 'en';
   }

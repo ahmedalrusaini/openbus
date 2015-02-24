@@ -50,6 +50,10 @@ angular
         templateUrl: 'views/users/show.html',
         controller: 'UsersShowCtrl'
       })
+      .when('/settings', {
+        templateUrl: 'views/settings.html',
+        controller: 'SettingsCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
@@ -90,6 +94,8 @@ angular
       Auth.isLoggedInAsync(function(loggedIn) {
         if (!loggedIn) {
           $location.path('/login');
+        } else {
+          $rootScope.loggedUser = Auth.getCurrentUser();
         }
       });
     });

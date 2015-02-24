@@ -3,9 +3,10 @@
 <!--    {{'user.one' | translate}}: {{user.fullname || user.email}}-->
     <span translate='user.header.title' translate-values="{user: user.fullname || user.email}"></span>
     <span class="pull-right">
-      <a href="#" ng-show="!editMode" ng-click="toggleEditMode()"><i class="fa fa-edit"></i></a>
+      <a ng-href="/users/{{user.id}}/edit" ng-show="!editMode" ng-click="toggleEditMode()"><i class="fa fa-edit"></i></a>
     </span>
   </h4>
 </div>
+
 <ng-include src="'views/users/_show.html'" ng-hide="editMode"></ng-include>
 <ng-include src="'views/users/_form.html'" ng-show="editMode"></ng-include>

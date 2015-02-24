@@ -1,5 +1,5 @@
 <form name="userForm" class="form-horizontal" novalidate>
-  <div class="form-group" ng-class="{ 'has-error': (userForm.email.$invalid || errors.email) && userForm.submitted }" >
+  <div class="form-group" ng-class="{ 'has-error': (userForm.email.$invalid || errors.email) && userForm.$submitted }" >
     <label class="col-sm-4 control-label" for="email">{{'user.email' | translate}}</label>
     <div class="col-sm-5">
       <input id="email" name="email" type="email" 
@@ -9,7 +9,7 @@
         <div ng-message="required">Required</div>
         <div ng-message="email">Invalid email</div>
       </div>
-      <div class="help-block">
+      <div class="help-block" ng-show="errors.email.message">
         <div>{{errors.email.message | translate}}</div>
       </div>
     </div>    
@@ -35,7 +35,6 @@
       </div>
     </div>
   </div>
-  
   <div class="form-group" ng-show="user.id">
     <label class="col-sm-4 control-label" for="name">{{'user.fullname' | translate}}</label>
     <div class="col-sm-5">

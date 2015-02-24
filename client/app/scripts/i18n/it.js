@@ -36,7 +36,7 @@ var it = {
     password_confirmation: 'Conferma password',
     firstname: 'Nome',
     lastname: 'Cognome',
-    fullname: 'Nome',
+    fullname: 'Nome completo',
     age: 'Età',
     birthdate: 'Data di nascita',
     role: 'Ruolo'

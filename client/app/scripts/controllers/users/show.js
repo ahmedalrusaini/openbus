@@ -21,12 +21,10 @@ angular.module('openbusApp')
       if (form.$valid) {  
         $scope.user.$update({},
           function (user, responseHeaders) {
-            $scope.submitted = false;
             $scope.user = user;
             $translate('messages.user.success.updated', {
                 user: $scope.user.fullname || $scope.user.email
-              })
-              .then(function (msg) {
+              }).then(function (msg) {
                 $rootScope.addAlert('success', msg);
               });
           },

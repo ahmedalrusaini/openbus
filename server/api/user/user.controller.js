@@ -4,11 +4,11 @@ var User = require('./user.model');
 var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
 var i18n = require('i18n');
-var lodash = require('lodash');
+var _ = require('lodash');
 
 var validationError = function(res, err) {
   if(err.errors) {
-    lodash.each(User.schema.paths, function(prop) {
+    _.each(User.schema.paths, function(prop) {
       if(err.errors.hasOwnProperty(prop.path)) {
         var error = err.errors[prop.path];
         if(error.message) {
@@ -96,16 +96,16 @@ exports.changePassword = function(req, res, next) {
   var userId = req.user._id;
   var oldPass = String(req.body.oldPassword);
   var newPass = String(req.body.newPassword);
-
+  
   User.findById(userId, function (err, user) {
     if(user.authenticate(oldPass)) {
       user.password = newPass;
       user.save(function(err) {
         if (err) return validationError(res, err);
-        res.send(200);
+        res.status(200).json({ message: res.__('user.messages.password.change')});
       });
     } else {
-      res.send(403);
+      res.status(403).json({ message: res.__('user.errors.password.change')});
     }
   });
 };

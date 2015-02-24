@@ -8,7 +8,6 @@ angular.module('openbusApp')
     }
 
     return {  
-
       /**
        * Authenticate user and save token
        *
@@ -47,6 +46,7 @@ angular.module('openbusApp')
       logout: function() {
         $cookieStore.remove('token');
         currentUser = {};
+        $location.path('/login');
       },
 
       /**
@@ -81,8 +81,8 @@ angular.module('openbusApp')
        */
       changePassword: function(oldPassword, newPassword, callback) {
         var cb = callback || angular.noop;
-
-        return User.changePassword({ id: currentUser._id }, {
+        
+        return User.api.changePassword({ id: currentUser._id }, {
           oldPassword: oldPassword,
           newPassword: newPassword
         }, function(user) {

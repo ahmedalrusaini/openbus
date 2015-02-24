@@ -26,9 +26,9 @@ angular.module('openbusApp')
     };
   
     $scope.isCollapsed = true;
-    $scope.isLoggedIn = Auth.isLoggedIn;
-    $scope.isAdmin = Auth.isAdmin;
-    $scope.getCurrentUser = Auth.getCurrentUser;  
+    $rootScope.isLoggedIn = Auth.isLoggedIn;
+    $rootScope.isAdmin = Auth.isAdmin;
+    $rootScope.getCurrentUser = Auth.getCurrentUser;  
     $scope.logout = Auth.logout;
 
     $scope.isActive = function(route) {
