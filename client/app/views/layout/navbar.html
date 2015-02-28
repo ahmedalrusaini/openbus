@@ -16,6 +16,7 @@
             <a ng-href="{{item.link}}">{{item.title}}</a>
           </li>
           <li ng-show="isAdmin()" role="presentation" ng-class="{active: isActive('/users')}"><a href="/users">{{ 'menu.users.title' | translate }}</a></li>
+          <li role="presentation" ng-class="{active: isActive('/service/requests')}"><a href="/service/requests">{{ 'menu.service.requests.title' | translate }}</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right" ng-show="isLoggedIn()">
           <li role="presentation"><span class="navbar-text">{{loggedUser.email}}</span></li>
@@ -24,7 +25,7 @@
         </ul>        
       </div>
   </div>
-  <div class="navbar navbar-default navbar-static-top subheader">
+  <div ng-class="{collapse: isCollapsed}"  class="navbar navbar-default navbar-static-top subheader navbar-collapse collapse">
     <ul class="nav navbar-nav" ng-show="isLoggedIn() && !isHome()">
       <li ng-repeat="item in submenu" ng-class="{active: isSubActive(item.url)}">
         <a ng-href="{{item.url}}">{{item.title | translate}}</a>

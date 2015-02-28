@@ -21,7 +21,8 @@ angular
     'ngTouch',
     'ui.bootstrap.datetimepicker',
     'pascalprecht.translate',
-    'ui.select'
+    'ui.select',
+    'smart-table'
   ])
   
   .config(function ($routeProvider, $locationProvider, $httpProvider, uiSelectConfig) {
@@ -53,6 +54,10 @@ angular
       .when('/settings', {
         templateUrl: 'views/settings.html',
         controller: 'SettingsCtrl'
+      })
+      .when('/service/requests', {
+        templateUrl: 'views/service/requests/index.html',
+        controller: 'ServiceRequestsIndexCtrl'
       })
       .otherwise({
         redirectTo: '/'

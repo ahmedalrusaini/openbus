@@ -1,22 +1,61 @@
 <div class="page-header">
   <h4>Users</h4>
 </div>
-<table class="table table-striped table-bordered">
-  <tr>
-    <th width="50px"></th>
-    <th>{{'user.email' | translate}}</th>
-    <th>{{'user.role' | translate}}</th>
-    <th>{{'user.firstname' | translate}}</th>
-    <th>{{'user.lastname' | translate}}</th>
-  </tr>
-  <tr ng-repeat="user in users">
-    <td>
-      <a href="#" ng-click="delete(user, $index)"><i class="fa fa-trash-o"></i></a>
-      <a ng-href="/users/{{user.id}}/edit" ><i class="fa fa-edit"></i></a>
-    </td>
-    <td><a ng-href="/users/{{user._id}}">{{user.email}}</a></td>
-    <td>{{user.role}}</td>
-    <td>{{user.firstname}}</td>
-    <td>{{user.lastname}}</td>
-  </tr>
+
+<table class="table table-striped" st-table="users" st-safe-src="stSafeUsers">
+  <thead>
+    <tr>
+      <th width="5%"></th>
+      <th width="20%" st-sort="email" st-skip-natural="true" st-sort-default="email">{{'user.email' | translate}}</th>
+      <th width="20%" st-sort="role">{{'user.role' | translate}}</th>
+      <th width="25%" st-sort="firstname">{{'user.firstname' | translate}}</th>
+      <th width="25%" st-sort="lastname">{{'user.lastname' | translate}}</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>
+        <input ng-model="search.email" type="text" class="inline-table-filter">
+        <a href="#" ng-click="clearFilter('email')" ng-show="search.email" class="animate-show">
+          <i class="fa fa-remove"></i>
+        </a>
+      </th>
+      <th width="20%">
+        <input ng-model="search.role" class="inline-table-filter">
+        <a href="#" ng-click="clearFilter('role')" ng-show="search.role" class="animate-show">
+          <i class="fa fa-remove"></i>
+        </a>
+      </th>
+      <th>
+        <input ng-model="search.firstname" type="text" class="inline-table-filter">
+        <a href="#" ng-click="clearFilter('firstname')" ng-show="search.firstname" class="animate-show">
+          <i class="fa fa-remove"></i>
+        </a>
+      </th>
+      <th>
+        <input ng-model="search.lastname" type="text" class="inline-table-filter">
+        <a href="#" ng-click="clearFilter('lastname')" ng-show="search.lastname" class="animate-show">
+          <i class="fa fa-remove"></i>
+        </a>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="user in users | filter:search:strict">
+      <td>
+        <a href="#" ng-click="delete(user, $index)"><i class="fa fa-trash-o"></i></a>
+        <a ng-href="/users/{{user.id}}/edit"><i class="fa fa-edit"></i></a>
+      </td>
+      <td><a ng-href="/users/{{user._id}}">{{user.email}}</a></td>
+      <td>{{'user.roles.' + user.role | translate}}</td>
+      <td>{{user.firstname}}</td>
+      <td>{{user.lastname}}</td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="5" class="text-center">
+      <div st-pagination="" st-items-by-page="2" st-displayed-pages="5" st-template="views/bootstrap/pagination.html"></div>
+      </td>
+    </tr>
+  </tfoot>
 </table>

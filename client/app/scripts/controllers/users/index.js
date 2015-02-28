@@ -8,10 +8,16 @@
  * Controller of the openbusApp
  */
 angular.module('openbusApp')
-  .controller('UsersIndexCtrl', function ($rootScope, $scope, User, $translate) {
+  .controller('UsersIndexCtrl', function ($rootScope, $scope, User, $translate, $filter) {
     $rootScope.pageTitle = 'users';
-    $scope.users = User.api.query();
-
+    
+    $scope.roles = User.roles;
+    
+    User.api.query().$promise.then(function(data){
+      $scope.users = data;
+      $scope.stSafeUsers = data;
+    });
+  
     $scope.delete = function (user, index) {
       if (confirm("Delete user?")) {
         $rootScope.initAlerts()
@@ -30,4 +36,9 @@ angular.module('openbusApp')
         });
       }
     };
+    
+    $scope.clearFilter = function(filter) {
+      $scope.search[filter] = '';
+    };
+  
   });

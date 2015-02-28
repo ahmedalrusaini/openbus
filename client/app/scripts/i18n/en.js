@@ -11,17 +11,35 @@
 
 var en = {
   menu: {
+    index: 'List',
+    new: 'Add',
+    
     users: {
       title: 'Users',
       sub: {
-        index: 'List',
-        new: 'Add'
+        index: "@:menu.index",
+        new: "@:menu.new"
+      }
+    },
+    
+    service: {
+      requests: {
+        title: 'Service Requests',
+        sub: {
+          index: "@:menu.index",
+          new: "@:menu.new"
+        }
       }
     }
   },
   main: {
     users: {
       descr: "Manage your application users"
+    },
+    service: {
+      requests: {
+        descr: "Manage you service requests"
+      }
     }
   },
   user: {
