@@ -1,15 +1,15 @@
 <nav class="pagination" ng-if="pages.length >= 2">
   <ul class="pagination">
     <li>
-      <a href="#" aria-label="Previous" ng-click="selectPage(1)">
+      <a href="#" aria-label="First" ng-click="selectPage(1)">
         <span aria-hidden="true">&laquo;</span>
       </a>
     </li>
     <li ng-repeat="page in pages" ng-class="{active: page==currentPage}">
-      <a ng-click="selectPage(page)">{{page}}</a>
+      <a href="#" ng-click="selectPage(page)">{{page}}</a>
     </li>
     <li>
-      <a href="#" aria-label="Next" ng-click="selectPage(pages.length)">
+      <a href="#" aria-label="Last" ng-click="selectPage(numPages)">
         <span aria-hidden="true">&raquo;</span>
       </a>
     </li>

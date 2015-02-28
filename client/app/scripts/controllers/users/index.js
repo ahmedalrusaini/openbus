@@ -36,9 +36,17 @@ angular.module('openbusApp')
         });
       }
     };
-    
-    $scope.clearFilter = function(filter) {
-      $scope.search[filter] = '';
+      
+    $scope.showInlineFilters = false;
+  
+    $scope.toggleInlineFilters = function() {
+      $scope.showInlineFilters = !$scope.showInlineFilters;
     };
+  
+    $("[data-toggle='tooltip']").tooltip();
+    
+    $scope.times = function(num) {
+      return new Array(num);
+    }
   
   });
