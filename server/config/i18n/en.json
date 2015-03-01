@@ -1,8 +1,12 @@
-{
-  "general.error": {
+{ 
+  "general": {
     "error": "Something went wrong, please try again"
   },
   "user": {
+    "roles": {
+      "user": "User",
+      "admin": "Administrator"
+    },
     "errors": {
       "login": {
         "notfound": "Email is not registered",

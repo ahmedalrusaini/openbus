@@ -13,7 +13,10 @@ angular.module('openbusApp')
     $rootScope.pageTitle = "user";
     $scope.editMode = $routeParams.action === 'edit';  
     $scope.user = User.api.get({ id: $routeParams.id });
-    $scope.roles = User.roles;
+    
+    User.Roles.query().$promise.then(function(data){
+      $scope.roles = data;
+    });
     
     $scope.submit = function (form) {
       $rootScope.initAlerts();

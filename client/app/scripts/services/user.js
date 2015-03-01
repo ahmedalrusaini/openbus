@@ -8,16 +8,17 @@
  * Service in the openbusApp.
  */
 angular.module('openbusApp')
-  .factory('User', function ($resource) {
+  .service('User', function ($resource) {
     return {
       api: $resource('/api/users/:id/:controller', { id: '@_id' }, {
         me: { method: 'GET', params: { id: 'me' } },
         update: { method: 'PUT' },
         changePassword: { method: 'PUT', params: { controller:'password' } }
       }),
-      roles: [
-        { id: 'user', name: 'user.roles.user' }, 
-        { id: 'admin', name: 'user.roles.admin' }
-      ]
+      Roles: $resource('/api/user/roles')
+//      roles: [
+//        { id: 'user', name: 'user.roles.user' }, 
+//        { id: 'admin', name: 'user.roles.admin' }
+//      ]
     }
   });

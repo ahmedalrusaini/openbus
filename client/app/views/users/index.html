@@ -13,10 +13,10 @@
     </tr>
     <tr class="filters" ng-show="showInlineFilters">
       <th></th>
-      <th><input st-search="email" type="text" class="inline-table-filter input-sm" placeholder="Search for email"></th>
-      <th><input st-search="role" class="inline-table-filter input-sm" placeholder="Search for role"></th>
-      <th><input st-search="firstname" type="text" class="inline-table-filter input-sm" placeholder="Search for firstname"></th>
-      <th><input st-search="lastname" type="text" class="inline-table-filter input-sm" placeholder="Search for lastname"></th>
+      <th><input st-search="'email'" class="inline-table-filter input-sm" placeholder="Search for email"></th>
+      <th><input st-search="'role'" class="inline-table-filter input-sm" placeholder="Search for role"></th>
+      <th><input st-search="'firstname'" class="inline-table-filter input-sm" placeholder="Search for firstname"></th>
+      <th><input st-search="'lastname'" class="inline-table-filter input-sm" placeholder="Search for lastname"></th>
     </tr>
   </thead>
   <tbody>
@@ -27,7 +27,7 @@
         <a href="#" ng-click="delete(user, $index)"><i class="fa fa-trash-o"></i></a>
       </td>
       <td><a ng-href="/users/{{user._id}}">{{user.email}}</a></td>
-      <td>{{'user.roles.' + user.role | translate}}</td>
+      <td>{{user.rolename}}</td>
       <td>{{user.firstname}}</td>
       <td>{{user.lastname}}</td>
     </tr>

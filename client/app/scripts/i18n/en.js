@@ -43,10 +43,6 @@ var en = {
     }
   },
   user: {
-    roles: {
-      admin: "Administrator",
-      user: "User"
-    },
     header: {
       title: 'User: {{user}}'
     },

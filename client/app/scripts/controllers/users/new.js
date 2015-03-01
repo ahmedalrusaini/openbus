@@ -12,7 +12,10 @@ angular.module('openbusApp')
     $scope.user = {}
 
     $scope.editMode = true;
-    $scope.roles = User.roles;
+    
+    User.Roles.query().$promise.then(function(data){
+      $scope.roles = data;
+    });
 
     $scope.submit = function (form) {
       $rootScope.initAlerts();

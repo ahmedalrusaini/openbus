@@ -11,8 +11,6 @@ angular.module('openbusApp')
   .controller('UsersIndexCtrl', function ($rootScope, $scope, User, $translate, $filter) {
     $rootScope.pageTitle = 'users';
     
-    $scope.roles = User.roles;
-    
     User.api.query().$promise.then(function(data){
       $scope.users = data;
       $scope.stSafeUsers = data;

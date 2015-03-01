@@ -4,6 +4,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var crypto = require('crypto');
 var _ = require('lodash');
+var i18n = require('i18n');
 
 var UserSchema = new Schema({
   firstname: String,
@@ -61,6 +62,12 @@ UserSchema
       return "";
     }
     return (this.firstname || '') + " " + (this.lastname || '');
+  });
+
+UserSchema
+  .virtual('rolename')
+  .get(function() {
+    return i18n.__("user.roles." + this.role);
   });
 
 // Non-sensitive info we'll be putting in the token
