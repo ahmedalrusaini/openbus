@@ -10,4 +10,4 @@ I decided to spend my nights developing a new application based on those framewo
 
 ## Requirements
 As mentioned above, **openbus** is built upon [Angular](http://angularjs.org), [Bootstrap](http://getbootstrap.com) (with [FontAwesome]() icons), [Node.js](http://nodejs.org) 
-and [MongoDB](http://www.mongodb.org) as the database. **openbus** is 
+and [MongoDB](http://www.mongodb.org) as the database.
