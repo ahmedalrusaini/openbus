@@ -1,0 +1,48 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="page-header">
+      <h4 class="text-muted">
+        {{'address.two' | translate}}
+      </h4>
+    </div>
+  </div>
+</div>  
+<div class="row">
+  <!-- <div class="col-sm-3">
+    <button data-toggle="modal" data-target="#addressModal" class="btn btn-default btn-block">
+      <i class="fa fa-plus"></i> New
+    </button>
+    <address ng-show="address">
+      <span ng-show="address.street">{{address.street}} {{address.houseNo}}</span><br>
+      <span ng-show="address.postalCode">{{address.postalCode}}</span>
+      <span ng-show="address.city">{{address.city}}</span><br>
+      <abbr title="Phone">P:</abbr> {{address.telephone}}<br>
+      <abbr title="Phone">M:</abbr> {{address.mobile}}<br>
+      <a href="mailto:{{account.address.email}}">{{address.email}}</a>
+    </address>
+  </div> -->
+  <div class="col-sm-12">
+    <table class="table table-striped table-hover" st-table="account.addresses" st-safe-src="stSafeAddresses">
+      <tbody>
+        <tr ng-repeat="address in account.addresses" st-select-row="address" ng-click="select($index)" data-toggle="modal" data-target="#addressModal">
+          <td>
+            {{address.houseNo ? address.street + ' ' + address.houseNo : address.street}}{{address.postalCode ? ', ' : ''}}{{address.postalCode}}{{address.city ? ', ' : ''}}{{address.city}}{{address.country ? ', ' : ''}}{{address.country}}
+            <span class="label label-primary pull-right" ng-show="address.standard">std.</span>
+            <span class="label label-default pull-right" ng-show="!address.standard">alt.</span>
+          </td>
+        </tr>
+        <tr ng-repeat="i in times(3 - account.addresses.length) track by $index">
+          <td>&nbsp;</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td class="text-center">
+            <div st-pagination="" st-items-by-page="3" st-displayed-pages="5" st-template="views/bootstrap/pagination.html"></div>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
+<ng-include src="'views/accounts/partials/_address.modal.html'"></ng-include>

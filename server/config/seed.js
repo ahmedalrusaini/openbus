@@ -8,6 +8,8 @@
 var Thing = require('../api/thing/thing.model');
 var User = require('../api/user/user.model');
 var ServiceRequest = require('../api/service/request/request.model');
+var Account = require('../api/account/account.model');
+var Address = require('../api/account/address.model');
 
 //Thing.find({}).remove(function() {
 //  Thing.create({
@@ -55,4 +57,27 @@ var ServiceRequest = require('../api/service/request/request.model');
 //       console.log('finished populating users');
 //     }
 //   );
+// });
+
+// var account = new Account({
+//     name: "Test Account",
+//     addresses: [{
+//     standard: true,
+//     street: 'Via Larga',
+//     city: 'Milan',
+//     country: 'Italy'
+//   }]
+// });
+//
+// console.log(account);
+//
+// account.addresses.push({
+//   standard: false,
+//   street: 'Via Stretta',
+//   city: 'Turin',
+//   country: 'Italy'
+// });
+//
+// Account.find({}).remove(function(){
+//   Account.create(account);
 // });

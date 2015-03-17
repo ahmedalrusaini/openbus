@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="page-header">
+      <h4 class="text-muted form-box-title">
+        Details
+      </h4>
+    </div>
+  </div>
+</div>
+  
+<form name="accountForm" class="form-horizontal" novalidate>
+  <div class="form-group" ng-class="{ 'has-error': (accountForm.name.$invalid || errors.name) && accountForm.$submitted }" >
+    <label class="col-sm-3 control-label" for="name">{{'account.name' | translate}}</label>
+    <div class="col-sm-8">
+      <input id="name" name="name" type="text" class="form-control" ng-model="account.name" required />
+      <div ng-messages="accountForm.name.$error" ng-show="accountForm.name.$invalid && accountForm.$submitted" class="help-block">
+        <div ng-message="required">Required</div>
+        <div ng-message="name">Invalid name</div>
+      </div>
+      <div class="help-block" ng-show="errors.name.message">
+        <div>{{errors.name.message | translate}}</div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-3 control-label" for="lastname">{{'account.type' | translate}}</label>
+    <div class="col-sm-8">
+      <ui-select ng-model="account.type">
+        <ui-select-match>{{$select.selected.name | translate}}</ui-select-match>
+        <ui-select-choices repeat="value.id as value in types | filter: $select.search">
+          <div ng-bind-html="value.name | translate | highlight: $select.search"></div>
+        </ui-select-choices>
+      </ui-select>
+    </div>
+  </div>
+</form>

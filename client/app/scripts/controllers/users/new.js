@@ -45,4 +45,8 @@ angular.module('openbusApp')
           });
       }
     };
+    
+    $scope.cancel = function() {
+      $location.path("/users");
+    }
   });

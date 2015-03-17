@@ -8,8 +8,10 @@
  * Controller of the openbusApp
  */
 angular.module('openbusApp')
-  .controller('UsersIndexCtrl', function ($rootScope, $scope, User, $translate, $filter) {
+  .controller('UsersIndexCtrl', function ($rootScope, $scope, User, $translate, $filter, TableCommon) {
     $rootScope.pageTitle = 'users';
+    
+    TableCommon.init($scope);
     
     User.api.query().$promise.then(function(data){
       $scope.users = data;
@@ -34,17 +36,5 @@ angular.module('openbusApp')
         });
       }
     };
-      
-    $scope.showInlineFilters = false;
-  
-    $scope.toggleInlineFilters = function() {
-      $scope.showInlineFilters = !$scope.showInlineFilters;
-    };
-  
-    $("[data-toggle='tooltip']").tooltip();
     
-    $scope.times = function(num) {
-      return new Array(num);
-    }
-  
   });

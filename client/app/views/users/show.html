@@ -1,10 +1,10 @@
 <div class="page-header">
   <h4>
-<!--    {{'user.one' | translate}}: {{user.fullname || user.email}}-->
     <span translate='user.header.title' translate-values="{user: user.fullname || user.email}"></span>
-    <span class="pull-right">
-      <a ng-href="/users/{{user.id}}/edit" ng-show="!editMode" ng-click="toggleEditMode()"><i class="fa fa-edit"></i></a>
-    </span>
+    <div class="btn-group btn-group-sm" role="group" aria-label="..." ng-show="!editMode">
+      <a class="btn btn-default"  ng-href="/users/{{user.id}}/edit" 
+         ng-click="toggleEditMode()"><i class="fa fa-edit"></i> {{'actions.edit' | translate}}</a>
+    </div>    
   </h4>
 </div>
 

@@ -22,5 +22,11 @@
         "change": "Current password is wrong"
       } 
     }
+  },
+  "account": {
+    "types": {
+      "organization": "Organization",
+      "person": "Person"
+    }
   }
 }

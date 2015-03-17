@@ -13,10 +13,10 @@
     </tr>
     <tr class="filters" ng-show="showInlineFilters">
       <th></th>
-      <th><input st-search="'email'" class="inline-table-filter input-sm" placeholder="Search for email"></th>
-      <th><input st-search="'role'" class="inline-table-filter input-sm" placeholder="Search for role"></th>
-      <th><input st-search="'firstname'" class="inline-table-filter input-sm" placeholder="Search for firstname"></th>
-      <th><input st-search="'lastname'" class="inline-table-filter input-sm" placeholder="Search for lastname"></th>
+      <th><input st-search="'email'" st-delay="100" class="inline-table-filter input-sm" placeholder="Search for email"></th>
+      <th><input st-search="'role'" st-delay="100" class="inline-table-filter input-sm" placeholder="Search for role"></th>
+      <th><input st-search="'firstname'" st-delay="100" class="inline-table-filter input-sm" placeholder="Search for firstname"></th>
+      <th><input st-search="'lastname'" st-delay="100" class="inline-table-filter input-sm" placeholder="Search for lastname"></th>
     </tr>
   </thead>
   <tbody>
@@ -31,14 +31,14 @@
       <td>{{user.firstname}}</td>
       <td>{{user.lastname}}</td>
     </tr>
-    <tr ng-repeat="i in times(6 - users.length) track by $index">
+    <tr ng-repeat="i in times(5 - users.length) track by $index">
       <td>&nbsp;</td><td></td><td></td><td></td><td></td>
     </tr>
   </tbody>
   <tfoot>
     <tr>
       <td colspan="5" class="text-center">
-        <div st-pagination="" st-items-by-page="6" st-displayed-pages="5" st-template="views/bootstrap/pagination.html"></div>
+        <div st-pagination="" st-items-by-page="5" st-displayed-pages="5" st-template="views/bootstrap/pagination.html"></div>
       </td>
     </tr>
   </tfoot>

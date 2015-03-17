@@ -20,7 +20,9 @@ var UserSchema = new Schema({
   },
   hashedPassword: String,
   provider: String,
-  salt: String
+  salt: String,
+  createdAt: Date,
+  updatedAt: Date
 }, {
   toJSON: {
     virtuals: true
@@ -124,12 +126,19 @@ var validatePresenceOf = function (value) {
  */
 UserSchema
   .pre('save', function (next) {
-    if (!this.isNew) return next();
-
-    if (!validatePresenceOf(this.hashedPassword))
-      next(new Error('user.errors.password.invalid'));
-    else
+    console.log("User save");
+    if (this.isNew) {
+      if (!validatePresenceOf(this.hashedPassword)) {
+        next(new Error('user.errors.password.invalid'));
+      } else {
+        this.createdAt = new Date();
+        next();
+      }
+    } else {
+      console.log("Updated");
+      this.updatedAt = new Date();      
       next();
+    }
   });
 
 /**

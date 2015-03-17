@@ -83,10 +83,16 @@ exports.update = function(req, res, next) {
   var props = req.body;
   delete props._id;
   
-  User.findByIdAndUpdate({_id: userId}, { $set: props}, function(err, user){
+  User.findById(userId, function(err, user) {
     if (err) return validationError(res, err);
+    
+    for(var f in props) {
+      user[f] = props[f];
+    }
+    
+    user.save();    
     res.send(user);
-  });
+  });  
 };
 
 /**

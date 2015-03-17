@@ -26,6 +26,10 @@ angular.module('openbusApp')
       else if ($location.path().match(/\/service\/requests/)) {
         $scope.submenu.push({url: "/service/requests", title: "menu.service.requests.sub.index"});
         $scope.submenu.push({url: "/service/requests/new", title: "menu.service.requests.sub.new"});
+      } 
+      else if ($location.path().match(/\/accounts/)) {
+        $scope.submenu.push({url: "/accounts", title: "menu.accounts.sub.index"});
+        $scope.submenu.push({url: "/accounts/new", title: "menu.accounts.sub.new"});
       }
     };
   

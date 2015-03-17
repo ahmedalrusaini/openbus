@@ -16,6 +16,7 @@
             <a ng-href="{{item.link}}">{{item.title}}</a>
           </li>
           <li ng-show="isAdmin()" role="presentation" ng-class="{active: isActive('/users')}"><a href="/users">{{ 'menu.users.title' | translate }}</a></li>
+          <li role="presentation" ng-class="{active: isActive('/accounts')}"><a href="/accounts">{{ 'menu.accounts.title' | translate }}</a></li>
           <li role="presentation" ng-class="{active: isActive('/service/requests')}"><a href="/service/requests">{{ 'menu.service.requests.title' | translate }}</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right" ng-show="isLoggedIn()">

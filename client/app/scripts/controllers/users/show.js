@@ -9,9 +9,9 @@
  */
 angular.module('openbusApp')
 
-  .controller('UsersShowCtrl', function ($scope, $rootScope, $routeParams, $location, $translate, User) {
-    $rootScope.pageTitle = "user";
-    $scope.editMode = $routeParams.action === 'edit';  
+  .controller('UsersShowCtrl', function ($scope, $rootScope, $routeParams, $location, $translate, User, ShowEditToggle) {
+    ShowEditToggle.init($scope, $routeParams);
+    
     $scope.user = User.api.get({ id: $routeParams.id });
     
     User.Roles.query().$promise.then(function(data){
@@ -39,13 +39,10 @@ angular.module('openbusApp')
       }
     }
 
-    $scope.toggleEditMode = function () {
-      $scope.editMode = !$scope.editMode;
-    }
-
     $scope.cancel = function () {
-      $scope.toggleEditMode();
-      $scope.user = User.api.get({ id: $routeParams.id });
+      // $scope.toggleEditMode();
+      // $scope.user = User.api.get({ id: $routeParams.id });
+      $location.path("/users/" + $routeParams.id);
     };
 
   });

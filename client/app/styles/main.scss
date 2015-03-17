@@ -75,6 +75,25 @@ input:disabled {
   padding-bottom: 0px;
 }
 
+.highlight-danger {
+  background-color: lighten($brand-danger, 30%);
+}
+
+.highlight-success {
+  background-color: lighten($brand-success, 30%);
+}
+
+.form-control,
+.input-group-addon {
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  background-color: transparent;
+  border-radius: 0;
+  box-sizing: none !important;
+  box-shadow: none !important;
+}
+
 tr {
   th {
     .inline-table-filter {
@@ -83,7 +102,7 @@ tr {
       border-right: none;
       border-left: none;
       background-color: transparent;
-//      width: 50%;
+      width: 100%;
     }
     &:hover {
       background-color: $gray-lighter;
@@ -148,6 +167,7 @@ tr {
     transition: all linear 0.5s;
   }
 }
+
 /* Responsive: Portrait tablets and up */
 
 @media screen and (min-width: 768px) {

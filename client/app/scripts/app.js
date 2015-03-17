@@ -59,6 +59,22 @@ angular
         templateUrl: 'views/service/requests/index.html',
         controller: 'ServiceRequestsIndexCtrl'
       })
+      .when('/accounts/new', {
+        templateUrl: 'views/accounts/new.html',
+        controller: 'AccountsNewCtrl'
+      })
+      .when('/accounts/:id', {
+        templateUrl: 'views/accounts/show.html',
+        controller: 'AccountsShowCtrl'
+      })
+      .when('/accounts/:id/edit', {
+        templateUrl: 'views/accounts/edit.html',
+        controller: 'AccountsShowCtrl'
+      })
+      .when('/accounts', {
+        templateUrl: 'views/accounts/index.html',
+        controller: 'AccountsIndexCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
