@@ -17,7 +17,6 @@ angular.module('openbusApp')
     $scope.accountSafe = angular.copy(account);
     $scope.selectedAddress = {};
     $scope.stSafeAddresses = $scope.account.addresses;
-    $scope.addresses = $scope.account.addresses;
   });
       
   Account.Types.query().$promise.then(function(types) {
@@ -56,6 +55,14 @@ angular.module('openbusApp')
   $scope.cancel = function () {
     $location.path("/accounts/" + $scope.account.id);
   };
+    
+  $scope.createFollowup = function(id) {
+    var fup = $.grep($scope.followups, function(fup){
+      return fup.id === id;
+    })[0];
+    
+    $location.path(fup.url);
+  };  
   
   $scope.select = function(index) {
     $scope.selectedAddress = $scope.account.addresses[index];
@@ -66,15 +73,11 @@ angular.module('openbusApp')
     $scope.account.addresses.splice(index, 1);
   };
   
-  $scope.createFollowup = function(id) {
-    var fup = $.grep($scope.followups, function(fup){
-      return fup.id === id;
-    })[0];
-    
-    $location.path(fup.url);
-  };  
+  $scope.$watch("account.addresses", function() {
+    console.log("changed");
+  }, true);
   
-  $scope.openAddressModal = function(isNew) {      
+  $scope.openAddressModal = function(isNew) {
     var modal = $modal.open({
       templateUrl: 'addressModal.html',
       controller: 'AddressModalCtrl',
@@ -89,19 +92,21 @@ angular.module('openbusApp')
     });
     
     modal.result.then(function(address) {
-      $scope.selectedAddress = angular.copy(address);
-      var addr = $.grep($scope.addresses, function(addr, index) {
-        if (addr.id === $scope.selectedAddress.id) {
-          $scope.addresses[index] = $scope.selectedAddress;
-          $scope.stSafeAddresses[index] = $scope.selectedAddress;
-          return true;
-        }
-      });
-  
-      if (!addr[0]) {
-        $scope.account.addresses.push($scope.selectedAddress);
-      } 
+      angular.copy(address, $scope.selectedAddress);
       
+      if (isNew) {
+        $scope.account.addresses.push($scope.selectedAddress);
+      } else {
+        $.grep($scope.account.addresses, function(addr, index) {
+          if (addr.id === $scope.selectedAddress.id || addr.isSelected) {
+            $scope.account.addresses[index] = $scope.selectedAddress;
+            return;
+          }
+        });
+      }
+      
+      $scope.stSafeAddresses = $scope.account.addresses;
+            
     }, function () {
       // console.log('Modal dismissed');
     });

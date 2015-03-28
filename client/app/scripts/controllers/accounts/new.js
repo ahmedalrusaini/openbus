@@ -10,7 +10,7 @@
 angular.module('openbusApp')
   .controller('AccountsNewCtrl', function ($scope, $rootScope, $location, Account, TableCommon, $translate, $modal) {
     $scope.account = {};
-    $scope.address = {};
+    $scope.selectedAddress = {};
     $scope.editMode = true;
     
     TableCommon.init($scope);
@@ -48,14 +48,18 @@ angular.module('openbusApp')
       $location.path("/accounts");
     };
     
-    $scope.openAddressModal = function(isNew) {      
+    $scope.select = function(index) {
+      $scope.selectedAddress = $scope.account.addresses[index];
+      $scope.openAddressModal(false);
+    };
+    
+    $scope.openAddressModal = function(isNew) {  
       var modal = $modal.open({
         templateUrl: 'addressModal.html',
         controller: 'AddressModalCtrl',
         resolve: {
-          address: function() {
-            
-            return isNew ? {} : $scope.address;
+          address: function() {            
+            return isNew ? {} : $scope.selectedAddress;
           },
           editMode: function() {
             return $scope.editMode;
@@ -64,9 +68,10 @@ angular.module('openbusApp')
       });
       
       modal.result.then(function(address) {
-        $scope.address = angular.copy(address);
-        
-        $scope.account.addresses.push($scope.address);      
+        angular.copy(address, $scope.selectedAddress);
+        if(isNew) {
+           $scope.account.addresses.push($scope.selectedAddress);
+        }
       }, function () {
         console.log('Modal dismissed');
       });

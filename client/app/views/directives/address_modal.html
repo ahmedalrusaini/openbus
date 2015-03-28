@@ -60,20 +60,14 @@
           <label class="col-sm-3 control-label">{{'address.street' | translate}} / {{'address.houseNo' | translate}}</label>
           <div class="col-sm-7" ng-class="{ 'control-label': !editMode, 'has-error': (addressForm.street.$invalid || errors.name) && addressForm.$submitted }">
             <span class="pull-left" ng-hide="editMode">{{addressModal.street}}</span>
-            <input id="street" name="street" type="text" class="form-control" ng-model="addressModal.street" required/>
-            <div ng-messages="addressForm.street.$error" ng-show="addressForm.street.$invalid && addressForm.$submitted" class="help-block">
-              <div ng-message="required">Required</div>
-            </div>
-            <div class="help-block" ng-show="errors.name.message">
-              <div>{{errors.name.message | translate}}</div>
-            </div>
+            <input id="street" name="street" type="text" class="form-control" ng-model="addressModal.street" />
           </div>
           <div class="col-sm-2">
             <span class="pull-left" ng-hide="editMode">{{addressModal.houseNo}}</span>
             <input id="houseNo" name="houseNo" type="text" class="form-control" ng-model="addressModal.houseNo"/>
           </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" ng-class="{ 'has-error': addressForm.city.$invalid }">
           <label class="col-sm-3 control-label">{{'address.postalCode' | translate}} / {{'address.city' | translate}}</label>
           <div class="col-sm-2" ng-class="{'control-label': !editMode}">
             <span class="pull-left" ng-hide="editMode">{{addressModal.postalCode}}</span>
@@ -82,7 +76,7 @@
           <div class="col-sm-7" ng-class="{ 'control-label': !editMode, 'has-error': (addressForm.city.$invalid || errors.name) && addressForm.$submitted }">
             <span class="pull-left" ng-hide="editMode">{{addressModal.city}}</span>
             <input id="city" name="city" type="text" class="form-control" ng-model="addressModal.city" required />
-            <div ng-messages="addressForm.city.$error" ng-show="addressForm.city.$invalid && addressForm.$submitted" class="help-block">
+            <div ng-messages="addressForm.city.$error" ng-show="addressForm.city.$invalid" class="help-block">
               <div ng-message="required">Required</div>
             </div>
             <div class="help-block" ng-show="errors.name.message">
@@ -97,11 +91,15 @@
             <input id="telephone" name="telephone" type="tel" class="form-control" ng-model="addressModal.telephone" />
           </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" ng-class="{ 'has-error': addressForm.email.$invalid }">
           <label class="col-sm-3 control-label">{{'address.email' | translate}}</label>
           <div class="col-sm-9" ng-class="{'control-label': !editMode}">
             <span class="pull-left" ng-hide="editMode">{{addressModal.email}}</span>
             <input id="email" name="email" type="email" class="form-control" ng-model="addressModal.email" required  />
+            <div ng-messages="addressForm.email.$error" ng-show="addressForm.email.$invalid" class="help-block">
+              <div ng-message="required">{{'messages.general.errors.required' | translate}}</div>
+              <div ng-message="email">{{'messages.general.errors.email' | translate}}</div>
+            </div>
           </div>
         </div>
       </form>

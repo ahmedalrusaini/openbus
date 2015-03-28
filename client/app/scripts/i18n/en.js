@@ -85,6 +85,12 @@ var en = {
   },
   login: 'Login',
   messages: {
+    general: {
+      errors: {
+        required: 'Required',
+        email: 'Not a valid email'
+      }
+    },
     user: {
       success: {
         created: '{{user.one}} created successfully',
