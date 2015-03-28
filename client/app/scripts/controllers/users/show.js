@@ -9,9 +9,7 @@
  */
 angular.module('openbusApp')
 
-  .controller('UsersShowCtrl', function ($scope, $rootScope, $routeParams, $location, $translate, User, ShowEditToggle) {
-    ShowEditToggle.init($scope, $routeParams);
-    
+  .controller('UsersShowCtrl', function ($scope, $rootScope, $routeParams, $location, $translate, User) {
     $scope.user = User.api.get({ id: $routeParams.id });
     
     User.Roles.query().$promise.then(function(data){

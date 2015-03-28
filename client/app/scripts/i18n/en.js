@@ -117,6 +117,11 @@ var en = {
     }
   },
   account: {
+    actions: {
+      new: {
+        title: "Create new account"
+      }
+    },
     header: {
       title: "Account: {{account}}"
     },

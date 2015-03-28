@@ -3,6 +3,7 @@
 var Account = require('./account.model');
 var config = require('../../config/environment');
 var _ = require('lodash');
+var extend = require('util')._extend;
 
 var validationError = function(res, err) {
   if(err.errors) {
@@ -57,32 +58,16 @@ exports.update = function(req, res) {
   
   Account.findById(id, function(err, obj) {
     if (err) return new validationError(res, err);
-      
-    for(var p in props) {
-      if (p === 'addresses') {
-        for (var a in props[p]) {
-          var addrProps = props[p][a];
-          
-          var addr = _(obj.addresses).filter(function(addr) { return addr.id === addrProps.id }).value();
-          
-          // console.log("ADDR");
-          // console.log(addr)
-          // console.log("ADDRPROPS");
-          // console.log(addrProps)
-          
-          for (var pa in addrProps) {
-            console.log(pa);
-            addr[0][pa] = addrProps[pa];
-          }
-          
-          console.log(addr[0])
-        }
-      } else {
-        obj[p] = props[p];
-      }
-    }
-
+    
+    obj = extend(obj, props);  
     obj.save();
     res.send(obj);
   });
-}
+};
+
+exports.destroy = function(req, res) {
+  Account.findByIdAndRemove(req.params.id, function(err, account) {
+    if(err) return res.status(500).json(err);
+    return res.send(204);
+  });
+};

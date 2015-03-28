@@ -47,6 +47,10 @@ angular
         templateUrl: 'views/users/show.html',
         controller: 'UsersShowCtrl'
       })
+      .when('/users/:id/edit', {
+        templateUrl: 'views/users/edit.html',
+        controller: 'UsersShowCtrl'
+      })
       .when('/users/:id/:action', {
         templateUrl: 'views/users/show.html',
         controller: 'UsersShowCtrl'

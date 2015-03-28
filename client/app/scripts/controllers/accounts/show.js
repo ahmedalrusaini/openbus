@@ -8,15 +8,16 @@
 * Controller of the openbusApp
 */
 angular.module('openbusApp')
-.controller('AccountsShowCtrl', function ($rootScope, $scope, $routeParams, $location, $translate, Account, ShowEditToggle, TableCommon) {
-  ShowEditToggle.init($scope, $location);
+.controller('AccountsShowCtrl', function ($rootScope, $scope, $routeParams, $location, $translate, Account, TableCommon, ShowEditToggle, $modal) {
   TableCommon.init($scope);
-
+  ShowEditToggle.init($scope, $location);
+  
   Account.api.get({id: $routeParams.id}).$promise.then(function(account) {
     $scope.account = account;
     $scope.accountSafe = angular.copy(account);
-    $scope.address = $scope.account.address;
-    $scope.stSafeAddresses = account.addresses;
+    $scope.selectedAddress = {};
+    $scope.stSafeAddresses = $scope.account.addresses;
+    $scope.addresses = $scope.account.addresses;
   });
       
   Account.Types.query().$promise.then(function(types) {
@@ -57,30 +58,52 @@ angular.module('openbusApp')
   };
   
   $scope.select = function(index) {
-    $scope.address = $scope.account.addresses[index];
-    $scope.addressModal = angular.copy($scope.address);
+    $scope.selectedAddress = $scope.account.addresses[index];
+    $scope.openAddressModal(false);
+  };
+  
+  $scope.deleteAddress = function(address, index) {
+    $scope.account.addresses.splice(index, 1);
   };
   
   $scope.createFollowup = function(id) {
     var fup = $.grep($scope.followups, function(fup){
       return fup.id === id;
     })[0];
-    $location.path(fup.url);
-  }
-  
-  $scope.saveAddressModal = function(form) {
-    form.$submitted = true;
-    $scope.dismiss();
     
-    if(form.$valid) {
-      for(var p in $scope.addressModal) {
-        $scope.address[p] = $scope.addressModal[p];
+    $location.path(fup.url);
+  };  
+  
+  $scope.openAddressModal = function(isNew) {      
+    var modal = $modal.open({
+      templateUrl: 'addressModal.html',
+      controller: 'AddressModalCtrl',
+      resolve: {
+        address: function() {
+          return isNew ? {} : angular.copy($scope.selectedAddress);
+        },
+        editMode: function() {
+          return $scope.editMode;
+        }
       }
+    });
+    
+    modal.result.then(function(address) {
+      $scope.selectedAddress = angular.copy(address);
+      var addr = $.grep($scope.addresses, function(addr, index) {
+        if (addr.id === $scope.selectedAddress.id) {
+          $scope.addresses[index] = $scope.selectedAddress;
+          $scope.stSafeAddresses[index] = $scope.selectedAddress;
+          return true;
+        }
+      });
+  
+      if (!addr[0]) {
+        $scope.account.addresses.push($scope.selectedAddress);
+      } 
       
-      if($scope.account.addresses.length === 0) {
-        $scope.account.addresses.push($scope.address);
-        console.log($scope.address);
-      }
-    }
-  }
+    }, function () {
+      // console.log('Modal dismissed');
+    });
+  };
 })
