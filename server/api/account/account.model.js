@@ -28,4 +28,13 @@ AccountSchema
     })];
   });
 
+AccountSchema.pre("save", function(next) {
+  var stdAddresses = _.filter(this.addresses, {standard: true});
+  if (stdAddresses.length > 1) {
+    next(new Error('account.errors.addresses.multipleStandard'));
+  } else {
+    next();
+  }
+});
+
 module.exports = mongoose.model('Account', AccountSchema);

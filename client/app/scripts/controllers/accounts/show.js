@@ -12,13 +12,14 @@ angular.module('openbusApp')
   TableCommon.init($scope);
   ShowEditToggle.init($scope, $location);
   
+  var addressesChanged = false;
+  
   Account.api.get({id: $routeParams.id}).$promise.then(function(account) {
     $scope.account = account;
     $scope.accountSafe = angular.copy(account);
-    $scope.selectedAddress = {};
-    $scope.stSafeAddresses = $scope.account.addresses;
+    $scope.displayedAddresses = [].concat($scope.account.addresses);
   });
-      
+  
   Account.Types.query().$promise.then(function(types) {
     $scope.types = types;
   });
@@ -26,7 +27,7 @@ angular.module('openbusApp')
   $scope.followups = [{
     id: "1",
     title: "Create service request",
-    url: "/service/requestes/new"
+    url: "/service/requests/new"
   }];
     
   $scope.submit = function (form) {
@@ -38,11 +39,15 @@ angular.module('openbusApp')
         function (account, responseHeaders) {
           $scope.account = account;
           $scope.accountSafe = angular.copy(account);
+          
           $translate('messages.account.success.updated', {
             account: $scope.account.name
           }).then(function (msg) {
             $rootScope.addAlert('success', msg);
           });
+          
+          $scope.displayedAddresses = [].concat($scope.account.addresses);
+          addressesChanged = false; 
         },
         function (httpResponse) {
           $scope.errors = httpResponse.data.errors;
@@ -55,35 +60,57 @@ angular.module('openbusApp')
   $scope.cancel = function () {
     $location.path("/accounts/" + $scope.account.id);
   };
-    
+  
+  $scope.delete = function (account) {
+    if (confirm("Delete account?")) {
+      $rootScope.initAlerts();
+      
+      Account.api.delete(account, function () {
+        $translate('messages.account.success.deleted', {
+          account: account.name
+        }).then(function (msg) {
+          $rootScope.addAlert('success', msg);
+        });
+          
+        $location.path("/accounts").search({ hasAlerts: true });
+      }, function (err) {
+        $rootScope.addAlert('danger', 'messages.account.danger.deleted');
+      });
+    }
+  };
+  
+  $scope.isSaveDisabled =   function (accountForm) {
+    return !(accountForm.$dirty || addressesChanged) || !accountForm.$valid;
+  }
+  
+  
+  
   $scope.createFollowup = function(id) {
     var fup = $.grep($scope.followups, function(fup){
       return fup.id === id;
     })[0];
+
+    $location.path(fup.url).search({account: $scope.account.id});
+  };
     
-    $location.path(fup.url);
-  };  
-  
-  $scope.select = function(index) {
-    $scope.selectedAddress = $scope.account.addresses[index];
-    $scope.openAddressModal(false);
+  $scope.selectAddress = function(address) {
+    $scope.openAddressModal(angular.copy(address));
   };
   
-  $scope.deleteAddress = function(address, index) {
+  $scope.deleteAddress = function(address) {
+    var index = $scope.account.addresses.indexOf(address)
     $scope.account.addresses.splice(index, 1);
+    addressesChanged = true;
   };
   
-  $scope.$watch("account.addresses", function() {
-    console.log("changed");
-  }, true);
-  
-  $scope.openAddressModal = function(isNew) {
+  $scope.openAddressModal = function(selectedAddress) {
+    var isNew = !selectedAddress;
     var modal = $modal.open({
       templateUrl: 'addressModal.html',
       controller: 'AddressModalCtrl',
       resolve: {
         address: function() {
-          return isNew ? {} : angular.copy($scope.selectedAddress);
+          return isNew ? {} : selectedAddress;
         },
         editMode: function() {
           return $scope.editMode;
@@ -92,23 +119,22 @@ angular.module('openbusApp')
     });
     
     modal.result.then(function(address) {
-      angular.copy(address, $scope.selectedAddress);
-      
       if (isNew) {
-        $scope.account.addresses.push($scope.selectedAddress);
+        $scope.account.addresses.push(address);
       } else {
         $.grep($scope.account.addresses, function(addr, index) {
-          if (addr.id === $scope.selectedAddress.id || addr.isSelected) {
-            $scope.account.addresses[index] = $scope.selectedAddress;
+          if (addr.isSelected) {
+            angular.copy(address, $scope.account.addresses[index]);
             return;
           }
         });
       }
+      addressesChanged = true;
       
-      $scope.stSafeAddresses = $scope.account.addresses;
-            
+      $scope.displayedAddresses = [].concat($scope.account.addresses);
     }, function () {
       // console.log('Modal dismissed');
     });
   };
+
 })

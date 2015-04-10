@@ -5,6 +5,7 @@ var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
 var i18n = require('i18n');
 var _ = require('lodash');
+var extend = require('util')._extend;
 
 var validationError = function(res, err) {
   if(err.errors) {
@@ -79,16 +80,16 @@ exports.destroy = function(req, res) {
  */
 exports.update = function(req, res, next) {
   var userId = req.params.id;
-
   var props = req.body;
-  delete props._id;
   
   User.findById(userId, function(err, user) {
     if (err) return validationError(res, err);
     
-    for(var f in props) {
-      user[f] = props[f];
-    }
+    user = extend(user, props);
+    
+    // for(var f in props) {
+//       user[f] = props[f];
+//     }
     
     user.save();    
     res.send(user);

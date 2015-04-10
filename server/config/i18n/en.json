@@ -27,6 +27,11 @@
     "types": {
       "organization": "Organization",
       "person": "Person"
+    },
+    "errors": {
+      "addresses": {
+        "multipleStandard": "There can only be one standard address"
+      }
     }
   }
 }

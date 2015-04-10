@@ -2,7 +2,7 @@
   <h4>
     {{ 'account.actions.new.title' | translate }}
     <div class="btn-group btn-group-sm" role="group" aria-label="...">
-      <button class="btn btn-default" ng-click="submit(accountForm)">
+      <button class="btn btn-default" type="submit" ng-click="submit(accountForm)" ng-disabled="isSaveDisabled(accountForm)">
         <i class="fa fa-save"></i> {{'actions.save' | translate}}
       </button>
       <button class="btn btn-default" ng-click="cancel(accountForm)">
@@ -14,7 +14,9 @@
 <div class="form-horizontal">
   <div class="row">
     <div class="col-sm-6">
+      <form name="accountForm" class="form-horizontal" novalidate>
         <account_form></account_form>
+      </form>
     </div>
     <div class="col-sm-6">
       <ng-include src="'views/accounts/partials/_show.address.html'"></ng-include>

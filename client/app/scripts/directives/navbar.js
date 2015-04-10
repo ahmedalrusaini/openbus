@@ -64,5 +64,21 @@ angular.module('openbusApp')
     });
   
     submenu();
-        
+    
+    $scope.isTypeShown = function(type) {
+      return $scope.showAlertType === type;
+    };
+    
+    $scope.showAlerts = function(type) {
+      if ($scope.showAlertType !== type) {
+        $scope.showAlertType = type;      
+      } else {
+        $scope.showAlertType = "";
+      }
+    };
+    
+    $rootScope.$on("clearAlertType", function(){
+      $scope.showAlertType = "";
+    });
+    
   });

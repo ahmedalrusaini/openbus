@@ -1,0 +1,17 @@
+<div class="page-header">
+  <h4>
+    {{ 'service.request.actions.new.title' | translate }}
+    <div class="btn-group btn-group-sm" role="group" aria-label="...">
+      <button class="btn btn-default" type="submit" ng-click="submit(requestForm)" ng-disabled="isSaveDisabled(requestForm)">
+        <i class="fa fa-save"></i> {{'actions.save' | translate}}
+      </button>
+      <button class="btn btn-default" ng-click="cancel()">
+        <i class="fa fa-undo"></i> {{'actions.cancel' | translate}}
+      </button>
+    </div>
+  </h4>
+</div>
+
+<form name="requestForm" class="form-horizontal" novalidate>
+  <ng-include src="'views/service/requests/partials/_request.form.html'"></ng-include>
+</form>

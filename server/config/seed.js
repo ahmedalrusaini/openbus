@@ -41,6 +41,14 @@ var Address = require('../api/account/address.model');
 //  });
 //});
 
+// for(var i=0;i<10;i++){
+//     User.create({
+//       provider: 'local',
+//       email: 'test'+i+'@test.com',
+//       password: 'test'
+//       });
+// } 
+
 // User.find({}).remove(function() {
 //   User.create({
 //     provider: 'local',

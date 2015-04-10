@@ -16,16 +16,20 @@ angular.module('openbusApp')
     User.Roles.query().$promise.then(function(data){
       $scope.roles = data;
     });
-
+    
     $scope.submit = function (form) {
       $rootScope.initAlerts();
+        
+      var checkPasswordConfirmation = function() {
+        if ($scope.user.password !== $scope.user.password_confirmation) {
+          form.password_confirmation.$setValidity("match", false);
+        } else {
+          form.password_confirmation.$setValidity("match", true);
+        }
+      };
       
-      if ($scope.user.password !== $scope.user.password_confirmation) {
-        form.password_confirmation.$setValidity("match", false);
-      } else {
-        form.password_confirmation.$setValidity("match", true);
-      }
-
+      checkPasswordConfirmation();
+      
       if (form.$valid) {
         User.api.save($scope.user,
           function (user, responseHeaders) {            
@@ -36,17 +40,24 @@ angular.module('openbusApp')
                 $rootScope.addAlert('success', msg);
               });
 
-            $location.path("/users/" + user.id);
+            $location.path("/users/" + user.id).search({ hasAlerts: true });
           },
           function (httpResponse) {
             $scope.errors = httpResponse.data.errors;            
             var message = httpResponse.data.message || 'User creation failed';
             $rootScope.addAlert('danger', message );
           });
+      } else {
+        $scope.$watch("user.password", checkPasswordConfirmation);
+        $scope.$watch("user.password_confirmation", checkPasswordConfirmation);
       }
     };
     
     $scope.cancel = function() {
       $location.path("/users");
+    };
+    
+    $scope.isSaveDisabled = function (form) {
+      return !form.$valid;
     }
   });

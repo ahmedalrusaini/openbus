@@ -126,7 +126,6 @@ var validatePresenceOf = function (value) {
  */
 UserSchema
   .pre('save', function (next) {
-    console.log("User save");
     if (this.isNew) {
       if (!validatePresenceOf(this.hashedPassword)) {
         next(new Error('user.errors.password.invalid'));
@@ -135,7 +134,6 @@ UserSchema
         next();
       }
     } else {
-      console.log("Updated");
       this.updatedAt = new Date();      
       next();
     }

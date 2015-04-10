@@ -59,7 +59,7 @@ body {
 }
 
 input:disabled {
-  background-color: lighten($gray-lighter, 3%) !important;
+  background-color: transparent !important; //lighten($gray-lighter, 3%) !important;
   cursor: default !important;
 }
 /* Custom page footer */
@@ -83,12 +83,26 @@ input:disabled {
   background-color: lighten($brand-success, 30%);
 }
 
+.has-error .input-group-btn .btn {
+  border-bottom-color: $state-danger-text;
+//  color: $state-danger-text;
+}
+
 .form-control,
-.input-group-addon {
+.input-group-addon {  
   border-top: none;
-  border-right: none;
+  border-right: none ;
   border-left: none;
   background-color: transparent;
+  border-radius: 0;
+  box-sizing: none !important;
+  box-shadow: none !important;
+}
+
+.input-group-btn .btn {
+  border-top: 1px solid transparent;
+  border-right: 1px solid transparent;
+  border-left: 1px solid transparent ;
   border-radius: 0;
   box-sizing: none !important;
   box-shadow: none !important;
@@ -102,6 +116,9 @@ tr {
       border-right: none;
       border-left: none;
       background-color: transparent;
+      border-radius: 0;
+      box-sizing: none !important;
+      box-shadow: none !important;
       width: 100%;
     }
     &:hover {
@@ -131,7 +148,19 @@ tr {
   &.st-selected {
     background-color: $selected-bg !important;
   }
-  
+}
+
+.alert {
+
+}
+
+.show-hide {
+  -webkit-transition:all linear 0.5s;
+  transition:all linear 0.5s;
+}
+
+.show-hide.ng-hide {
+  opacity:0;
 }
 
 .container-narrow > hr {

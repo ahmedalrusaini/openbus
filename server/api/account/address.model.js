@@ -21,12 +21,12 @@ var AddressSchema = new Schema({
 AddressSchema
   .virtual('text')
   .get(function () {
-    var address = this.street;
-    if (address && this.house_no) address += " " + this.house_no;
-    if (address && this.postal_code) address += ", " + this.postal_code;
-    if (address && this.city) address += ", " + this.city;
-    if (address && this.country) address += ", " + this.country;    
-    return address;
+    var text = this.street || "";
+    if (this.house_no) text += " " + this.house_no;
+    if (this.postal_code) text += (text ? ", " : "") + this.postal_code;
+    if (this.city) text += (text ? ", " : "") + this.city;
+    if (this.country) text += (text ? ", " : "") + this.country;
+    return text;
   });
 
 module.exports = mongoose.model('Address', AddressSchema);

@@ -20,11 +20,11 @@
     </tr>
   </thead>
   <tbody>
-    <tr st-select-row="user" ng-repeat="user in users | filter:search:strict">
+    <tr st-select-row="user" ng-repeat="user in users">
       <td>
         <a ng-href="/users/{{user.id}}/edit"><i class="fa fa-edit"></i></a>
         &nbsp;
-        <a href="#" ng-click="delete(user, $index)"><i class="fa fa-trash-o"></i></a>
+        <a href="#" ng-click="delete(user)"><i class="fa fa-trash-o"></i></a>
       </td>
       <td><a ng-href="/users/{{user._id}}">{{user.email}}</a></td>
       <td>{{user.rolename}}</td>

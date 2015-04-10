@@ -2,14 +2,20 @@
   <h4>
     <span translate='user.header.title' translate-values="{user: user.fullname || user.email}"></span>
     <div class="btn-group btn-group-sm" role="group" aria-label="...">
-      <button class="btn btn-default" ng-click="submit(userForm)">
+      <button class="btn btn-default" ng-click="submit(userForm)" ng-disabled="isSaveDisabled(userForm)">
         <i class="fa fa-save"></i> {{'actions.save' | translate}}
       </button>
       <button class="btn btn-default" ng-click="cancel(userForm)">
         <i class="fa fa-undo"></i> {{'actions.cancel' | translate}}
       </button>
     </div>
+    <div class="btn-group btn-group-sm" role="group" aria-label="...">
+      <button class="btn btn-danger" ng-click="delete(user)">
+        <i class="fa fa-trash-o"></i> {{'actions.delete' | translate}}
+      </button>
+    </div>
   </h4>
 </div>
-
-<user-form></user-form>
+<form name="userForm" class="form-horizontal" novalidate>
+  <user-form></user-form>
+</form>

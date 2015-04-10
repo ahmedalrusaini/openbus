@@ -13,17 +13,24 @@ angular.module('openbusApp')
   
     $rootScope.initAlerts = function() {
       $rootScope.alerts = [];
+      $rootScope.$broadcast("clearAlertType");
     };
     
     $rootScope.addAlert = function(type, message){
       $rootScope.alerts.push({type: type, message: message});
     }; 
   
-    $rootScope.closeAlert = function(index) {
+    $rootScope.closeAlert = function(alertInst) {
+      // $rootScope.alerts.splice(index, 1);
+      
+      var index = $rootScope.alerts.indexOf(alertInst);
+      console.log(index);
       $rootScope.alerts.splice(index, 1);
     };
   
     $rootScope.$on('$routeChangeStart', function(event, next) {
-      $rootScope.initAlerts();
+      if(!next.params.hasAlerts) {
+         $rootScope.initAlerts();
+      }
     });
   });

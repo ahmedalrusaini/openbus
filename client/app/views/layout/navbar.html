@@ -32,10 +32,43 @@
         <a ng-href="{{item.url}}">{{item.title | translate}}</a>
       </li>
     </ul>
+    <ul class="nav navbar-nav pull-right">
+      <li>
+        <a href="#" ng-click="showAlerts('success')" ng-repeat="alert in alerts | filter:{type: 'success'} as successes" ng-show="$first">
+          <i class="text-success fa fa-check-circle"></i>
+        </a>
+      </li>
+      <li>
+        <a href="#" ng-click="showAlerts('info')" ng-repeat="alert in alerts | filter:{type: 'info'} as infos" ng-show="$first">
+          <i class="text-info fa fa-info-circle"></i>
+        </a>
+      </li>
+      <li>
+        <a href="#" ng-click="showAlerts('warning')" ng-repeat="alert in alerts | filter:{type: 'warning'} as warnings" ng-show="$first">
+          <i class="text-warning fa fa-warning"></i>
+        </a>
+      </li>
+      <li>
+        <a href="#" ng-click="showAlerts('danger')" ng-repeat="alert in alerts | filter:{type: 'danger'} as dangers" ng-show="$first">
+          <i class="text-danger fa fa-exclamation-circle"></i>
+        </a>
+      </li>
+    </ul>
   </div>
-</div>
-<div class="row messages" ng-controller="AlertsCtrl">
-  <div class="col-sm-offset-7 col-sm-5">
-    <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.message}}</alert>
+  <div class="row messages" ng-controller="AlertsCtrl">
+    <div class="col-sm-offset-7 col-sm-5">
+      <div class="show-hide" ng-show="isTypeShown('success')">
+        <alert ng-repeat="alert in alerts | filter:{type:'success'}" type="{{alert.type}}" close="closeAlert(alert)">{{alert.message}}</alert>
+      </div>
+      <div class="show-hide" ng-show="isTypeShown('info')">
+        <alert ng-repeat="alert in alerts | filter:{type:'info'}" type="{{alert.type}}" close="closeAlert(alert)">{{alert.message}}</alert>
+      </div>
+      <div class="show-hide" ng-show="isTypeShown('warning')">
+        <alert ng-repeat="alert in alerts | filter:{type:'warning'}" type="{{alert.type}}" close="closeAlert(alert)">{{alert.message}}</alert>
+      </div>
+      <div class="show-hide" ng-show="isTypeShown('danger')">
+        <alert ng-repeat="alert in alerts | filter:{type:'danger'}" type="{{alert.type}}" close="closeAlert(alert)">{{alert.message}}</alert>
+      </div>
+    </div> 
   </div>
 </div>

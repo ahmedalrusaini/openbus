@@ -63,6 +63,10 @@ angular
         templateUrl: 'views/service/requests/index.html',
         controller: 'ServiceRequestsIndexCtrl'
       })
+      .when('/service/requests/new', {
+        templateUrl: 'views/service/requests/new.html',
+        controller: 'ServiceRequestsNewCtrl'
+      })
       .when('/accounts/new', {
         templateUrl: 'views/accounts/new.html',
         controller: 'AccountsNewCtrl'

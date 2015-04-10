@@ -16,13 +16,14 @@ angular.module('openbusApp')
       $scope.stSafeAccounts = data;
     });
     
-    $scope.delete = function (account, index) {
+    $scope.delete = function (account) {
       if (confirm("Delete account?")) {
         $rootScope.initAlerts()
+        var index = $scope.stSafeAccounts.indexOf(account);
+        $scope.stSafeAccounts.splice(index, 1);
+        
         Account.api.delete(account, function () {
-          $scope.accounts.splice(index, 1);
-          
-          $translate('messages.user.success.deleted', {
+          $translate('messages.account.success.deleted', {
               account: account.name
             })
             .then(function (msg) {
@@ -30,7 +31,7 @@ angular.module('openbusApp')
             });
                       
         }, function (err) {
-          $rootScope.addAlert('danger', 'messages.user.danger.deleted');
+          $rootScope.addAlert('danger', 'messages.account.danger.deleted');
         });
       }
     };

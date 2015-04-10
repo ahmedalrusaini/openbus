@@ -30,7 +30,7 @@ angular.module('openbusApp')
       link: function(scope, element, attrs, alertCtrl) {
         $timeout(function(){
           alertCtrl.close();
-        }, parseInt(attrs.dismissOnTimeout, 5));
+        }, parseInt(attrs.dismissOnTimeout, 10));
       }
     }
   }]);

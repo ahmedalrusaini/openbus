@@ -15,6 +15,7 @@ var en = {
     save: "Save",
     create: "Create",
     cancel: "Cancel",
+    delete: "Delete",
     followup: "Follow up"
   },
   menu: {
@@ -49,12 +50,15 @@ var en = {
   },
   main: {
     users: {
-      descr: "Manage your application users"
+      descr: "Manage openbus users"
     },
     service: {
       requests: {
-        descr: "Manage you service requests"
+        descr: "Manage service requests"
       }
+    },
+    accounts: {
+      descr: "Manage accounts"
     }
   },
   user: {
@@ -108,7 +112,7 @@ var en = {
     },
     account: {
       success: {
-        created: 'Account created successfully',
+        created: 'Account {{account}} created successfully',
         updated: 'Account {{account}} updated successfully',
         saved: 'Account {{account}} saved successfully',
         deleted: 'Account {{account}} deleted successfully',
@@ -157,7 +161,22 @@ var en = {
     region: "Region",
     telephone: "Telephone",
     mobile: "Mobile",
-    email: "Email"
-    
+    email: "Email",
+    standard: "Default",
+    standard_abbr: "def.",
+    alternative_abbr: "alt."
+  },
+  service: {
+    request: {
+      actions: {
+        new: {
+          title: "Create new service request"
+        }
+      },
+      one: "Service Request",
+      two: "Service Requests",
+      account: "Account",
+      startDate: "Start Date"
+    }
   }
 };

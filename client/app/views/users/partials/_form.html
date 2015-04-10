@@ -1,86 +1,86 @@
-<form name="userForm" class="form-horizontal" novalidate>
-  <div class="form-group" ng-class="{ 'has-error': (userForm.email.$invalid || errors.email) && userForm.$submitted }" >
-    <label class="col-sm-4 control-label" for="email">{{'user.email' | translate}}</label>
+<div class="form-group" ng-class="{ 'has-error': userForm.email.$invalid || errors.email }" >
+  <label class="col-sm-4 control-label" for="email">{{'user.email' | translate}}</label>
+  <div class="col-sm-5">
+    <input id="email" name="email" type="email" 
+           class="form-control"  
+            ng-model="user.email" required />
+    <div ng-messages="userForm.email.$error" ng-show="userForm.email.$invalid" class="help-block">
+      <div ng-message="required">Required</div>
+      <div ng-message="email">Invalid email</div>
+    </div>
+    <div class="help-block" ng-show="errors.email.message">
+      <div>{{errors.email.message | translate}}</div>
+    </div>
+  </div>    
+</div>
+<div ng-show="!user.id">
+  <div class="form-group" ng-class="{ 'has-error': userForm.password.$invalid }" >
+    <label class="col-sm-4 control-label" for="password">{{'user.password' | translate}}</label>
     <div class="col-sm-5">
-      <input id="email" name="email" type="email" 
-             class="form-control"  
-              ng-model="user.email" required />
-      <div ng-messages="userForm.email.$error" ng-show="userForm.email.$invalid && userForm.$submitted" class="help-block">
+      <input id="password" name="password" type="password" class="form-control" ng-model="user.password" ng-required="!user.id"/>
+      <div ng-messages="userForm.password.$error" ng-show="userForm.password.$invalid" class="help-block">
         <div ng-message="required">Required</div>
-        <div ng-message="email">Invalid email</div>
       </div>
-      <div class="help-block" ng-show="errors.email.message">
-        <div>{{errors.email.message | translate}}</div>
-      </div>
-    </div>    
+    </div>
   </div>
-  <div ng-show="!user.id">
-    <div class="form-group" ng-class="{ 'has-error': userForm.password.$invalid && userForm.$submitted }" >
-      <label class="col-sm-4 control-label" for="password">{{'user.password' | translate}}</label>
-      <div class="col-sm-5">
-        <input id="password" name="password" type="password" class="form-control" ng-model="user.password" ng-required="!user.id"/>
-        <div ng-messages="userForm.password.$error" ng-show="userForm.password.$invalid && userForm.$submitted" class="help-block">
-          <div ng-message="required">Required</div>
+  <div class="form-group" ng-class="{ 'has-error': userForm.password_confirmation.$invalid }" >
+    <label class="col-sm-4 control-label" for="password">{{'user.password_confirmation' | translate}}</label>
+    <div class="col-sm-5">
+      <input id="password_confirmation" name="password_confirmation" type="password" class="form-control" ng-model="user.password_confirmation" ng-required="!user.id" />
+      <div ng-messages="userForm.password_confirmation.$error" ng-show="userForm.password_confirmation.$invalid" class="help-block">
+        <div ng-message="required">Required</div>
+        <div ng-message="match">Password does not match</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="form-group" ng-show="user.id">
+  <label class="col-sm-4 control-label" for="name">{{'user.fullname' | translate}}</label>
+  <div class="col-sm-5">
+    <input id="name" name="name" type="text" class="form-control" ng-model="user.fullname" disabled />
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-sm-4 control-label" for="firstname">{{'user.firstname' | translate}}</label>
+  <div class="col-sm-5">
+    <input id="firstname" name="firstname" type="text" class="form-control" ng-model="user.firstname" />
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-sm-4 control-label" for="lastname">{{'user.lastname' | translate}}</label>
+  <div class="col-sm-5">
+    <input id="lastname" name="lastname" type="text" class="form-control" ng-model="user.lastname" />
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-sm-4 control-label" for="birthdate">{{'user.birthdate' | translate}}</label>
+  <div class="col-sm-5">
+    <div class="dropdown">
+      <a class="dropdown-toggle" id="dropdown1" role="button" data-toggle="dropdown" data-target="#" href="#">
+        <div class="input-group">
+          <input value="{{user.birthdate | date:'dd/MM/yyyy'}}" class="form-control"/>
+          <input type="hidden" id="birthdate" name="birthdate" class="form-control" ng-model="user.birthdate" />
+          <span class="input-group-btn">
+            <span class="btn btn-default"><i class="fa fa-calendar"></i></span>
+          </span>
         </div>
-      </div>
-    </div>
-    <div class="form-group" ng-class="{ 'has-error': userForm.password_confirmation.$invalid && userForm.$submitted }" >
-      <label class="col-sm-4 control-label" for="password">{{'user.password_confirmation' | translate}}</label>
-      <div class="col-sm-5">
-        <input id="password_confirmation" name="password_confirmation" type="password" class="form-control" ng-model="user.password_confirmation" ng-required="!user.id" />
-        <div ng-messages="userForm.password_confirmation.$error" ng-show="userForm.password_confirmation.$invalid && userForm.$submitted" class="help-block">
-          <div ng-message="required">Required</div>
-          <div ng-message="match">Password does not match</div>
-        </div>
-      </div>
+      </a>
+      <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+        <datetimepicker 
+          data-ng-model="user.birthdate" 
+          data-datetimepicker-config="{ dropdownSelector: '#dropdown1', startView:'day', minView:'day' }"></datetimepicker>
+      </ul>
     </div>
   </div>
-  <div class="form-group" ng-show="user.id">
-    <label class="col-sm-4 control-label" for="name">{{'user.fullname' | translate}}</label>
-    <div class="col-sm-5">
-      <input id="name" name="name" type="text" class="form-control" ng-model="user.fullname" disabled />
-    </div>
+</div>
+<div class="form-group">
+  <label class="col-sm-4 control-label" for="lastname">{{'user.role' | translate}}</label>
+  <div class="col-sm-5">
+    <ui-select ng-model="user.role">
+      <ui-select-match>{{$select.selected.name | translate}}</ui-select-match>
+      <ui-select-choices repeat="value.id as value in roles | filter: $select.search">
+        <div ng-bind-html="value.name | translate | highlight: $select.search"></div>
+      </ui-select-choices>
+    </ui-select>
   </div>
-  <div class="form-group">
-    <label class="col-sm-4 control-label" for="firstname">{{'user.firstname' | translate}}</label>
-    <div class="col-sm-5">
-      <input id="firstname" name="firstname" type="text" class="form-control" ng-model="user.firstname" />
-    </div>
-  </div>
-  <div class="form-group">
-    <label class="col-sm-4 control-label" for="lastname">{{'user.lastname' | translate}}</label>
-    <div class="col-sm-5">
-      <input id="lastname" name="lastname" type="text" class="form-control" ng-model="user.lastname" />
-    </div>
-  </div>
-  <div class="form-group">
-    <label class="col-sm-4 control-label" for="birthdate">{{'user.birthdate' | translate}}</label>
-    <div class="col-sm-5">
-      <div class="dropdown">
-        <a class="dropdown-toggle" id="dropdown1" role="button" data-toggle="dropdown" data-target="#" href="#">
-          <div class="input-group">
-            <input value="{{user.birthdate | date:'dd/MM/yyyy'}}" class="form-control"/>
-            <input type="hidden" id="birthdate" name="birthdate" class="form-control" ng-model="user.birthdate" />
-            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-          </div>
-        </a>
-        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-          <datetimepicker 
-            data-ng-model="user.birthdate" 
-            data-datetimepicker-config="{ dropdownSelector: '#dropdown1', startView:'day', minView:'day' }"></datetimepicker>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <div class="form-group">
-    <label class="col-sm-4 control-label" for="lastname">{{'user.role' | translate}}</label>
-    <div class="col-sm-5">
-      <ui-select ng-model="user.role">
-        <ui-select-match>{{$select.selected.name | translate}}</ui-select-match>
-        <ui-select-choices repeat="value.id as value in roles | filter: $select.search">
-          <div ng-bind-html="value.name | translate | highlight: $select.search"></div>
-        </ui-select-choices>
-      </ui-select>
-    </div>
-  </div>
-</form>
+</div>

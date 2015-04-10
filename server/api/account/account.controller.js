@@ -7,7 +7,7 @@ var extend = require('util')._extend;
 
 var validationError = function(res, err) {
   if(err.errors) {
-    _.each(ServiceRequest.schema.paths, function(prop) {
+    _.each(Account.schema.paths, function(prop) {
       if(err.errors.hasOwnProperty(prop.path)) {
         var error = err.errors[prop.path];
         if(error.message) {
@@ -17,8 +17,10 @@ var validationError = function(res, err) {
     })
   }
   
+  console.log(err.message);
+  
   var theErr = {
-    message: err.message, //res.__(err.name),
+    message: res.__(err.message),
     errors: err.errors
   };
   return res.status(422).json(theErr);
@@ -54,14 +56,15 @@ exports.update = function(req, res) {
   var id = req.params.id;
 
   var props = req.body;
-  delete props._id;
-  
+    
   Account.findById(id, function(err, obj) {
     if (err) return new validationError(res, err);
     
     obj = extend(obj, props);  
-    obj.save();
-    res.send(obj);
+    obj.save(function(err, obj) {
+      if (err) return validationError(res, err);
+      res.send(obj);
+    });
   });
 };
 
