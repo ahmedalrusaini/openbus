@@ -1,0 +1,17 @@
+<div class="page-header">
+  <h4>
+    <span translate='request.header.title' translate-values="{request: request.description}"></span>
+    <div class="btn-group btn-group-sm" role="group" aria-label="...">
+      <a class="btn btn-default" href="/service/requests/{{request.id}}/edit">
+         <i class="fa fa-edit"></i> {{'actions.edit' | translate}}
+      </a>
+    </div>
+  </h4>
+</div>
+<div class="form-horizontal">
+  <div class="row">
+    <div class="col-sm-12">
+      <ng-include src="'views/service/requests/partials/_request.show.html'"></ng-include>  
+    </div>
+  </div>
+</div>

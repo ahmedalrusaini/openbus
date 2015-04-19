@@ -59,6 +59,7 @@ angular
         templateUrl: 'views/settings.html',
         controller: 'SettingsCtrl'
       })
+      
       .when('/service/requests', {
         templateUrl: 'views/service/requests/index.html',
         controller: 'ServiceRequestsIndexCtrl'
@@ -67,6 +68,15 @@ angular
         templateUrl: 'views/service/requests/new.html',
         controller: 'ServiceRequestsNewCtrl'
       })
+      .when('/service/requests/:id', {
+        templateUrl: 'views/service/requests/show.html',
+        controller: 'ServiceRequestsShowCtrl'
+      })
+      .when('/service/requests/:id/edit', {
+        templateUrl: 'views/service/requests/edit.html',
+        controller: 'ServiceRequestsShowCtrl'
+      })
+      
       .when('/accounts/new', {
         templateUrl: 'views/accounts/new.html',
         controller: 'AccountsNewCtrl'
@@ -83,6 +93,7 @@ angular
         templateUrl: 'views/accounts/index.html',
         controller: 'AccountsIndexCtrl'
       })
+      
       .otherwise({
         redirectTo: '/'
       });

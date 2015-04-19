@@ -1,0 +1,70 @@
+<div class="row">
+  <div class="col-sm-6">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="page-header">
+          <h4 class="text-muted form-box-title">
+            Details
+          </h4>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label" for="accountId">{{'service.request.description' | translate}}</label>
+      <div class="col-sm-9 control-label">
+        <span class="pull-left">{{request.description}}</span>
+      </div>
+    </div>
+    <!-- Account -->
+    <div class="form-group">
+      <label class="col-sm-3 control-label" for="accountId">{{'service.request.account' | translate}}</label>
+      <div class="col-sm-6 control-label">
+        <span class="pull-left">{{account.name}}</span>
+      </div>
+    </div>
+  </div>
+  <!-- Dates -->
+  <div class="col-sm-6">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="page-header">
+          <h4 class="text-muted form-box-title">
+            Date and Time
+          </h4>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label" for="birthdate">{{'service.request.startEndDate' | translate}}</label>
+      <div class="col-sm-4 control-label">
+        <span class="pull-left">{{request.startDate | date:'dd/MM/yyyy'}}</span>
+      </div>
+      <div class="col-sm-4 control-label">
+        <span class="pull-left">{{request.endDate | date:'dd/MM/yyyy'}}</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label" for="birthdate">{{'service.request.estimatedTime' | translate}}</label>
+      <div class="col-sm-4 control-label">
+        <span class="pull-left">{{request.estimatedTime}} {{request.estimatedTimeUnit}}</span>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Notes -->
+<div class="row">
+  <div class="col-sm-12">
+    <div class="page-header">
+      <h4 class="text-muted form-box-title">
+        Notes
+      </h4>
+    </div>
+  </div>
+</div>
+<div class="form-group">
+  <div class="col-sm-12 control-label">
+    <textarea class="form-control" rows="5" readonly>{{request.notes}}</textarea>
+  </div>
+</div>
+
+<account-search-modal></account-search-modal>

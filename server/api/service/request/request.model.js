@@ -8,6 +8,10 @@ var ServiceRequestSchema = new Schema({
   description: String,
   startDate: Date,
   endDate: Date,
+  notes: String,
+  account: {
+    id: Schema.Types.ObjectId
+  },
   estimatedTime: Number,
   estimatedTimeUnit: String,
   createdAt: Date,

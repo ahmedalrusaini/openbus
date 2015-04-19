@@ -17,8 +17,6 @@ var validationError = function(res, err) {
     })
   }
   
-  console.log(err.message);
-  
   var theErr = {
     message: res.__(err.message),
     errors: err.errors

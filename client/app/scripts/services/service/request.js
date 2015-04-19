@@ -10,6 +10,8 @@
 angular.module('openbusApp')
   .service('ServiceRequest', function ($resource) {
     return {
-      api: $resource('/api/service/requests/:id', { id: '@_id' })
+      api: $resource('/api/service/requests/:id', { id: '@_id' }, {
+        update: { method: 'PUT' }
+      })
     }
   });

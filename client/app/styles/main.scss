@@ -58,10 +58,6 @@ body {
   }
 }
 
-input:disabled {
-  background-color: transparent !important; //lighten($gray-lighter, 3%) !important;
-  cursor: default !important;
-}
 /* Custom page footer */
 
 .footer {
@@ -88,15 +84,25 @@ input:disabled {
 //  color: $state-danger-text;
 }
 
+input,
 .form-control,
 .input-group-addon {  
   border-top: none;
   border-right: none ;
   border-left: none;
-  background-color: transparent;
+  background-color: transparent !important;
   border-radius: 0;
   box-sizing: none !important;
   box-shadow: none !important;
+  
+  &[disabled],
+  &[readonly] {
+    cursor: default !important;
+  }
+}
+
+i.readonly {
+  font-size: 0.7em;
 }
 
 .input-group-btn .btn {

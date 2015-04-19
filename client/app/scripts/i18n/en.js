@@ -124,6 +124,22 @@ var en = {
         saved: 'Account {{account}} save failed',
         deleted: 'Account {{account}} deletion failed'
       }
+    },
+    service: {
+      request: {
+        success: {
+          created: 'Service Request created successfully',
+          updated: 'Service Request updated successfully',
+          saved: 'Service Request saved successfully',
+          deleted: 'Service Request deleted successfully'
+        },
+        danger: {
+          created: 'Service Request creation failed',
+          updated: 'Service Request update failed',
+          saved: 'Service Request save failed',
+          deleted: 'Service Request deletion failed'
+        }
+      }
     }
   },
   account: {
@@ -176,7 +192,11 @@ var en = {
       one: "Service Request",
       two: "Service Requests",
       account: "Account",
-      startDate: "Start Date"
+      startEndDate: "Start / End Date",
+      startDate: "Start Date",
+      endDate: "End Date",
+      description: "Description",
+      estimatedTime: "Estimated Time"
     }
   }
 };
