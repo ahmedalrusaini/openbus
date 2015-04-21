@@ -8,7 +8,7 @@
  * Controller of the openbusApp
  */
 angular.module('openbusApp')
-.controller('UsersShowCtrl', function ($scope, $rootScope, $routeParams, $location, $translate, User) {
+.controller('UsersShowCtrl', function ($scope, $rootScope, $routeParams, $location, $translate, User, $locale) {
   $scope.user = User.api.get({ id: $routeParams.id });
   
   User.Roles.query().$promise.then(function(data){
@@ -60,5 +60,13 @@ angular.module('openbusApp')
   
   $scope.isSaveDisabled = function (form) {
     return !form.$valid;
-  }
+  };
+  
+  $scope.openDatePicker = function($event) {
+    $event.preventDefault();
+    $event.stopPropagation();
+    $scope.opened = true;
+  };
+  
+  console.log($locale.id);
 });

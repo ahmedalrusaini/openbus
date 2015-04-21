@@ -22,9 +22,9 @@ angular
     'ui.bootstrap.datetimepicker',
     'pascalprecht.translate',
     'ui.select',
-    'smart-table'
-  ])
-  
+    'smart-table',
+    'ui.bootstrap'
+  ]) 
   .config(function ($routeProvider, $locationProvider, $httpProvider, uiSelectConfig) {
     $routeProvider
       .when('/', {
@@ -101,6 +101,7 @@ angular
     $locationProvider.html5Mode(true);
     $httpProvider.interceptors.push('authInterceptor');
     uiSelectConfig.theme = 'bootstrap';
+
   })
   
   .factory('authInterceptor', function ($rootScope, $q, $cookieStore, $location) {
@@ -128,7 +129,6 @@ angular
       }
     };
   })
-  
   .run(function($rootScope, $location, Auth) {
     $rootScope.$on('$routeChangeStart', function(event, next) {
       Auth.isLoggedInAsync(function(loggedIn) {

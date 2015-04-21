@@ -18,7 +18,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr st-select-row="request" ng-repeat="request in requests | filter:search:strict">
+    <tr ng-repeat="request in requests | filter:search:strict">
       <td>
         <a ng-href="/requests/{{request.id}}/edit"><i class="fa fa-edit"></i></a>
         &nbsp;

@@ -66,10 +66,19 @@
         </div>
       </a>
       <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-        <datetimepicker 
-          data-ng-model="user.birthdate" 
+        <datetimepicker
+          data-ng-model="user.birthdate"
           data-datetimepicker-config="{ dropdownSelector: '#dropdown1', startView:'day', minView:'day' }"></datetimepicker>
       </ul>
+    </div>
+
+
+    <div class="input-group">
+      <input type="text" class="form-control" datepicker-popup="dd/MM/yyyy" ng-model="user.birthdate" 
+        is-open="opened" ng-required="true" close-text="Close" />
+      <span class="input-group-btn">
+        <button type="button" class="btn btn-default" ng-click="openDatePicker($event)"><i class="fa fa-calendar"></i></button>
+      </span>
     </div>
   </div>
 </div>

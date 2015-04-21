@@ -90,6 +90,7 @@ var en = {
   login: 'Login',
   messages: {
     general: {
+      showHideFilters: 'Filters',
       errors: {
         required: 'Required',
         email: 'Not a valid email'
