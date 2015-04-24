@@ -82,6 +82,7 @@ module.exports = function (grunt) {
           '{.tmp,<%= yeoman.client %>}/app/**/*.js',
           '!{.tmp,<%= yeoman.client %>}app/**/*.spec.js',
           '!{.tmp,<%= yeoman.client %>}/app/**/*.mock.js',
+          '!<%= yeoman.client %>/app/bower_components/angular-i18n/**/*.js',
           '<%= yeoman.client %>/app/images/{,*//*}*.{png,jpg,jpeg,gif,webp,svg}'
         ],
         options: {
