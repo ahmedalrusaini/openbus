@@ -16,39 +16,43 @@ var en = {
     create: "Create",
     cancel: "Cancel",
     delete: "Delete",
-    followup: "Follow up"
+    followup: "Follow up",
+    display: "Display",
+    refresh: "Refresh",
+    add: "Add"
   },
   menu: {
-    index: 'List',
-    new: 'Add',
-    
+    notifications: {
+      title: 'Notifications'
+    },
+    toggleSidebar: 'Toggle sidebar',
+    currentUser: {
+      title: "User menu",
+      settings: "Settings",
+      logout: "Logout"
+    },
     users: {
-      title: 'Users',
-      sub: {
-        index: "@:menu.index",
-        new: "@:menu.new"
-      }
+      title: 'Users'
     },
-    
     accounts: {
-      title: "Accounts",
-      sub: {
-        index: "@:menu.index",
-        new: "@:menu.new"
-      }
+      title: "Accounts"
     },
-    
     service: {
       requests: {
-        title: 'Service Requests',
-        sub: {
-          index: "@:menu.index",
-          new: "@:menu.new"
-        }
+        title: 'Service Requests'
       }
     }
   },
+  common: {
+    list: "List",
+    details: "Details",
+    overview: "Overview",
+    search: "Search",
+    notes: "Notes",
+    filters: "Filters"
+  },
   main: {
+    title: "Home",
     users: {
       descr: "Manage openbus users"
     },
@@ -62,13 +66,9 @@ var en = {
     }
   },
   user: {
-    header: {
-      title: 'User: {{user}}'
-    },
-    actions: {
-      new: {
-        title: "Create new user"
-      }
+    heading: {
+      new: "Create new User",
+      index: 'Users list'
     },
     one: 'User',
     two: 'Users',
@@ -144,13 +144,9 @@ var en = {
     }
   },
   account: {
-    actions: {
-      new: {
-        title: "Create new account"
-      }
-    },
-    header: {
-      title: "Account: {{account}}"
+    heading: {
+      index: 'Account list',
+      new: "Create new Account"
     },
     followups: {
       modal: {
@@ -173,6 +169,7 @@ var en = {
     two: "Addresses",
     street: "Street",
     city: "City",
+    country: "Country",
     houseNo: "House no",
     postalCode: "Postal code",
     region: "Region",
@@ -185,10 +182,9 @@ var en = {
   },
   service: {
     request: {
-      actions: {
-        new: {
-          title: "Create new service request"
-        }
+      heading: {
+        new:  "Create new Service Request",
+        index: "Service Requests list"
       },
       one: "Service Request",
       two: "Service Requests",

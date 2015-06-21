@@ -8,12 +8,11 @@
  * Controller of the openbusApp
  */
 angular.module('openbusApp')
-  .controller('LoginCtrl', function ($rootScope, $scope, $http, $location, Auth) {
-    $rootScope.pageTitle = "login"
+  .controller('LoginCtrl', function ($scope, $http, $location, Auth, Notification) {
     $scope.user = {};
     
     $scope.login = function(form) {
-      $rootScope.initAlerts();
+      Notification.init();
       
       if(form.$valid) {
         Auth.login($scope.user)
@@ -21,7 +20,7 @@ angular.module('openbusApp')
           $location.path('/');
         })
         .catch(function(err) {
-          $rootScope.addAlert('danger', err.message);
+          Notification.add('danger', err.message);
         });
       }
     };

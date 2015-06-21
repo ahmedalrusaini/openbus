@@ -8,17 +8,25 @@
  * Controller of the openbusApp
  */
 angular.module('openbusApp')
-  .controller('UsersIndexCtrl', function ($rootScope, $scope, User, $translate, $filter, TableCommon) {    
+  .controller('UsersIndexCtrl', function ($rootScope, $scope, User, $translate, $filter, TableCommon, Notification) {    
     TableCommon.init($scope);
     
-    User.api.query().$promise.then(function(data){
-      $scope.users = data;
-      $scope.stSafeUsers = data;
-    });
+    var getData = function() {
+      User.api.query().$promise.then(function(data){
+        $scope.users = data;
+        $scope.stSafeUsers = data;
+      });
+    };
+    
+    getData();
+    
+    $scope.refresh = function() {
+      getData();
+    };
   
     $scope.delete = function (user) {
       if (confirm("Delete user?")) {
-        $rootScope.initAlerts();
+        Notification.init();
         
         var i = $scope.stSafeUsers.indexOf(user);
         $scope.stSafeUsers.splice(i, 1);
@@ -27,11 +35,11 @@ angular.module('openbusApp')
           $translate('messages.user.success.deleted', {
             user: user.fullname || user.email
           }).then(function (msg) {
-            $rootScope.addAlert('success', msg);
+            Notification.add('success', msg);
           });
           
         }, function (err) {
-          $rootScope.addAlert('danger', 'messages.user.danger.deleted');
+          Notification.add('danger', 'messages.user.danger.deleted');
         });
       }
     };

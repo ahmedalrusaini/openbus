@@ -1,2 +1,45 @@
-<ng-include src="'views/accounts/partials/_account.show.html'"></ng-include>
+<page-header heading="{{accountSafe.typename }}: {{accountSafe.name}}">
+  <div class="btn-group" role="group" aria-label="...">
+    <a class="btn btn-default" href="/accounts/{{account.id}}/edit">
+       <i class="fa fa-edit"></i> {{'actions.edit' | translate}}
+    </a>
+    <button class="btn btn-default" data-toggle="modal" data-target="#followupModal">
+      <i class="fa fa-ellipsis-h"></i> {{'actions.followup' | translate}}
+    </button>
+  </div>
+  <!-- <div class="btn-group" dropdown>
+    <button type="button" class="btn btn-default"><i class="fa fa-remove"></i> aaa</button>
+    <button type="button" class="btn btn-default"><i class="fa fa-remove"></i> Cancel</button>
+    <button type="button" class="btn btn-default dropdown-toggle" dropdown-toggle>
+      <span class="fa fa-ellipsis-v"></span>
+      <span class="sr-only">More</span>
+    </button>
+    <ul class="dropdown-menu dropdown-menu-right" role="menu">
+      <li><a href="#">Action</a></li>
+      <li><a href="#">Another action</a></li>
+      <li><a href="#">Something else here</a></li>
+      <li class="divider"></li>
+      <li><a href="#">Separated link</a></li>
+    </ul>
+  </div> -->
+</page-header>
+
+<sidebar>
+  <sb-main heading="{{'account.heading.index' | translate}}" nav-to="/accounts"></sb-main>
+  <sb-item heading="{{'common.overview' | translate}}" icon="crosshairs">  
+    <div class="form-horizontal">
+      <ng-include src="'views/accounts/partials/_show.overview.html'"></ng-include>
+    </div>
+  </sb-item>
+  <sb-item heading="{{'common.details' | translate}}" icon="info">  
+    <div class="form-horizontal">
+      <ng-include src="'views/accounts/partials/_show.details.html'"></ng-include>  
+    </div>
+  </sb-item>
+  <sb-item heading="{{'address.two' | translate }}" icon="map-marker">
+    <ng-include src="'views/accounts/partials/_show.address.html'"></ng-include>  
+  </sb-item>
+  
+</sidebar>
+
 <ng-include src="'views/accounts/partials/_followup.modal.html'"></ng-include>

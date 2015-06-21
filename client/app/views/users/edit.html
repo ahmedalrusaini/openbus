@@ -1,21 +1,21 @@
-<div class="page-header">
-  <h4>
-    <span translate='user.header.title' translate-values="{user: user.fullname || user.email}"></span>
-    <div class="btn-group btn-group-sm" role="group" aria-label="...">
-      <button class="btn btn-default" ng-click="submit(userForm)" ng-disabled="isSaveDisabled(userForm)">
-        <i class="fa fa-save"></i> {{'actions.save' | translate}}
-      </button>
-      <button class="btn btn-default" ng-click="cancel(userForm)">
-        <i class="fa fa-undo"></i> {{'actions.cancel' | translate}}
-      </button>
-    </div>
-    <div class="btn-group btn-group-sm" role="group" aria-label="...">
-      <button class="btn btn-danger" ng-click="delete(user)">
-        <i class="fa fa-trash-o"></i> {{'actions.delete' | translate}}
-      </button>
-    </div>
-  </h4>
-</div>
-<form name="userForm" class="form-horizontal" novalidate>
-  <user-form></user-form>
-</form>
+<sidebar>
+  <sb-main heading="{{'user.heading.index' | translate}}" nav-to="/users"></sb-main>
+  <sb-item heading="Details" icon="info">
+    <form name="userForm" class="form-horizontal" novalidate>
+      <page-header heading="{{'actions.edit' | translate}}: {{user.name || user.email}}">
+        <div class="btn-group">
+          <button type="submit" class="btn btn-primary" ng-click="submit(userForm)" ng-disabled="isSaveDisabled(userForm)">
+            <i class="fa fa-save"></i> {{'actions.save' | translate}}
+          </button>
+          <button class="btn btn-default" ng-click="cancel(userForm)">
+            <i class="fa fa-remove"></i> {{'actions.cancel' | translate}}
+          </button>
+          <button class="btn btn-danger" ng-click="delete(user)">
+            <i class="fa fa-trash-o"></i> {{'actions.delete' | translate}}
+          </button>
+        </div>
+      </page-header>
+      <user-form></user-form>
+    </form>
+  </sb-item>
+</sidebar>

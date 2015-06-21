@@ -1,1 +1,21 @@
-<div ng-include src="'views/accounts/partials/_account.new.html'"></div>
+<form name="accountForm" class="form-horizontal" novalidate>
+  <page-header heading="{{'account.heading.new' | translate}}">
+    <div class="btn-group" role="group" aria-label="...">
+      <button class="btn btn-default" type="submit" ng-click="submit(accountForm)" ng-disabled="isSaveDisabled(accountForm)">
+        <i class="fa fa-save"></i> {{'actions.save' | translate}}
+      </button>
+      <button class="btn btn-default" ng-click="cancel(accountForm)">
+        <i class="fa fa-undo"></i> {{'actions.cancel' | translate}}
+      </button>
+    </div>    
+  </page-header>
+  <sidebar>
+    <sb-main heading="{{'account.heading.index' | translate}}" nav-to="/accounts"></sb-main>
+    <sb-item heading="{{'common.details' | translate }}" icon="users">
+      <account-form></account-form>
+    </sb-item>
+    <sb-item heading="Addresses">
+      <ng-include src="'views/accounts/partials/_show.address.html'"></ng-include>
+    </sb-item>
+  </sidebar>
+</form>

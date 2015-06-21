@@ -12,7 +12,7 @@
 angular
   .module('openbusApp', [
     'ngAnimate',
-    'ngAria',
+    // 'ngAria',
     'ngCookies',
     'ngMessages',
     'ngResource',
@@ -23,9 +23,10 @@ angular
     'pascalprecht.translate',
     'ui.select',
     'smart-table',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'uiGmapgoogle-maps'
   ]) 
-  .config(function ($routeProvider, $locationProvider, $httpProvider, uiSelectConfig) {
+  .config(function ($routeProvider, $locationProvider, $httpProvider, uiSelectConfig, uiGmapGoogleMapApiProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
@@ -34,66 +35,7 @@ angular
       .when('/login', {
         templateUrl: 'views/login.html',
         controller: 'LoginCtrl'
-      })
-      .when('/users', {
-        templateUrl: 'views/users/index.html',
-        controller: 'UsersIndexCtrl'
-      })
-      .when('/users/new', {
-        templateUrl: 'views/users/new.html',
-        controller: 'UsersNewCtrl'
-      })
-      .when('/users/:id', {
-        templateUrl: 'views/users/show.html',
-        controller: 'UsersShowCtrl'
-      })
-      .when('/users/:id/edit', {
-        templateUrl: 'views/users/edit.html',
-        controller: 'UsersShowCtrl'
-      })
-      .when('/users/:id/:action', {
-        templateUrl: 'views/users/show.html',
-        controller: 'UsersShowCtrl'
-      })
-      .when('/settings', {
-        templateUrl: 'views/settings.html',
-        controller: 'SettingsCtrl'
-      })
-      
-      .when('/service/requests', {
-        templateUrl: 'views/service/requests/index.html',
-        controller: 'ServiceRequestsIndexCtrl'
-      })
-      .when('/service/requests/new', {
-        templateUrl: 'views/service/requests/new.html',
-        controller: 'ServiceRequestsNewCtrl'
-      })
-      .when('/service/requests/:id', {
-        templateUrl: 'views/service/requests/show.html',
-        controller: 'ServiceRequestsShowCtrl'
-      })
-      .when('/service/requests/:id/edit', {
-        templateUrl: 'views/service/requests/edit.html',
-        controller: 'ServiceRequestsShowCtrl'
-      })
-      
-      .when('/accounts/new', {
-        templateUrl: 'views/accounts/new.html',
-        controller: 'AccountsNewCtrl'
-      })
-      .when('/accounts/:id', {
-        templateUrl: 'views/accounts/show.html',
-        controller: 'AccountsShowCtrl'
-      })
-      .when('/accounts/:id/edit', {
-        templateUrl: 'views/accounts/edit.html',
-        controller: 'AccountsShowCtrl'
-      })
-      .when('/accounts', {
-        templateUrl: 'views/accounts/index.html',
-        controller: 'AccountsIndexCtrl'
-      })
-      
+      })      
       .otherwise({
         redirectTo: '/'
       });
@@ -101,7 +43,12 @@ angular
     $locationProvider.html5Mode(true);
     $httpProvider.interceptors.push('authInterceptor');
     uiSelectConfig.theme = 'bootstrap';
-
+    
+    uiGmapGoogleMapApiProvider.configure({
+        //    key: 'your api key',
+        v: '3.17',
+        libraries: 'weather,geometry,visualization'
+    });
   })
   
   .factory('authInterceptor', function ($rootScope, $q, $cookieStore, $location) {
@@ -130,7 +77,7 @@ angular
     };
   })
   .run(function($rootScope, $location, Auth) {
-    $rootScope.$on('$routeChangeStart', function(event, next) {
+    $rootScope.$on('$routeChangeStart', function(event, next, current) {
       Auth.isLoggedInAsync(function(loggedIn) {
         if (!loggedIn) {
           $location.path('/login');

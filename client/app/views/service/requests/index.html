@@ -1,0 +1,17 @@
+<page-header heading="{{'service.request.heading.index' | translate}}">
+  <div class="btn-group">
+    <a class="btn btn-default" href="/service/requests/new">
+      <i class="fa fa-plus"></i> {{'actions.create' | translate}}
+    </a>
+    <a class="btn btn-default" href ng-click="refresh()">
+      <i class="fa fa-refresh"></i> {{'actions.refresh' | translate}}
+    </a>
+  </div>
+</page-header>
+
+<sidebar>
+  <sb-main heading="Home" nav-to="/"></sb-main>
+  <sb-item heading="{{'common.list' | translate }}" icon="search">
+    <ng-include src="'/views/service/requests/partials/_request.index.html'">
+  </sb-item>
+</sidebar>

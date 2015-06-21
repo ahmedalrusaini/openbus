@@ -8,15 +8,15 @@
  * Controller of the openbusApp
  */
 angular.module('openbusApp')
-.controller('UsersShowCtrl', function ($scope, $rootScope, $routeParams, $location, $translate, User, $locale) {
+.controller('UsersShowCtrl', function ($scope, $routeParams, $location, $translate, User, $locale, Notification) {
   $scope.user = User.api.get({ id: $routeParams.id });
-  
+    
   User.Roles.query().$promise.then(function(data){
     $scope.roles = data;
   });
   
   $scope.submit = function (form) {
-    $rootScope.initAlerts();
+    Notification.init();
     
     if (form.$valid) {
       $scope.user.$update({},
@@ -25,13 +25,17 @@ angular.module('openbusApp')
           $translate('messages.user.success.updated', {
               user: $scope.user.fullname || $scope.user.email
             }).then(function (msg) {
-              $rootScope.addAlert('success', msg);
+              Notification.add('success', msg);
+              
+              Notification.add('danger', "msg");
+              Notification.add('info', "sdfasdfads");
+              Notification.add('warning', "maaaaaasg");
             });
         },
         function (httpResponse) {
           $scope.errors = httpResponse.data.errors;
           var message = httpResponse.data.message || 'User update failed';
-          $rootScope.addAlert('danger', message );
+          Notification.add('danger', message );
         });
     }
   }
@@ -42,18 +46,18 @@ angular.module('openbusApp')
   
   $scope.delete = function (user) {
     if (confirm("Delete user?")) {
-      $rootScope.initAlerts();
+      Notification.init();
       
       User.api.delete(user, function () {
         $translate('messages.user.success.deleted', {
           user: user.fullname || user.email
         }).then(function (msg) {
-          $rootScope.addAlert('success', msg);
+          Notification.add('success', msg);
         });
         
         $location.path("/users").search({ hasAlerts: true });
       }, function (err) {
-        $rootScope.addAlert('danger', 'messages.user.danger.deleted');
+        Notification.add('danger', 'messages.user.danger.deleted');
       });
     }
   };
@@ -61,12 +65,5 @@ angular.module('openbusApp')
   $scope.isSaveDisabled = function (form) {
     return !form.$valid;
   };
-  
-  $scope.openDatePicker = function($event) {
-    $event.preventDefault();
-    $event.stopPropagation();
-    $scope.opened = true;
-  };
-  
-  console.log($locale.id);
+
 });

@@ -1,0 +1,17 @@
+<div>
+<div id="sidebar-wrapper">
+  <ul class="sidebar" ng-transclude></ul>
+  <div class="sidebar-footer">
+    <div class="col-sm-12">
+      <a href="https://github.com/lula/openbus" target="_blank">Github</a>  
+    </div>
+  </div>
+</div>
+<!-- Tabs content -->
+<div class="page-content" 
+  ng-repeat="tab in tabs"
+  ng-class="{active: tab.active}"
+  ng-show="tab.active"
+  sb-content-transclude="tab">
+</div>
+</div>

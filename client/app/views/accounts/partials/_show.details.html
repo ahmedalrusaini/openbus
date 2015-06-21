@@ -1,22 +1,15 @@
-<div class="row">
-  <div class="col-sm-12">
-    <div class="page-header">
-      <h4 class="text-muted">
-        Details
-      </h4>
+<panel page-header="true">
+  <panel-heading title="Details"></panel-heading>
+  <panel-body>
+    <div class="form-group">
+      <label class="col-sm-2 control-label">{{'account.name' | translate}}</label>
+      <div class="col-sm-3 control-label">
+        <span class="pull-left">{{account.name}}</span>
+      </div>
+      <label class="col-sm-2 control-label">{{'account.type' | translate}}</label>
+      <div class="col-sm-3 control-label">
+        <span class="pull-left">{{account.typename}}</span>
+      </div>
     </div>
-  </div>
-</div>  
-
-<div class="form-group">
-  <label class="col-sm-3 control-label">{{'account.name' | translate}}</label>
-  <div class="col-sm-9 control-label">
-    <span class="pull-left">{{account.name}}</span>
-  </div>
-</div>
-<div class="form-group">
-  <label class="col-sm-3 control-label">{{'account.type' | translate}}</label>
-  <div class="col-sm-9 control-label">
-    <span class="pull-left">{{account.typename}}</span>
-  </div>
-</div>
+  </panel-body>
+</panel>

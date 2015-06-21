@@ -1,10 +1,22 @@
-<div class="page-header">
+<sidebar>
+  <sb-main heading="{{'user.heading.index' | translate}}" nav-to="/users"></sb-main>
+  <sb-item heading="{{'common.details' | translate}}" icon="info">
+    <page-header heading="{{'user.one' | translate}}: {{user.name || user.email}}" back-url="/users" back-title="List">
+      <div class="btn-group">
+        <a class="btn btn-default" ng-href="/users/{{user.id}}/edit"><i class="fa fa-edit"></i> {{'actions.edit' | translate}}</a>
+      </div>
+    </page-header>
+    <ng-include src="'views/users/partials/_show.html'"></ng-include>
+  </sb-item>
+</sidebar>
+
+<!-- <div class="page-header">
   <h4>
     <span translate='user.header.title' translate-values="{user: user.fullname || user.email}"></span>
     <div class="btn-group btn-group-sm" role="group" aria-label="...">
-      <a class="btn btn-default"  ng-href="/users/{{user.id}}/edit"><i class="fa fa-edit"></i> {{'actions.edit' | translate}}</a>
-    </div>    
+      <a class="btn btn-default" ng-href="/users/{{user.id}}/edit"><i class="fa fa-edit"></i> {{'actions.edit' | translate}}</a>
+    </div>
   </h4>
 </div>
 
-<ng-include src="'views/users/partials/_show.html'"></ng-include>
+<ng-include src="'views/users/partials/_show.html'"></ng-include> -->

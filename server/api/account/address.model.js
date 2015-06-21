@@ -22,8 +22,8 @@ AddressSchema
   .virtual('text')
   .get(function () {
     var text = this.street || "";
-    if (this.house_no) text += " " + this.house_no;
-    if (this.postal_code) text += (text ? ", " : "") + this.postal_code;
+    if (this.houseNo) text += " " + this.houseNo;
+    if (this.postalCode) text += (text ? ", " : "") + this.postalCode;
     if (this.city) text += (text ? ", " : "") + this.city;
     if (this.country) text += (text ? ", " : "") + this.country;
     return text;

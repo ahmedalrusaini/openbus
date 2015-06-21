@@ -14,7 +14,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="country in countries" st-select-row="country" ng-click="selectCountry(country)">
+        <tr ng-repeat="country in countries" ng-click="selectCountry(country)"> <!-- st-select-row="country" > -->
           <td>{{country.name.common}}</td>
         </tr>
       </tbody>

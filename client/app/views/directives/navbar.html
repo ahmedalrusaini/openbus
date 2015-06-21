@@ -1,0 +1,71 @@
+<nav class="navbar navbar-default navbar-fixed-top header" ng-controller="NavbarCtrl">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" data-toggle="collapse" 
+              ng-init="isCollapsed = true" ng-click="isCollapsed = !isCollapsed">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="/" class="navbar-brand">openbus</a>
+    </div>
+    <div ng-class="{collapse: isCollapsed}" class="navbar-collapse collapse" id="navbar-main">
+      <ul class="nav navbar-nav" ng-show="isLoggedIn()">
+        <li ng-repeat="item in menu" ng-class="{active: isActive(item.link)}">
+          <a ng-href="{{item.link}}">{{item.title}}</a>
+        </li>
+        <li ng-show="isAdmin()" role="presentation" ng-class="{active: isActive('/users')}"><a href="/users">{{ 'menu.users.title' | translate }}</a></li>
+        <li role="presentation" ng-class="{active: isActive('/accounts')}"><a href="/accounts">{{ 'menu.accounts.title' | translate }}</a></li>
+        <li role="presentation" ng-class="{active: isActive('/service/requests')}"><a href="/service/requests">{{ 'menu.service.requests.title' | translate }}</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right" ng-show="isLoggedIn()">
+        <li ng-show="pageHasSidebar()" ng-click="toggleSidebar()" tooltip="{{'menu.toggleSidebar' | translate}}" tooltip-placement="left" tooltip-popup-delay="500">
+          <a href>
+            <i class="fa fa-list-ul"></i>
+          </a>
+        </li>
+        <li dropdown>
+          <a href="#" class="dropdown-toggle" role="button" aria-expanded="false" dropdown-toggle>
+            <span class="label label-{{getAlertsBadge().type}}" ng-show="getAlertsBadge().num > 0">
+              {{getAlertsBadge().num}} <i class="fa fa-{{getAlertsBadge().icon}}"></i>
+            </span>
+            &nbsp;
+            <i class="fa fa-bell-o"></i> 
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-right" role="menu">
+            <li class="dropdown-header">
+              {{'menu.notifications.title' | translate}} 
+            </li>
+            <!-- <li class="divider"></li> -->
+            <li ng-repeat="alert in alerts">
+              <a href="#"><i class="text-{{alert.type}} fa" 
+                ng-class="{'fa-check': alert.type === 'success', 
+                           'fa-exclamation-circle': alert.type === 'danger', 
+                           'fa-warning': alert.type === 'warning',
+                           'fa-info-circle': alert.type === 'info'}"></i> 
+                {{alert.message}}
+              </a>
+            </li>
+            <li class="divider" ng-show="alerts.length > 0">
+            <li ng-show="alerts.length > 0">
+              <a href ng-click="markAllAlertsAsRead()"><i class="fa fa-check-square-o"></i> Mark all as read</a>
+            </li>
+          </ul>
+        </li>
+        <li dropdown>
+          <a href="#" class="dropdown-toggle" role="button" aria-expanded="false" dropdown-toggle>
+            {{loggedUser.email}} <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-right" role="menu">
+            <li class="dropdown-header">{{'menu.currentUser.title' | translate}}</li>
+            <li><a href="/settings"><i class="fa fa-cog"></i> {{'menu.currentUser.settings' | translate}}</a></li>
+            <!-- <li class="divider"></li> -->
+            <li><a href="/" ng-click="logout()"><i class="fa fa-sign-out"></i> {{'menu.currentUser.logout' | translate}}</a></li>
+          </ul>
+        </li>
+      </ul>        
+    </div>
+  </div>
+</nav>

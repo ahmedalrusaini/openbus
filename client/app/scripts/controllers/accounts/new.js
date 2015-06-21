@@ -8,7 +8,7 @@
  * Controller of the openbusApp
  */
 angular.module('openbusApp')
-.controller('AccountsNewCtrl', function ($scope, $rootScope, $location, Account, TableCommon, $translate, $modal) {
+.controller('AccountsNewCtrl', function ($scope, $location, Account, TableCommon, $translate, $modal, Notification) {
   $scope.account = { addresses: [] };
   $scope.editMode = true;
   
@@ -19,7 +19,7 @@ angular.module('openbusApp')
   });
 
   $scope.submit = function (form) {
-    $rootScope.initAlerts();
+    Notification.init();
         
     if (form.$valid) {
       Account.api.save($scope.account,
@@ -27,7 +27,7 @@ angular.module('openbusApp')
           $translate('messages.account.success.created', {
             account: account.name
           }).then(function (msg) {
-            $rootScope.addAlert('success', msg);
+            Notification.add('success', msg);
           });
 
           $location.path("/accounts/" + account.id).search({ hasAlerts: true });
@@ -35,7 +35,7 @@ angular.module('openbusApp')
         function (httpResponse) {
           $scope.errors = httpResponse.data.errors;            
           var message = httpResponse.data.message || 'Account creation failed';
-          $rootScope.addAlert('danger', message );
+          Notification.add('danger', message );
         });
     }
   };

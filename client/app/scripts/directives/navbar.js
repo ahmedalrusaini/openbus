@@ -9,29 +9,29 @@
 angular.module('openbusApp')
   .directive('navbar', function () {
     return {
-      templateUrl: 'views/layout/navbar.html',
+      templateUrl: 'views/directives/navbar.html',
       restrict: 'E'
     };
   })
-  .controller('NavbarCtrl', function($rootScope, $scope, $location, Auth) {
+  .controller('NavbarCtrl', function($rootScope, $scope, $location, Auth, Notification) {
     
     $scope.menu = $rootScope.menu || {};
     
-    var submenu = function() {
-      $scope.submenu = [];
-      if($location.path().match(/\/users/)) {
-        $scope.submenu.push({url: "/users", title: "menu.users.sub.index"});
-        $scope.submenu.push({url: "/users/new", title: "menu.users.sub.new"});
-      } 
-      else if ($location.path().match(/\/service\/requests/)) {
-        $scope.submenu.push({url: "/service/requests", title: "menu.service.requests.sub.index"});
-        $scope.submenu.push({url: "/service/requests/new", title: "menu.service.requests.sub.new"});
-      } 
-      else if ($location.path().match(/\/accounts/)) {
-        $scope.submenu.push({url: "/accounts", title: "menu.accounts.sub.index"});
-        $scope.submenu.push({url: "/accounts/new", title: "menu.accounts.sub.new"});
-      }
-    };
+    // var submenu = function() {
+//       $scope.submenu = [];
+//       if($location.path().match(/\/users/)) {
+//         $scope.submenu.push({url: "/users", title: "menu.users.sub.index"});
+//         $scope.submenu.push({url: "/users/new", title: "menu.users.sub.new"});
+//       }
+//       else if ($location.path().match(/\/service\/requests/)) {
+//         $scope.submenu.push({url: "/service/requests", title: "menu.service.requests.sub.index"});
+//         $scope.submenu.push({url: "/service/requests/new", title: "menu.service.requests.sub.new"});
+//       }
+//       else if ($location.path().match(/\/accounts/)) {
+//         $scope.submenu.push({url: "/accounts", title: "menu.accounts.sub.index"});
+//         $scope.submenu.push({url: "/accounts/new", title: "menu.accounts.sub.new"});
+//       }
+//     };
   
     $scope.isCollapsed = true;
     $rootScope.isLoggedIn = Auth.isLoggedIn;
@@ -46,39 +46,34 @@ angular.module('openbusApp')
         return $location.path().match(new RegExp(route));
       }
     };
-  
-    $scope.isSubActive = function(route) {
-      if(route === '/') {
-        return route === $location.path();
-      } else {
-        return $location.path().match(new RegExp(route+"$"));
+    
+    $scope.pageHasSidebar = function() {
+      if($(".no-sidebar").length > 0) {
+        return false;
       }
+      return true;
     };
+    
+    $rootScope.$on('$routeChangeStart', function(event, next) {
+      $scope.pageHasSidebar();
+    });
+  
+    // $scope.isSubActive = function(route) {
+    //   if(route === '/') {
+    //     return route === $location.path();
+    //   } else {
+    //     return $location.path().match(new RegExp(route+"$"));
+    //   }
+    // };
   
     $scope.isHome = function() {
       return $location.path() === '/';
     }
   
-    $rootScope.$on('$routeChangeStart', function(event, next) {
-      submenu();
-    });
-  
-    submenu();
-    
-    $scope.isTypeShown = function(type) {
-      return $scope.showAlertType === type;
-    };
-    
-    $scope.showAlerts = function(type) {
-      if ($scope.showAlertType !== type) {
-        $scope.showAlertType = type;      
-      } else {
-        $scope.showAlertType = "";
-      }
-    };
-    
-    $rootScope.$on("clearAlertType", function(){
-      $scope.showAlertType = "";
-    });
+    // $rootScope.$on('$routeChangeStart', function(event, next) {
+    //   submenu();
+    // });
+    //
+    // submenu();
     
   });

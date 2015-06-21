@@ -83,6 +83,7 @@ module.exports = function (grunt) {
           '!{.tmp,<%= yeoman.client %>}app/**/*.spec.js',
           '!{.tmp,<%= yeoman.client %>}/app/**/*.mock.js',
           '!<%= yeoman.client %>/app/bower_components/angular-i18n/**/*.js',
+          '!<%= yeoman.client %>/app/bower_components/moment/**/*.js',
           '<%= yeoman.client %>/app/images/{,*//*}*.{png,jpg,jpeg,gif,webp,svg}'
         ],
         options: {
@@ -222,7 +223,8 @@ module.exports = function (grunt) {
         },
         files: {
           '<%= yeoman.client %>/app/index.html': [
-            '<%= yeoman.client %>/app/scripts/i18n/*.js'
+            '<%= yeoman.client %>/app/scripts/i18n/*.js',
+            '<%= yeoman.client %>/app/scripts/controllers/**/routes.js'
           ]
         }
       }

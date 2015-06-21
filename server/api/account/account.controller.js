@@ -25,10 +25,16 @@ var validationError = function(res, err) {
 };
 
 exports.index = function(req, res) {
-  Account.find({}, function (err, accounts) {
+  // Account.find({}, function (err, accounts) {
+  //   if(err) return res.status(500).json(err);
+  //   res.status(200).json(accounts);
+  // });
+  
+  Account.find({}).sort("name").exec(function (err, accounts) {
     if(err) return res.status(500).json(err);
     res.status(200).json(accounts);
   });
+  
 };
 
 exports.show = function(req, res) {

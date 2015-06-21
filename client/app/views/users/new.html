@@ -1,15 +1,18 @@
-<div class="page-header">
-  <h4>{{'user.actions.new.title' | translate}}
-    <div class="btn-group btn-group-sm" role="group" aria-label="...">
-      <button class="btn btn-default" ng-click="submit(userForm)" ng-disabled="isSaveDisabled(userForm)">
-        <i class="fa fa-save"></i> {{'actions.save' | translate}}
-      </button>
-      <button class="btn btn-default" ng-click="cancel(userForm)">
-        <i class="fa fa-undo"></i> {{'actions.cancel' | translate}}
-      </button>
-    </div>
-  </h4>
-</div>
-<form name="userForm" class="form-horizontal" novalidate>
-  <user-form></user-form>
-</form>
+<sidebar>
+  <sb-main heading="{{'user.heading.index' | translate}}" nav-to="/users"></sb-main>
+  <sb-item heading="{{'common.details' | translate}}" icon="user">
+    <form name="userForm" class="form-horizontal" novalidate>
+      <page-header heading="{{'user.heading.new' | translate}}">
+        <div class="btn-group" dropdown>
+          <button type="submit" class="btn btn-primary" ng-click="submit(userForm)" ng-disabled="isSaveDisabled(userForm)">
+            <i class="fa fa-save"></i> {{'actions.save' | translate}}
+          </button>
+          <button type="button" class="btn btn-default" ng-click="cancel(userForm)">
+            <i class="fa fa-remove"></i> {{'actions.cancel' | translate}}
+          </button>
+        </div>
+      </page-header>
+      <user-form></user-form>
+    </form>
+  </sb-item>
+</sidebar>

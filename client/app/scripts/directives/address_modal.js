@@ -23,7 +23,10 @@ angular.module('openbusApp')
       if (address.country) $scope.addressModal.text += ($scope.addressModal.text ? ", " : "") + $scope.addressModal.country;
     };
     
+    $scope.countries = i18n.countries;
     $scope.addressModal = address;
+    $scope.addressModal.countryName = i18n.getCountryName(address.country);
+    
     $scope.editMode = editMode;
     
     $scope.cancelModal = function() {
@@ -40,6 +43,10 @@ angular.module('openbusApp')
     
     $scope.isSaveDisabled = function (addressForm) {
       return !addressForm.$valid || !addressForm.$dirty;
+    };
+    
+    $scope.countrySelected = function($item) {
+      $scope.addressModal.country = $item.cca2;
     };
     
     $scope.openCountriesModal = function(selectedCountry, addressForm) {

@@ -8,7 +8,7 @@
  * Controller of the openbusApp
  */
 angular.module('openbusApp')
-  .controller('UsersNewCtrl', function ($rootScope, $scope, $location, User, $translate) {
+  .controller('UsersNewCtrl', function ($scope, $location, User, $translate, Notification) {
     $scope.user = {}
 
     $scope.editMode = true;
@@ -18,7 +18,7 @@ angular.module('openbusApp')
     });
     
     $scope.submit = function (form) {
-      $rootScope.initAlerts();
+      Notification.init();
         
       var checkPasswordConfirmation = function() {
         if ($scope.user.password !== $scope.user.password_confirmation) {
@@ -37,7 +37,7 @@ angular.module('openbusApp')
                 user: $scope.user.fullname || $scope.user.email
               })
               .then(function (msg) {
-                $rootScope.addAlert('success', msg);
+                Notification.add('success', msg);
               });
 
             $location.path("/users/" + user.id).search({ hasAlerts: true });
@@ -45,7 +45,7 @@ angular.module('openbusApp')
           function (httpResponse) {
             $scope.errors = httpResponse.data.errors;            
             var message = httpResponse.data.message || 'User creation failed';
-            $rootScope.addAlert('danger', message );
+            Notification.add('danger', message );
           });
       } else {
         $scope.$watch("user.password", checkPasswordConfirmation);

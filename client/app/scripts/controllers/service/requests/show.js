@@ -8,19 +8,22 @@
  * Controller of the openbusApp
  */
 angular.module('openbusApp')
-  .controller('ServiceRequestsShowCtrl', function ($scope, $rootScope, $location, $translate, $routeParams, $modal, ShowEditToggle, Account, Units, ServiceRequest) {
+  .controller('ServiceRequestsShowCtrl', function ($scope, $location, $translate, $routeParams, $modal, ShowEditToggle, Account, Units, ServiceRequest, Notification) {
     ShowEditToggle.init($scope, $location);
     
     Units.api.time.query().$promise.then(function(units){
       $scope.estTimeUnits = units;
     });
     
+    var getAccount = function(id) {
+      Account.api.get({id: id}).$promise.then(function(account) {
+        $scope.request.account = account;
+      });
+    };
+    
     ServiceRequest.api.get({id: $routeParams.id}).$promise.then(function(request) {
       if(request.account.id) {
-        Account.api.get({id: request.account.id}).$promise.then(function(account) {
-          $scope.request.account.id = account.id;
-          $scope.account = account;
-        });
+        getAccount(request.account.id);
       }
       
       $scope.request = request;
@@ -50,19 +53,20 @@ angular.module('openbusApp')
     
     $scope.submit = function(form) {
       if(form.$valid) {
-        console.log($scope.request);
         $scope.request.$update({},
           function (request, responseHeaders) {
             $scope.request = request;
           
             $translate('messages.service.request.success.updated').then(function (msg) {
-              $rootScope.addAlert('success', msg);
+              Notification.add('success', msg);
+              
+              getAccount(request.account.id);
             });
           },
           function (httpResponse) {
             $scope.errors = httpResponse.data.errors;
             var message = httpResponse.data.message;
-            $rootScope.addAlert('danger', message );
+            Notification.add('danger', message );
           });
       }
     };
@@ -73,17 +77,17 @@ angular.module('openbusApp')
     
     $scope.delete = function (request) {
       if (confirm("Delete request?")) {
-        $rootScope.initAlerts()
+        Notification.init()
 
         ServiceRequest.api.delete(request, function () {
           $translate('messages.service.request.success.deleted')
             .then(function (msg) {
-              $rootScope.addAlert('success', msg);
+              Notification.add('success', msg);
             });
 
           $location.path("/requests").search({ hasAlerts: true });
         }, function (err) {
-          $rootScope.addAlert('danger', 'messages.request.danger.deleted');
+          Notification.add('danger', 'messages.request.danger.deleted');
         });
       }
     };

@@ -247,5 +247,16 @@ var i18n = { countries: [{"name":{"common":"Aruba"},"cca2":"AW","currency":["AWG
 {"name":{"common":"Yemen"},"cca2":"YE","currency":["YER"],"callingCode":["967"],"region":"Asia","subregion":"Western Asia","translations":{"deu":{"common":"Jemen"},"fra":{"common":"Y\u00e9men"},"hrv":{"common":"Jemen"},"ita":{"common":"Yemen"},"jpn":{"common":"\u30a4\u30a8\u30e1\u30f3"},"nld":{"common":"Jemen"},"por":{"common":"I\u00e9men"},"rus":{"common":"\u0419\u0435\u043c\u0435\u043d"},"spa":{"common":"Yemen"}},"latlng":[15,48],"borders":["OMN","SAU"],"area":527968,"languages":{}},
 {"name":{"common":"South Africa"},"cca2":"ZA","currency":["ZAR"],"callingCode":["27"],"region":"Africa","subregion":"Southern Africa","translations":{"deu":{"common":"Republik S\u00fcdafrika"},"fra":{"common":"Afrique du Sud"},"hrv":{"common":"Ju\u017enoafri\u010dka Republika"},"ita":{"common":"Sud Africa"},"jpn":{"common":"\u5357\u30a2\u30d5\u30ea\u30ab"},"nld":{"common":"Zuid-Afrika"},"por":{"common":"\u00c1frica do Sul"},"rus":{"common":"\u042e\u0436\u043d\u043e-\u0410\u0444\u0440\u0438\u043a\u0430\u043d\u0441\u043a\u0430\u044f \u0420\u0435\u0441\u043f\u0443\u0431\u043b\u0438\u043a\u0430"},"spa":{"common":"Rep\u00fablica de Sud\u00e1frica"}},"latlng":[-29,24],"borders":["BWA","LSO","MOZ","NAM","SWZ","ZWE"],"area":1221037,"languages":{}},
 {"name":{"common":"Zambia"},"cca2":"ZM","currency":["ZMW"],"callingCode":["260"],"region":"Africa","subregion":"Eastern Africa","translations":{"deu":{"common":"Sambia"},"fra":{"common":"Zambie"},"hrv":{"common":"Zambija"},"ita":{"common":"Zambia"},"jpn":{"common":"\u30b6\u30f3\u30d3\u30a2"},"nld":{"common":"Zambia"},"por":{"common":"Z\u00e2mbia"},"rus":{"common":"\u0417\u0430\u043c\u0431\u0438\u044f"},"spa":{"common":"Zambia"}},"latlng":[-15,30],"borders":["AGO","BWA","COD","MWI","MOZ","NAM","TZA","ZWE"],"area":752612,"languages":{}},
-{"name":{"common":"Zimbabwe"},"cca2":"ZW","currency":["ZWL"],"callingCode":["263"],"region":"Africa","subregion":"Eastern Africa","translations":{"deu":{"common":"Simbabwe"},"fra":{"common":"Zimbabwe"},"hrv":{"common":"Zimbabve"},"ita":{"common":"Zimbabwe"},"jpn":{"common":"\u30b8\u30f3\u30d0\u30d6\u30a8"},"nld":{"common":"Zimbabwe"},"por":{"common":"Zimbabwe"},"rus":{"common":"\u0417\u0438\u043c\u0431\u0430\u0431\u0432\u0435"},"spa":{"common":"Zimbabue"}},"latlng":[-20,30],"borders":["BWA","MOZ","ZAF","ZMB"],"area":390757,"languages":{}}]
+{"name":{"common":"Zimbabwe"},"cca2":"ZW","currency":["ZWL"],"callingCode":["263"],"region":"Africa","subregion":"Eastern Africa","translations":{"deu":{"common":"Simbabwe"},"fra":{"common":"Zimbabwe"},"hrv":{"common":"Zimbabve"},"ita":{"common":"Zimbabwe"},"jpn":{"common":"\u30b8\u30f3\u30d0\u30d6\u30a8"},"nld":{"common":"Zimbabwe"},"por":{"common":"Zimbabwe"},"rus":{"common":"\u0417\u0438\u043c\u0431\u0430\u0431\u0432\u0435"},"spa":{"common":"Zimbabue"}},"latlng":[-20,30],"borders":["BWA","MOZ","ZAF","ZMB"],"area":390757,"languages":{}}],
+
+getCountryName: function(cca2) {
+  var country = this.countries.filter(function(country) {
+    return country.cca2 === cca2;
+  });
+  
+  if (country.length > 0) {
+    return country[0].name.common;
+  }
+}
+
 };
