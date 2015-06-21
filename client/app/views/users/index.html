@@ -1,45 +1,62 @@
-<div class="page-header">
-  <h4>Users</h4>
-</div>
-
-<table class="table table-striped table-hover" st-table="users" st-safe-src="stSafeUsers">
-  <thead>
-    <tr>
-      <th width="5%" class="text-center"><a href="#" title="Show/Hide filters" data-toggle="tooltip" ng-click="toggleInlineFilters()"><i class="fa fa-filter"></i></a></th>
-      <th st-sort="email" st-skip-natural="true" st-sort-default="email">{{'user.email' | translate}}</th>
-      <th st-sort="role" st-skip-natural="true" >{{'user.role' | translate}}</th>
-      <th st-sort="firstname" st-skip-natural="true" >{{'user.firstname' | translate}}</th>
-      <th st-sort="lastname" st-skip-natural="true" >{{'user.lastname' | translate}}</th>
-    </tr>
-    <tr class="filters" ng-show="showInlineFilters">
-      <th></th>
-      <th><input st-search="'email'" st-delay="100" class="inline-table-filter input-sm" placeholder="Search for email"></th>
-      <th><input st-search="'role'" st-delay="100" class="inline-table-filter input-sm" placeholder="Search for role"></th>
-      <th><input st-search="'firstname'" st-delay="100" class="inline-table-filter input-sm" placeholder="Search for firstname"></th>
-      <th><input st-search="'lastname'" st-delay="100" class="inline-table-filter input-sm" placeholder="Search for lastname"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr ng-repeat="user in users">
-      <td>
-        <a ng-href="/users/{{user.id}}/edit"><i class="fa fa-edit"></i></a>
-        &nbsp;
-        <a href="#" ng-click="delete(user)"><i class="fa fa-trash-o"></i></a>
-      </td>
-      <td><a ng-href="/users/{{user._id}}">{{user.email}}</a></td>
-      <td>{{user.rolename}}</td>
-      <td>{{user.firstname}}</td>
-      <td>{{user.lastname}}</td>
-    </tr>
-    <tr ng-repeat="i in times(5 - users.length) track by $index">
-      <td>&nbsp;</td><td></td><td></td><td></td><td></td>
-    </tr>
-  </tbody>
-  <tfoot>
-    <tr>
-      <td colspan="5" class="text-center">
-        <div st-pagination="" st-items-by-page="5" st-displayed-pages="5" st-template="views/bootstrap/pagination.html"></div>
-      </td>
-    </tr>
-  </tfoot>
-</table>
+<sidebar>
+  <sb-main heading="{{'main.title' | translate}}" nav-to="/"></sb-main>
+  <sb-item heading="{{'common.list' | translate}}" icon="search">
+    <page-header heading="{{'user.heading.index' | translate}}">
+      <div class="btn-group">
+        <a class="btn btn-default" href="/users/new">
+          <i class="fa fa-plus"></i> {{'actions.create' | translate}}
+        </a>
+        <a class="btn btn-default" href ng-click="refresh()">
+          <i class="fa fa-refresh"></i> {{'actions.refresh' | translate}}
+        </a>
+      </div>
+    </page-header>
+    <panel>
+      <panel-body fill="true">
+        <table class="table table-striped table-hover" st-table="users" st-safe-src="stSafeUsers">
+          <thead>
+            <tr>
+              <th class="text-center"><a href="#" title="Show/Hide filters" data-toggle="tooltip" ng-click="toggleInlineFilters()"><i class="fa fa-filter"></i></a></th>
+              <th st-sort="email" st-skip-natural="true" st-sort-default="email">{{'user.email' | translate}}</th>
+              <th st-sort="role" st-skip-natural="true" >{{'user.role' | translate}}</th>
+              <th st-sort="firstname" st-skip-natural="true" >{{'user.firstname' | translate}}</th>
+              <th st-sort="lastname" st-skip-natural="true" >{{'user.lastname' | translate}}</th>
+            </tr>
+            <tr class="filters" ng-show="showInlineFilters">
+              <th></th>
+              <th><input st-search="'email'" st-delay="100" class="inline-table-filter input-sm" placeholder="Search for email"></th>
+              <th><input st-search="'role'" st-delay="100" class="inline-table-filter input-sm" placeholder="Search for role"></th>
+              <th><input st-search="'firstname'" st-delay="100" class="inline-table-filter input-sm" placeholder="Search for firstname"></th>
+              <th><input st-search="'lastname'" st-delay="100" class="inline-table-filter input-sm" placeholder="Search for lastname"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="user in users">
+              <td width="80px">
+                <a ng-href="/users/{{user._id}}" tooltip="{{'actions.display' | translate}}"><i class="fa fa-search"></i></a>
+                &nbsp;
+                <a ng-href="/users/{{user.id}}/edit" tooltip="{{'actions.edit' | translate}}"><i class="fa fa-edit"></i></a>
+                &nbsp;
+                <a href="#" ng-click="delete(user)" tooltip="{{'actions.delete' | translate}}"><i class="fa fa-trash-o"></i></a>
+              </td>
+              <td>{{user.email}}</td>
+              <td>{{user.rolename}}</td>
+              <td>{{user.firstname}}</td>
+              <td>{{user.lastname}}</td>
+            </tr>
+            <tr ng-repeat="i in times(5 - users.length) track by $index">
+              <td>&nbsp;</td><td></td><td></td><td></td><td></td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="5" class="text-center">
+                <div st-pagination="" st-items-by-page="5" st-displayed-pages="5" st-template="views/bootstrap/pagination.html"></div>&nbsp;
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </panel-body>
+    </panel>
+  </sb-item>
+</sidebar>

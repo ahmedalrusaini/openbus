@@ -8,9 +8,11 @@
  * Controller of the openbusApp
  */
 angular.module('openbusApp')
-  .controller('ServiceRequestsIndexCtrl', function ($scope, $rootScope, ServiceRequest, TableCommon, Account) {
+  .controller('ServiceRequestsIndexCtrl', function ($scope, $rootScope, $location, ServiceRequest, TableCommon, Account) {
     TableCommon.init($scope);
     
+    var accountId = $location.search().account;
+        
     ServiceRequest.api.query().$promise.then(function(requests){
       angular.forEach(requests, function(req, key, obj) {
         Account.api.get({id: req.account.id}).$promise.then(function(account) {

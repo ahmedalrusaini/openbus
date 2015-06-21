@@ -26,7 +26,18 @@ var validationError = function(res, err) {
 };
 
 exports.index = function(req, res) {
-  ServiceRequest.find({}, function (err, requests) {
+  var count = req.query._count;
+  if (count) {
+    delete req.query._count;
+    ServiceRequest.count(req.query, function(err, count) {
+      res.status(200).json({count: count});
+    });    
+    return;
+  }
+  
+  var limit = req.query._limit;
+  delete req.query._limit;
+  ServiceRequest.find(req.query).limit(limit).exec(function (err, requests) {
     if(err) return res.status(500).json(err);
     res.status(200).json(requests);
   });

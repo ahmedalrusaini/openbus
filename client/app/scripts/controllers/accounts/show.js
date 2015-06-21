@@ -8,7 +8,7 @@
 * Controller of the openbusApp
 */
 angular.module('openbusApp')
-.controller('AccountsShowCtrl', function ($rootScope, $scope, $routeParams, $location, $translate, Account, TableCommon, ShowEditToggle, $modal) {
+.controller('AccountsShowCtrl', function ($scope, $routeParams, $location, $translate, Account, TableCommon, ShowEditToggle, $modal, Notification, uiGmapGoogleMapApi, ServiceRequest) {
   TableCommon.init($scope);
   ShowEditToggle.init($scope, $location);
   
@@ -18,6 +18,30 @@ angular.module('openbusApp')
     $scope.account = account;
     $scope.accountSafe = angular.copy(account);
     $scope.displayedAddresses = [].concat($scope.account.addresses);
+    
+    if($scope.account.address) {
+      $scope.account.address.countryName = i18n.getCountryName($scope.account.address.country);
+      
+      var url = 'http://maps.google.com/maps/api/geocode/json?address=' + $scope.account.address.text;
+
+      $.get(url, function(data) {
+        var lat = data.results[0].geometry.location.lat;
+        var lng = data.results[0].geometry.location.lng;
+      
+        uiGmapGoogleMapApi.then(function(maps) {
+          $scope.map = { 
+            center: { latitude: lat, longitude: lng }, 
+            zoom: 15,
+            marker: {
+              idkey: 1,
+              coords: { latitude: lat, longitude: lng }
+            }
+          };
+        });
+      });
+    }
+    
+    $scope.getServiceRequests();
   });
   
   Account.Types.query().$promise.then(function(types) {
@@ -29,12 +53,19 @@ angular.module('openbusApp')
     title: "Create service request",
     url: "/service/requests/new"
   }];
+
+  $scope.getServiceRequests = function() {
+    ServiceRequest.api.query({'account.id': $scope.account.id, _limit: 10}).$promise.then(function(requests){      
+      $scope.account.serviceRequests = requests;
+      $scope.stSafeRequests = requests;
+    });
+  };
     
   $scope.submit = function (form) {
-    $rootScope.initAlerts();
+    Notification.init();
     form.$submitted = true;
     
-    if (form.$valid) {  
+    if (form.$valid) {
       $scope.account.$update({},
         function (account, responseHeaders) {
           $scope.account = account;
@@ -43,7 +74,10 @@ angular.module('openbusApp')
           $translate('messages.account.success.updated', {
             account: $scope.account.name
           }).then(function (msg) {
-            $rootScope.addAlert('success', msg);
+            Notification.add('success', msg);
+            if (!$scope.account.address) {
+              Notification.add('warning', 'No default address set!');
+            }
           });
           
           $scope.displayedAddresses = [].concat($scope.account.addresses);
@@ -52,7 +86,7 @@ angular.module('openbusApp')
         function (httpResponse) {
           $scope.errors = httpResponse.data.errors;
           var message = httpResponse.data.message;
-          $rootScope.addAlert('danger', message );
+          Notification.add('danger', message );
         });
     }
   };
@@ -63,18 +97,18 @@ angular.module('openbusApp')
   
   $scope.delete = function (account) {
     if (confirm("Delete account?")) {
-      $rootScope.initAlerts();
+      Notification.init();
       
       Account.api.delete(account, function () {
         $translate('messages.account.success.deleted', {
           account: account.name
         }).then(function (msg) {
-          $rootScope.addAlert('success', msg);
+          Notification.add('success', msg);
         });
           
         $location.path("/accounts").search({ hasAlerts: true });
       }, function (err) {
-        $rootScope.addAlert('danger', 'messages.account.danger.deleted');
+        Notification.add('danger', 'messages.account.danger.deleted');
       });
     }
   };
@@ -82,8 +116,6 @@ angular.module('openbusApp')
   $scope.isSaveDisabled =   function (accountForm) {
     return !(accountForm.$dirty || addressesChanged) || !accountForm.$valid;
   }
-  
-  
   
   $scope.createFollowup = function(id) {
     var fup = $.grep($scope.followups, function(fup){
@@ -93,7 +125,8 @@ angular.module('openbusApp')
     $location.path(fup.url).search({account: $scope.account.id});
   };
     
-  $scope.selectAddress = function(address) {
+  $scope.selectAddress = function(address) {    
+    address.isSelected = true;
     $scope.openAddressModal(angular.copy(address));
   };
   
@@ -108,6 +141,7 @@ angular.module('openbusApp')
     var modal = $modal.open({
       templateUrl: 'addressModal.html',
       controller: 'AddressModalCtrl',
+      size: 'lg',
       resolve: {
         address: function() {
           return isNew ? {} : selectedAddress;
@@ -118,12 +152,13 @@ angular.module('openbusApp')
       }
     });
     
-    modal.result.then(function(address) {
+    modal.result.then(function(address) { 
       if (isNew) {
         $scope.account.addresses.push(address);
       } else {
         $.grep($scope.account.addresses, function(addr, index) {
           if (addr.isSelected) {
+            address.isSelected = false;
             angular.copy(address, $scope.account.addresses[index]);
             return;
           }

@@ -1,12 +1,12 @@
 <script type="text/ng-template" id="addressModal.html">
   <div class="modal-header">
     <button type="button" class="close" aria-label="Close" ng-click="cancelModal( )"><span aria-hidden="true">&times;</span></button>
-    <h4 class="modal-title" id="myModalLabel">{{'address.one' | translate}}</h4>
-    <div class="row messages" ng-controller="AlertsCtrl">
-      <div class="col-sm-offset-7 col-sm-5">
-        <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.message}}</alert>
+    <h4 class="modal-title">{{'address.one' | translate}}</h4>
+    <!-- <div class="row messages">
+      <div class="col-sm-12">
+        <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert(alert)">{{alert}}</alert>
       </div>
-    </div>
+    </div> -->
   </div>
   <div class="modal-body">
     <div ng-hide="editMode">
@@ -87,14 +87,20 @@
             </div>
           </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" ng-class="{ 'control-label': !editMode, 'has-error': (addressForm.country.$invalid || errors.name) }">
           <label class="col-sm-3 control-label">{{'address.country' | translate}}</label>
           <div class="col-sm-9" ng-class="{'control-label': !editMode}">
             <div class="input-group">
-              <input id="country" name="country" type="text" class="form-control" ng-model="addressModal.countryName" />
+              <input id="country" name="country" type="text" class="form-control" ng-model="addressModal.countryName" 
+                typeahead="country.name.common for country in countries | filter:$viewValue | limitTo: 10" 
+                typeahead-on-select="countrySelected($item)" 
+                class="form-control" required/>              
               <span class="input-group-btn">
                 <a class="btn btn-default" type="button" ng-click="openCountriesModal(addressModal.country, addressForm)"><i class="fa fa-lightbulb-o"></i></a>
               </span>
+            </div>
+            <div ng-messages="addressForm.country.$error" ng-show="addressForm.country.$invalid" class="help-block">
+              <div ng-message="required">Required</div>
             </div>
           </div>
         </div>

@@ -1,0 +1,18 @@
+<div class="header-block" ng-class="{'panel-heading': isPanel(), 'page-header': isPageHeader()}">
+  <div class="panel-title" ng-if="isPanel()">
+    {{title}}
+    <a href class="toggle-panel-body" ng-click="toggleBody()" ng-if="isClosable()">
+      <i class="fa fa-toggle-off" ng-if="isLazy()"></i>
+      <i class="fa fa-toggle-on" ng-if="!isLazy()"></i>
+    </a>
+    <ng-transclude></ng-transclude>
+  </div>
+  <h4 ng-if="isPageHeader()">
+    {{title}}
+    <a href class="pull-right toggle-panel-body" ng-click="toggleBody()" ng-if="isClosable()">
+      <i class="fa fa-toggle-off" ng-if="isLazy()"></i>
+      <i class="fa fa-toggle-on" ng-if="!isLazy()"></i>
+    </a>
+    <ng-transclude></ng-transclude>
+  </h4>
+</div>

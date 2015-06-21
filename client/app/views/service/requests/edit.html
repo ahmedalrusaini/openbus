@@ -1,22 +1,21 @@
-<div class="page-header">
-  <h4>
-    <span translate='request.header.title' translate-values="{request: request.description}"></span>
-    <div class="btn-group btn-group-sm" role="group" aria-label="...">
-      <button class="btn btn-default" ng-click="submit(requestForm)" ng-disabled="isSaveDisabled(userForm)">
-        <i class="fa fa-save"></i> {{'actions.save' | translate}}
-      </button>
-      <button class="btn btn-default" ng-click="cancel(requestForm)">
-        <i class="fa fa-undo"></i> {{'actions.cancel' | translate}}
-      </button>
-    </div>
-    <div class="btn-group btn-group-sm" role="group" aria-label="...">
-      <button class="btn btn-danger" ng-click="delete(user)">
-        <i class="fa fa-trash-o"></i> {{'actions.delete' | translate}}
-      </button>
-    </div>
-  </h4>
-</div>
-
-<form name="requestForm" class="form-horizontal" novalidate>
-  <ng-include src="'views/service/requests/partials/_request.form.html'"></ng-include>  
-</form>
+<sidebar>
+  <sb-main heading="{{'service.request.heading.index' | translate}}" nav-to="/service/requests"></sb-main>
+  <sb-item heading="{{ 'common.details' | translate }}" icon="search">
+    <form name="requestForm" novalidate> 
+      <page-header heading="{{'actions.edit' | translate}}: {{request.description || '<no description>'}}">
+        <div class="btn-group" role="group" aria-label="...">
+          <button class="btn btn-default" ng-click="submit(requestForm)" ng-disabled="isSaveDisabled(userForm)">
+            <i class="fa fa-save"></i> {{'actions.save' | translate}}
+          </button>
+          <button class="btn btn-default" ng-click="cancel(requestForm)">
+            <i class="fa fa-undo"></i> {{'actions.cancel' | translate}}
+          </button>
+          <button class="btn btn-danger" ng-click="delete(user)">
+            <i class="fa fa-trash-o"></i> {{'actions.delete' | translate}}
+          </button>
+        </div>
+      </page-header>
+      <ng-include src="'views/service/requests/partials/_request.form.html'"></ng-include>
+    </form>
+  </sb-item>
+</sidebar>
