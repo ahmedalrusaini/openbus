@@ -1,25 +1,42 @@
-<panel>
+<panel page-header="true">
   <panel-heading title="{{'address.two' | translate}}">
     <a href ng-click="openAddressModal()" ng-show="editMode"><i class="fa fa-plus"></i> Add</a>
   </panel-heading>
   <panel-body fill="true">
     <table class="table table-hover table-striped table-condensed" st-table="displayedAddresses" st-safe-src="account.addresses">
+      <thead>
+        <tr>
+          <th ng-show="editMode" class="text-center"><a href="#" title="Show/Hide filters" data-toggle="tooltip" ng-click="toggleInlineFilters()"><i class="fa fa-filter"></i></a></th>
+          <th st-sort="street" st-skip-natural="true" >{{'address.street' | translate}}</th>
+          <th st-sort="city" st-skip-natural="true" st-sort-default="description">{{'address.city' | translate}}</th>
+          <th st-sort="country" st-skip-natural="true" st-sort-default="description">{{'address.country' | translate}}</th>
+          <th></th>
+        </tr>
+        <tr class="filters" ng-show="showInlineFilters">
+          <th></th>
+          <th><input st-search="'startDate'" st-delay="100" class="inline-table-filter input-sm" placeholder="Search for start date"></th>
+          <th><input st-search="'description'" st-delay="100" class="inline-table-filter input-sm" placeholder="Search for description"></th>
+          <th></th>
+        </tr>
+      </thead>
       <tbody>
         <tr ng-repeat="address in displayedAddresses" ng-click="selectAddress(address)">
-          <td ng-show="editMode" width="0px">
+          <td ng-show="editMode" width="0px" class="text-center">
             <a href="#" id="delete" ng-click="deleteAddress(address)">
               <i class="fa fa-trash-o"></i>
             </a>
           </td>
+          <td>{{address.street}} {{address.houseNo}}</td>
+          <td>{{address.city}}</td>
+          <td>{{i18n.getCountryName(address.country)}}</td>
           <td>
-            {{address.text}}
             <span class="label label-primary pull-right" ng-show="address.standard">{{'address.standard_abbr' | translate}}</span>
             <span class="label label-default pull-right" ng-show="!address.standard">{{'address.alternative_abbr' | translate}}</span>
           </td>
         </tr>
         <tr ng-repeat="i in times(3 - displayedAddresses.length) track by $index">
           <td ng-show="editMode"></td>
-          <td>&nbsp;</td>
+          <td colspan="4">&nbsp;</td>
         </tr>
       </tbody>
       <tfoot>

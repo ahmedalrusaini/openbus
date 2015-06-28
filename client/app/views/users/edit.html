@@ -2,16 +2,16 @@
   <sb-main heading="{{'user.heading.index' | translate}}" nav-to="/users"></sb-main>
   <sb-item heading="Details" icon="info">
     <form name="userForm" class="form-horizontal" novalidate>
-      <page-header heading="{{'actions.edit' | translate}}: {{user.name || user.email}}">
+      <page-header heading="{{'action.edit' | translate}}: {{user.name || user.email}}">
         <div class="btn-group">
           <button type="submit" class="btn btn-primary" ng-click="submit(userForm)" ng-disabled="isSaveDisabled(userForm)">
-            <i class="fa fa-save"></i> {{'actions.save' | translate}}
+            <i class="fa fa-save"></i> {{'action.save' | translate}}
           </button>
           <button class="btn btn-default" ng-click="cancel(userForm)">
-            <i class="fa fa-remove"></i> {{'actions.cancel' | translate}}
+            <i class="fa fa-remove"></i> {{'action.cancel' | translate}}
           </button>
           <button class="btn btn-danger" ng-click="delete(user)">
-            <i class="fa fa-trash-o"></i> {{'actions.delete' | translate}}
+            <i class="fa fa-trash-o"></i> {{'action.delete' | translate}}
           </button>
         </div>
       </page-header>

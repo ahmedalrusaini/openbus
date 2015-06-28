@@ -4,7 +4,7 @@
 
 <panel page-header="true" closable="false">
   <panel-heading title="{{account.typename}}: {{account.name}}">
-    <a href="/accounts/{{account.id}}" class="pull-right"><i class="fa fa-search"></i> {{'actions.display' | translate}}</a>
+    <a href="/accounts/{{account.id}}" class="pull-right"><i class="fa fa-search"></i> {{'action.display' | translate}}</a>
   </panel-heading>
 
   <panel-body>
@@ -31,7 +31,7 @@
   </panel-body>
 </panel>
 
-<panel lazy="true">
+<panel>
   <panel-heading title="Last 10 Service Requests">
     <a href ng-click="getServiceRequests()"><i class="fa fa-refresh"></i></a>
     <a href="/service/requests">All</a>

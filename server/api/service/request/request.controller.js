@@ -37,7 +37,39 @@ exports.index = function(req, res) {
   
   var limit = req.query._limit;
   delete req.query._limit;
-  ServiceRequest.find(req.query).limit(limit).exec(function (err, requests) {
+  
+  var query = {};
+  query.description = new RegExp(req.query.description, "i"); 
+  if(req.query.account)  {query.account = req.query.account }
+    
+  var find = ServiceRequest.find(query);  
+  if(req.query.startDate) {
+    req.query.startDate = JSON.parse(req.query.startDate);
+    
+    switch (req.query.startDate.op) {
+    case 'gt':
+      find.where("startDate").gt(req.query.startDate.value);
+      break;
+    case 'gte':
+      find.where("startDate").gte(req.query.startDate.value);
+      break;
+    case 'lt':
+      find.where("startDate").lt(req.query.startDate.value);
+      break;
+    case 'lte':
+      find.where("startDate").lte(req.query.startDate.value);
+      break;
+    case 'bt':
+      find.where("startDate").gte(req.query.startDate.value).lte(req.query.startDate.valueTo);
+      break;
+    default:
+      find.where("startDate").equals(req.query.startDate.value);
+    }
+  }
+  
+  find.limit(limit);
+  
+  find.exec(function (err, requests) {
     if(err) return res.status(500).json(err);
     res.status(200).json(requests);
   });

@@ -16,7 +16,6 @@ angular.module('openbusApp')
     if (accountId) {
       Account.api.get({id: accountId}).$promise.then(function(account) {
         $scope.request.account = account;
-        $scope.account = account;
       });
     }
     
@@ -85,7 +84,6 @@ angular.module('openbusApp')
         $scope.request.account = account;
         $scope.account = account;
       });
-
     };
     
   });

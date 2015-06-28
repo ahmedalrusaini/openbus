@@ -4,30 +4,27 @@
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group" ng-class="{ 'has-error': accountForm.name.$invalid }">
-          <label class="col-sm-4 control-label">{{'account.name' | translate}}</label>
-          <div class="col-sm-8">
-            <input id="name" name="name" type="text" class="form-control" ng-model="account.name" required />
-            <div ng-messages="accountForm.name.$error" ng-show="accountForm.name.$invalid" class="help-block">
-              <div ng-message="required">{{'messages.general.errors.required' | translate}}</div>
-            </div>
-            <div class="help-block" ng-show="errors.name.message">
-              <div>{{errors.name.message | translate}}</div>
-            </div>
+          <label class="control-label">{{'account.name' | translate}}</label>
+          <input id="name" name="name" type="text" class="form-control" ng-model="account.name" required />
+          <div ng-messages="accountForm.name.$error" ng-show="accountForm.name.$invalid" class="help-block">
+            <div ng-message="required">{{'messages.general.errors.required' | translate}}</div>
+          </div>
+          <div class="help-block" ng-show="errors.name.message">
+            <div>{{errors.name.message | translate}}</div>
           </div>
         </div>
       </div>
       <div class="col-sm-6">
         <div class="form-group">
-          <label class="col-sm-3 control-label">{{'account.type' | translate}}</label>
-          <div class="col-sm-5">
-            <ui-select ng-model="account.type">
-              <ui-select-match>{{$select.selected.name | translate}}</ui-select-match>
-              <ui-select-choices repeat="value.id as value in types | filter: $select.search">
-                <div ng-bind-html="value.name | translate | highlight: $select.search"></div>
-              </ui-select-choices>
-            </ui-select>
-          </div>
+          <label class="control-label">{{'account.type' | translate}}</label>
+          <ui-select ng-model="account.type">
+            <ui-select-match>{{$select.selected.name | translate}}</ui-select-match>
+            <ui-select-choices repeat="value.id as value in types | filter: $select.search">
+              <div ng-bind-html="value.name | translate | highlight: $select.search"></div>
+            </ui-select-choices>
+          </ui-select>
         </div>
       </div>
+    </div>
   </panel-body>
 </panel>

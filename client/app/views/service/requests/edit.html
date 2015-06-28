@@ -2,16 +2,16 @@
   <sb-main heading="{{'service.request.heading.index' | translate}}" nav-to="/service/requests"></sb-main>
   <sb-item heading="{{ 'common.details' | translate }}" icon="search">
     <form name="requestForm" novalidate> 
-      <page-header heading="{{'actions.edit' | translate}}: {{request.description || '<no description>'}}">
+      <page-header heading="{{'action.edit' | translate}}: {{request.description || '<no description>'}}">
         <div class="btn-group" role="group" aria-label="...">
           <button class="btn btn-default" ng-click="submit(requestForm)" ng-disabled="isSaveDisabled(userForm)">
-            <i class="fa fa-save"></i> {{'actions.save' | translate}}
+            <i class="fa fa-save"></i> {{'action.save' | translate}}
           </button>
           <button class="btn btn-default" ng-click="cancel(requestForm)">
-            <i class="fa fa-undo"></i> {{'actions.cancel' | translate}}
+            <i class="fa fa-undo"></i> {{'action.cancel' | translate}}
           </button>
           <button class="btn btn-danger" ng-click="delete(user)">
-            <i class="fa fa-trash-o"></i> {{'actions.delete' | translate}}
+            <i class="fa fa-trash-o"></i> {{'action.delete' | translate}}
           </button>
         </div>
       </page-header>

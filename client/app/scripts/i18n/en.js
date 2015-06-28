@@ -10,7 +10,7 @@
  */
 
 var en = {
-  actions: {
+  action: {
     edit: "Edit",
     save: "Save",
     create: "Create",
@@ -19,7 +19,35 @@ var en = {
     followup: "Follow up",
     display: "Display",
     refresh: "Refresh",
-    add: "Add"
+    add: "Add",
+    search: "Search",
+    clear: "Clear"
+  },
+  operator: {
+    eq: {
+      short: "Equal to",
+      long: "Equal to"
+    },
+    gt: {
+      short: "Greater than",
+      long: "Greater than"
+    },
+    gte: {
+      short: "Greater/Eq. than",
+      long: "Greater or Equal than"
+    },
+    lt: {
+      short: "Less than",
+      long: "Less than"
+    },
+    lte: {
+      short: "Less/Eq. than",
+      long: "Less or Equal than"
+    },
+    bt: {
+      short: "Between",
+      long: "Between"
+    }
   },
   menu: {
     notifications: {
@@ -47,7 +75,6 @@ var en = {
     list: "List",
     details: "Details",
     overview: "Overview",
-    search: "Search",
     notes: "Notes",
     filters: "Filters"
   },

@@ -44,7 +44,7 @@ $quick-list-width: 225px;
 $default-transition: all .4s ease 0s;
 $longer-ease-transition: all .7s ease .0s;
 
-@mixin ellipsis-overfow {
+@mixin ellipsis-overflow {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -90,6 +90,12 @@ body {
 
 a:hover {
   text-decoration: none;
+}
+
+.input-group {
+  .form-control {
+    z-index: 3;
+  }
 }
 
 /* Space out content a bit */
@@ -213,7 +219,7 @@ table {
     }
     
     tbody {
-      @include ellipsis-overfow;
+      @include ellipsis-overflow;
       position: absolute;
       top: 46px;
       bottom: 120px;
@@ -316,6 +322,12 @@ table {
 //}
 
 .ui-select-bootstrap {
+  .ui-select-match-text {
+    width: inherit;
+    @include ellipsis-overflow;    
+    padding-right: 10px;
+  }
+  
   .btn-default {
     color: $input-color;
   }
@@ -690,7 +702,7 @@ ul.dropdown-menu {
 //        height: $sidebar-list-item-height;
         
         .heading {
-          @include ellipsis-overfow;
+          @include ellipsis-overflow;
           color: $sidebar-main-color;
           max-width: $sidebar-width - $sidebar-width-closed;
         }

@@ -8,18 +8,22 @@
           <input id="description" name="description" type="text" class="form-control" ng-model="request.description" />
         </div>
         <!-- Account id -->
-        <div class="form-group" ng-class="{ 'has-error': requestForm.accountId.$invalid }">
-          <label class="control-label" for="accountId">{{'service.request.account' | translate}}</label>
-          <input id="accountId" name="accountId" type="hidden" class="form-control" ng-model="request.account.id" required />
-          <div class="input-group">
-            <input type="text" class="form-control" ng-model="request.account.name" readonly/>
-            <span class="input-group-btn">
-              <button class="btn btn-default" type="button" ng-click="clearAccount()"><i class="fa fa-remove"></i></button>
-              <button class="btn btn-default" type="button" ng-click="openAccountSearchModal()"><i class="fa fa-lightbulb-o"></i></button>
-            </span>
-          </div>
-          <div ng-messages="requestForm.accountId.$error" ng-show="requestForm.accountId.$invalid" class="help-block">
-            <div ng-message="required">{{'messages.general.errors.required' | translate}}</div>
+        <div class="row">
+          <div class="col-sm-9">
+            <div class="form-group" ng-class="{ 'has-error': requestForm.accountId.$invalid }">
+              <label class="control-label" for="accountId">{{'service.request.account' | translate}}</label>
+              <input id="accountId" name="accountId" type="hidden" class="form-control" ng-model="request.account.id" required />
+              <div class="input-group">
+                <input type="text" class="form-control" ng-model="request.account.name" readonly/>
+                <span class="input-group-btn">
+                  <button class="btn btn-default" type="button" ng-click="clearAccount()"><i class="fa fa-remove"></i></button>
+                  <button class="btn btn-default" type="button" ng-click="openAccountSearchModal()"><i class="fa fa-lightbulb-o"></i></button>
+                </span>
+              </div>
+              <div ng-messages="requestForm.accountId.$error" ng-show="requestForm.accountId.$invalid" class="help-block">
+                <div ng-message="required">{{'messages.general.errors.required' | translate}}</div>
+              </div>
+            </div>
           </div>
         </div>
       </panel-body>

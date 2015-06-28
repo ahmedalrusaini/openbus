@@ -4,10 +4,10 @@
     <page-header heading="{{'user.heading.index' | translate}}">
       <div class="btn-group">
         <a class="btn btn-default" href="/users/new">
-          <i class="fa fa-plus"></i> {{'actions.create' | translate}}
+          <i class="fa fa-plus"></i> {{'action.create' | translate}}
         </a>
         <a class="btn btn-default" href ng-click="refresh()">
-          <i class="fa fa-refresh"></i> {{'actions.refresh' | translate}}
+          <i class="fa fa-refresh"></i> {{'action.refresh' | translate}}
         </a>
       </div>
     </page-header>
@@ -33,11 +33,11 @@
           <tbody>
             <tr ng-repeat="user in users">
               <td width="80px">
-                <a ng-href="/users/{{user._id}}" tooltip="{{'actions.display' | translate}}"><i class="fa fa-search"></i></a>
+                <a ng-href="/users/{{user._id}}" tooltip="{{'action.display' | translate}}"><i class="fa fa-search"></i></a>
                 &nbsp;
-                <a ng-href="/users/{{user.id}}/edit" tooltip="{{'actions.edit' | translate}}"><i class="fa fa-edit"></i></a>
+                <a ng-href="/users/{{user.id}}/edit" tooltip="{{'action.edit' | translate}}"><i class="fa fa-edit"></i></a>
                 &nbsp;
-                <a href="#" ng-click="delete(user)" tooltip="{{'actions.delete' | translate}}"><i class="fa fa-trash-o"></i></a>
+                <a href="#" ng-click="delete(user)" tooltip="{{'action.delete' | translate}}"><i class="fa fa-trash-o"></i></a>
               </td>
               <td>{{user.email}}</td>
               <td>{{user.rolename}}</td>

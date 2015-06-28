@@ -26,7 +26,7 @@ angular
     'ui.bootstrap',
     'uiGmapgoogle-maps'
   ]) 
-  .config(function ($routeProvider, $locationProvider, $httpProvider, uiSelectConfig, uiGmapGoogleMapApiProvider) {
+  .config(function ($routeProvider, $locationProvider, $httpProvider, uiSelectConfig, uiGmapGoogleMapApiProvider, $translateProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
@@ -49,6 +49,8 @@ angular
         v: '3.17',
         libraries: 'weather,geometry,visualization'
     });
+    
+    $translateProvider.useSanitizeValueStrategy('sanitize');
   })
   
   .factory('authInterceptor', function ($rootScope, $q, $cookieStore, $location) {

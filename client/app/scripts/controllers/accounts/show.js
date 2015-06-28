@@ -14,6 +14,7 @@ angular.module('openbusApp')
   
   var addressesChanged = false;
   
+  $scope.i18n = i18n;  
   Account.api.get({id: $routeParams.id}).$promise.then(function(account) {
     $scope.account = account;
     $scope.accountSafe = angular.copy(account);

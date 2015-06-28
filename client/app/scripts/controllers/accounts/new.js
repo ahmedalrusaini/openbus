@@ -60,6 +60,7 @@ angular.module('openbusApp')
     var modal = $modal.open({
       templateUrl: 'addressModal.html',
       controller: 'AddressModalCtrl',
+      size: 'lg',
       resolve: {
         address: function() {
           return isNew ? {} : selectedAddress;
