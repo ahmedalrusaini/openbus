@@ -3,7 +3,7 @@
     <div class="navbar-header">
       <button class="navbar-toggle" type="button" data-toggle="collapse" 
               ng-init="isCollapsed = true" ng-click="isCollapsed = !isCollapsed">
-        <span class="sr-only">Toggle navigation</span>
+        <span class="sr-only">{{'menu.toggleSidebar' | translate}}</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -11,13 +11,7 @@
       <a href="/" class="navbar-brand">openbus</a>
     </div>
     <div ng-class="{collapse: isCollapsed}" class="navbar-collapse collapse" id="navbar-main">
-      <ul class="nav navbar-nav" ng-show="isLoggedIn()">
-        <li ng-repeat="item in menu" ng-class="{active: isActive(item.link)}">
-          <a ng-href="{{item.link}}">{{item.title}}</a>
-        </li>
-        <li ng-show="isAdmin()" role="presentation" ng-class="{active: isActive('/users')}"><a href="/users">{{ 'menu.users.title' | translate }}</a></li>
-        <li role="presentation" ng-class="{active: isActive('/accounts')}"><a href="/accounts">{{ 'menu.accounts.title' | translate }}</a></li>
-        <li role="presentation" ng-class="{active: isActive('/service/requests')}"><a href="/service/requests">{{ 'menu.service.requests.title' | translate }}</a></li>
+      <ul class="nav navbar-nav" ng-show="isLoggedIn()" ng-transclude>
       </ul>
       <ul class="nav navbar-nav navbar-right" ng-show="isLoggedIn()">
         <li ng-show="pageHasSidebar()" ng-click="toggleSidebar()" tooltip="{{'menu.toggleSidebar' | translate}}" tooltip-placement="left" tooltip-popup-delay="500">

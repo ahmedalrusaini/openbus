@@ -1,0 +1,16 @@
+<page-header heading="{{employeeSafe.lastname }} {{accountSafe.name}}">
+  <div class="btn-group" role="group" aria-label="...">
+    <a class="btn btn-default" href="/employees/{{employee.id}}/edit">
+       <i class="fa fa-edit"></i> {{'action.edit' | translate}}
+    </a>
+  </div>
+</page-header>
+
+<sidebar>
+  <sb-main heading="{{'employee.heading.index' | translate}}" nav-to="/employees"></sb-main>
+  <sb-item heading="{{'common.details' | translate}}" icon="info">  
+    <div class="form-horizontal">
+      <ng-include src="'views/employees/partials/_show.details.html'"></ng-include>  
+    </div>
+  </sb-item>
+</sidebar>

@@ -9,7 +9,7 @@
 angular.module('openbusApp')
   .directive('addressFormat', function () {
     return {
-      template: '<address><strong>{{heading}}</strong><br><span></span</address>',
+      template: '<address><strong ng-show="heading">{{heading}}</strong><br ng-show="heading"><span></span</address>',
       restrict: 'E',
       scope: {
         heading: '=',

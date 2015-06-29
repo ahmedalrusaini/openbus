@@ -5,11 +5,11 @@
 
 'use strict';
 
-var Thing = require('../api/thing/thing.model');
-var User = require('../api/user/user.model');
-var ServiceRequest = require('../api/service/request/request.model');
-var Account = require('../api/account/account.model');
-var Address = require('../api/account/address.model');
+// var Thing = require('../api/thing/thing.model');
+// var User = require('../api/user/user.model');
+// var ServiceRequest = require('../api/service/request/request.model');
+// var Account = require('../api/account/account.model');
+// var Address = require('../api/account/address.model');
 
 //Thing.find({}).remove(function() {
 //  Thing.create({

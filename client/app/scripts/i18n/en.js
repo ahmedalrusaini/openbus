@@ -21,7 +21,8 @@ var en = {
     refresh: "Refresh",
     add: "Add",
     search: "Search",
-    clear: "Clear"
+    clear: "Clear",
+    toggleFilters: 'Show/Hide filters'
   },
   operator: {
     eq: {
@@ -62,6 +63,9 @@ var en = {
     users: {
       title: 'Users'
     },
+    employees: {
+      title: 'Employees'
+    },    
     accounts: {
       title: "Accounts"
     },
@@ -92,6 +96,10 @@ var en = {
       descr: "Manage accounts"
     }
   },
+  relationship: {
+    one: "Relationship",
+    two: "Relationships"
+  },
   user: {
     heading: {
       new: "Create new User",
@@ -113,6 +121,17 @@ var en = {
     change_password: 'Change your password',
     createdAt: 'Created on',
     updatedAt: 'Updated on'
+  },
+  employee: {
+    heading: {
+      new: "Create new Employee",
+      index: 'Employees list'
+    },
+    one: "Employee",
+    two: "Employees",
+    firstname: "Firstname",
+    lastname: "Lastname",
+    address: "Address"
   },
   login: 'Login',
   messages: {
@@ -136,6 +155,20 @@ var en = {
         updated: 'User {{user}} update failed',
         saved: 'User {{user}} save failed',
         deleted: 'User {{user}} deletion failed'
+      }
+    },
+    employee: {
+      success: {
+        created: 'Employee {{employee}} created successfully',
+        updated: 'Employee {{employee}} updated successfully',
+        saved: 'Employee {{employee}} saved successfully',
+        deleted: 'Employee {{employee}} deleted successfully'
+      },
+      danger: {
+        created: 'Employee creation failed',
+        updated: 'Employee {{employee}} update failed',
+        saved: 'Employee {{employee}} save failed',
+        deleted: 'Employee {{employee}} deletion failed'
       }
     },
     account: {

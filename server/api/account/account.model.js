@@ -3,13 +3,19 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var i18n = require('i18n');
-var Address = require('./address.model');
+var Address = require('../address/address.model');
 var _ = require('lodash');
+
+var EmployeeRelSchema = new Schema ({
+  type: { type: String, required: true},
+  employee: mongoose.Schema.ObjectId
+});
 
 var AccountSchema = new Schema({
   name: String,
   type: { type: String, default: 'organization' },
-  addresses: [Address.schema]
+  addresses: [Address.schema],
+  employeeRels: [EmployeeRelSchema]
 }, {
   toJSON: { virtuals: true }
 });

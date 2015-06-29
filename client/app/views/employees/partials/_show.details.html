@@ -1,0 +1,52 @@
+<style>
+.angular-google-map-container { height: 200px; margin:0; }
+</style>
+<div class="row">
+  <div class="col-sm-6">  
+    <panel page-header="true">
+      <panel-heading title="{{'common.details' | translate}}"></panel-heading>
+      <panel-body>
+        <div class="form-group">
+          <label class="col-sm-4 control-label">{{'employee.firstname' | translate}}</label>
+          <div class="col-sm-8 control-label">
+            <span class="pull-left">{{employee.firstname}}</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-4 control-label">{{'employee.lastname' | translate}}</label>
+          <div class="col-sm-8 control-label">
+            <span class="pull-left">{{employee.lastname}}</span>
+          </div>
+        </div>
+      </panel-body>
+    </panel>
+  </div>
+  <div class="col-sm-6">
+      <panel page-header="true">
+        <panel-heading title="{{'employee.address' | translate}}"></panel-heading>
+        <panel-body>
+          <div class="row">
+            <div class="col-sm-4">
+              <address-format model="employee.address"></address-format>
+            </div>
+            <div class="col-sm-8">
+              <div class="panel panel-default" ng-show="employee.address">
+                <ui-gmap-google-map center='map.center' zoom='map.zoom'>
+                  <ui-gmap-marker coords="map.marker.coords" options="map.marker.options" idkey="map.marker.idkey">
+                    <ui-gmap-window>
+                      <address>
+                        <strong>{{employee.lastname}} {{employee.firstname}}</strong><br>
+                        {{employee.address.street}} {{employee.address.houseNo}}<br>
+                        {{employee.address.postalCode}} {{employee.address.city}}
+                      </address>
+                    </ui-gmap-window>
+                  </ui-gmap-marker>
+                </ui-gmap-google-map>
+              </div>
+            </div>
+          </div>
+        </panel-body>
+      </panel>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+<form name="employeeForm" novalidate>
+  <page-header heading="{{'employee.heading.new' | translate}}">
+    <div class="btn-group" role="group" aria-label="...">
+      <button class="btn btn-default" type="submit" ng-click="submit(employeeForm)" ng-disabled="isSaveDisabled(employeeForm)">
+        <i class="fa fa-save"></i> {{'action.save' | translate}}
+      </button>
+      <button class="btn btn-default" ng-click="cancel(employeeForm)">
+        <i class="fa fa-undo"></i> {{'action.cancel' | translate}}
+      </button>
+    </div>    
+  </page-header>
+  <sidebar>
+    <sb-main heading="{{'employee.heading.index' | translate}}" nav-to="/employees"></sb-main>
+    <sb-item heading="{{'common.details' | translate }}" icon="user">
+      <employee-form></employee-form>
+    </sb-item>
+  </sidebar>
+</form>
