@@ -36,10 +36,15 @@
       <ng-include src="'views/accounts/partials/_show.details.html'"></ng-include>  
     </div>
   </sb-item>
-  <sb-item heading="{{'address.two' | translate }}" icon="map-marker">
+  <sb-item heading="{{'address.two' | translate }}" icon="map-marker" select="getAddresses()">
     <ng-include src="'views/accounts/partials/_show.address.html'"></ng-include>  
   </sb-item>
-  
+  <sb-item heading="{{'employee.two' | translate }}" icon="users" select="getEmployees()">
+    <ng-include src="'views/accounts/partials/_account.employees.html'"></ng-include>  
+  </sb-item>
+  <sb-item heading="{{'service.request.two' | translate }}" icon="gears" select="getServiceRequests()">
+    <ng-include src="'views/accounts/partials/_account.service.requests.html'"></ng-include>  
+  </sb-item>
 </sidebar>
 
 <ng-include src="'views/accounts/partials/_followup.modal.html'"></ng-include>

@@ -8,17 +8,18 @@
 * Controller of the openbusApp
 */
 angular.module('openbusApp')
-.controller('AccountsShowCtrl', function ($scope, $routeParams, $location, $translate, Account, TableCommon, ShowEditToggle, $modal, Notification, uiGmapGoogleMapApi, ServiceRequest) {
+.controller('AccountsShowCtrl', function ($scope, $routeParams, $modal, Account, TableCommon, uiGmapGoogleMapApi, ServiceRequest, Employee) {
   TableCommon.init($scope);
-  ShowEditToggle.init($scope, $location);
-  
+    
   var addressesChanged = false;
   
   $scope.i18n = i18n;  
   Account.api.get({id: $routeParams.id}).$promise.then(function(account) {
     $scope.account = account;
     $scope.accountSafe = angular.copy(account);
+    
     $scope.displayedAddresses = [].concat($scope.account.addresses);
+    $scope.stEmployeeRelsSafe = [].concat($scope.account.employeeRels);
     
     if($scope.account.address) {
       $scope.account.address.countryName = i18n.getCountryName($scope.account.address.country);
@@ -26,97 +27,54 @@ angular.module('openbusApp')
       var url = 'http://maps.google.com/maps/api/geocode/json?address=' + $scope.account.address.text;
 
       $.get(url, function(data) {
-        var lat = data.results[0].geometry.location.lat;
-        var lng = data.results[0].geometry.location.lng;
+        if (data.results && data.results[0]) {
+          var lat = data.results[0].geometry.location.lat;
+          var lng = data.results[0].geometry.location.lng;
       
-        uiGmapGoogleMapApi.then(function(maps) {
-          $scope.map = { 
-            center: { latitude: lat, longitude: lng }, 
-            zoom: 15,
-            marker: {
-              idkey: 1,
-              coords: { latitude: lat, longitude: lng }
-            }
-          };
-        });
+          uiGmapGoogleMapApi.then(function(maps) {
+            $scope.map = { 
+              center: { latitude: lat, longitude: lng }, 
+              zoom: 15,
+              marker: {
+                idkey: 1,
+                coords: { latitude: lat, longitude: lng }
+              }
+            };
+          });
+        }
       });
     }
-    
-    $scope.getServiceRequests();
   });
   
-  Account.Types.query().$promise.then(function(types) {
-    $scope.types = types;
-  });
-
+  $scope.getAddresses = function() {
+    _.each($scope.account.addresses, function(addr) {
+      if(addr.country) {
+         addr.countryName = i18n.getCountryName(addr.country);
+      }
+    });
+  };
+  
+  $scope.getEmployees = function() {
+    angular.forEach($scope.account.employeeRels, function(rel) {
+      Employee.api.get({id: rel.empid}).$promise.then(function(emp){
+        rel.employee = emp;
+        rel.employeeFullname = emp.fullname;
+      });
+    });
+  };
+  
+  $scope.getServiceRequests = function(limit) {
+    ServiceRequest.api.query({'account.id': $scope.account.id, _limit: limit}).$promise.then(function(requests){      
+      $scope.account.serviceRequests = requests;
+      $scope.stSafeRequests = requests;
+    });
+  };
+  
   $scope.followups = [{
     id: "1",
     title: "Create service request",
     url: "/service/requests/new"
   }];
-
-  $scope.getServiceRequests = function() {
-    ServiceRequest.api.query({'account.id': $scope.account.id, _limit: 10}).$promise.then(function(requests){      
-      $scope.account.serviceRequests = requests;
-      $scope.stSafeRequests = requests;
-    });
-  };
-    
-  $scope.submit = function (form) {
-    Notification.init();
-    form.$submitted = true;
-    
-    if (form.$valid) {
-      $scope.account.$update({},
-        function (account, responseHeaders) {
-          $scope.account = account;
-          $scope.accountSafe = angular.copy(account);
-          
-          $translate('messages.account.success.updated', {
-            account: $scope.account.name
-          }).then(function (msg) {
-            Notification.add('success', msg);
-            if (!$scope.account.address) {
-              Notification.add('warning', 'No default address set!');
-            }
-          });
-          
-          $scope.displayedAddresses = [].concat($scope.account.addresses);
-          addressesChanged = false; 
-        },
-        function (httpResponse) {
-          $scope.errors = httpResponse.data.errors;
-          var message = httpResponse.data.message;
-          Notification.add('danger', message );
-        });
-    }
-  };
-
-  $scope.cancel = function () {
-    $location.path("/accounts/" + $scope.account.id);
-  };
-  
-  $scope.delete = function (account) {
-    if (confirm("Delete account?")) {
-      Notification.init();
-      
-      Account.api.delete(account, function () {
-        $translate('messages.account.success.deleted', {
-          account: account.name
-        }).then(function (msg) {
-          Notification.add('success', msg);
-        });
-          
-        $location.path("/accounts").search({ hasAlerts: true });
-      }, function (err) {
-        Notification.add('danger', 'messages.account.danger.deleted');
-      });
-    }
-  };
-  
-  $scope.isSaveDisabled =   function (accountForm) {
-    return !(accountForm.$dirty || addressesChanged) || !accountForm.$valid;
-  }
   
   $scope.createFollowup = function(id) {
     var fup = $.grep($scope.followups, function(fup){
@@ -129,12 +87,6 @@ angular.module('openbusApp')
   $scope.selectAddress = function(address) {    
     address.isSelected = true;
     $scope.openAddressModal(angular.copy(address));
-  };
-  
-  $scope.deleteAddress = function(address) {
-    var index = $scope.account.addresses.indexOf(address)
-    $scope.account.addresses.splice(index, 1);
-    addressesChanged = true;
   };
   
   $scope.openAddressModal = function(selectedAddress) {
@@ -152,7 +104,7 @@ angular.module('openbusApp')
         }
       }
     });
-    
+  
     modal.result.then(function(address) { 
       if (isNew) {
         $scope.account.addresses.push(address);
@@ -166,11 +118,23 @@ angular.module('openbusApp')
         });
       }
       addressesChanged = true;
-      
+    
       $scope.displayedAddresses = [].concat($scope.account.addresses);
     }, function () {
       // console.log('Modal dismissed');
     });
   };
-
+  
+  $scope.openRelationshipModal = function(selectedRel) {
+    $modal.open({
+      templateUrl: 'employeeRespModal.html',
+      controller: 'EmployeeRelModalCtrl',
+      resolve: {
+        relationship: function() {
+          return selectedRel;
+        },
+        editMode: function() { return false; }
+      }
+    });    
+  };
 })

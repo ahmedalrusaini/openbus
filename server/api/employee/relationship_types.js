@@ -8,19 +8,19 @@ var i18n = require('i18n');
 
 var router = express.Router();
 
-var types = ["organization", "person"];
+var types = ["responsible", "salesrep", "technician"];
 
 router.get('/', auth.isAuthenticated(), function(req, res){
-  var accountTypes = [];
+  var empRelsTypes = [];
   
   _.each(types, function(type) {    
-    accountTypes.push({
+    empRelsTypes.push({
       id: type,
-      name: res.__("account.types."+type)
+      name: res.__("employee.relationship.type."+type)
     });
   });
   
-  res.status(200).json(accountTypes);
+  res.status(200).json(empRelsTypes);
 });
 
 module.exports = router;

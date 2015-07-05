@@ -1,0 +1,42 @@
+<script type="text/ng-template" id="employeeRespModal.html">
+  <form name="employeeRelForm" novalidate>
+    <div class="modal-header">
+      <button type="button" class="close" aria-label="Close" ng-click="cancelModal( )"><span aria-hidden="true">&times;</span></button>
+      <h4 class="modal-title">{{'relationship.one' | translate}}</h4>
+    </div>
+    <div class="modal-body">
+      <div class="form-group" ng-class="{ 'has-error': employeeRelForm.type.$invalid }">
+        <label class="control-label">Type</label>
+        <ui-select name="type" ng-model="relationship.type" required ng-disabled="!editMode">
+          <ui-select-match>{{$select.selected.name | translate}}</ui-select-match>
+          <ui-select-choices repeat="value.id as value in employeeRelTypes | filter: $select.search">
+            <div ng-bind-html="value.name | translate | highlight: $select.search"></div>
+          </ui-select-choices>
+        </ui-select>
+        <div ng-messages="employeeRelForm.type.$error" ng-show="employeeRelForm.type.$invalid" class="help-block">
+          <div ng-message="required">{{'messages.general.errors.required' | translate}}</div>
+        </div>
+      </div>
+      <div class="form-group" ng-class="{ 'has-error': employeeRelForm.employee.$invalid }">
+        <label class="control-label">{{'employee.one' | translate}}</label>
+        <input class="form-control" ng-model="relationship.empid" type="hidden">
+        <div class="input-group">
+          <input type="text" name="employee" class="form-control" ng-model="relationship.employee.fullname" readonly required />
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button" ng-click="clearEmployee()" ng-if="editMode"><i class="fa fa-remove"></i></button>
+            <button class="btn btn-default" type="button" ng-click="openEmployeeSearchModal()" ng-disabled="!editMode"><i class="fa fa-lightbulb-o"></i></button>
+          </span>
+        </div>
+        <div ng-messages="employeeRelForm.employee.$error" ng-show="employeeRelForm.employee.$invalid" class="help-block">
+          <div ng-message="required">{{'messages.general.errors.required' | translate}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-default" ng-show="editMode" ng-click="saveModal(employeeRelForm)" ng-disabled="isSaveDisabled(employeeRelForm)">{{'action.save' | translate}}</button>
+      <button type="button" class="btn btn-default" ng-show="editMode" ng-click="cancelModal()">{{'action.cancel' | translate}}</button>
+      <button type="button" class="btn btn-default" ng-hide="editMode" ng-click="cancelModal()">{{'action.close' | translate}}</button>
+    </div>
+  </form>
+  <employee-search-modal></employee-search-modal>
+</script>

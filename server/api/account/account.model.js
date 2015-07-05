@@ -4,11 +4,12 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var i18n = require('i18n');
 var Address = require('../address/address.model');
+var Employee = require('../employee/employee.model');
 var _ = require('lodash');
 
 var EmployeeRelSchema = new Schema ({
   type: { type: String, required: true},
-  employee: mongoose.Schema.ObjectId
+  empid: mongoose.Schema.ObjectId
 });
 
 var AccountSchema = new Schema({
@@ -35,10 +36,20 @@ AccountSchema
   });
 
 AccountSchema.pre("save", function(next) {
-  var stdAddresses = _.filter(this.addresses, {standard: true});
+  var account = this;
+  var stdAddresses = _.filter(account.addresses, {standard: true});
+  
   if (stdAddresses.length > 1) {
     next(new Error('account.errors.addresses.multipleStandard'));
   } else {
+    
+    _.each(account.employeeRels, function(rel) {
+      if(_.filter(account.employeeRels,{empid: rel.empid, type: rel.type}).length > 1) {
+        next(new Error('account.errors.employee.relationship.multiple'));
+        return;
+      }      
+    });
+    
     next();
   }
 });

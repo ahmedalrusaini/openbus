@@ -8,7 +8,7 @@
  * Controller of the openbusApp
  */
 angular.module('openbusApp')
-  .controller('ServiceRequestsIndexCtrl', function ($scope, $rootScope, $location, $translate, ServiceRequest, TableCommon, Account, $modal) {
+  .controller('ServiceRequestsIndexCtrl', function ($scope, $location, $translate, ServiceRequest, TableCommon, Account, $modal, Notification) {
     TableCommon.init($scope);
     
     $scope.dateOperators = [
@@ -41,7 +41,7 @@ angular.module('openbusApp')
     
     $scope.delete = function (request) {
       if (confirm("Delete request?")) {
-        $rootScope.initAlerts()
+        Notification.init();
         
         var index = $scope.stSafeRequests.indexOf(request);
         $scope.stSafeRequests.splice(index, 1);
@@ -49,11 +49,11 @@ angular.module('openbusApp')
         ServiceRequest.api.delete(request, function () {
           $translate('messages.service.request.success.deleted')
             .then(function (msg) {
-              $rootScope.addAlert('success', msg);
+              Notification.add('success', msg);
             });
                       
         }, function (err) {
-          $rootScope.addAlert('danger', 'messages.request.danger.deleted');
+          Notification.add('danger', 'messages.request.danger.deleted');
         });
       }
     };

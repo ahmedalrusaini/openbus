@@ -8,15 +8,14 @@
  * Controller of the openbusApp
  */
 angular.module('openbusApp')
-  .controller('EmployeesNewCtrl', function ($scope, $location, Notification, Employee, $modal) {
+  .controller('EmployeesNewCtrl', function ($scope, $location, Notification, Employee, $modal, $translate) {
     
+    $scope.countries = i18n.countries;
     $scope.employee = { address: {} }
     
     $scope.submit = function (form) {
       Notification.init();
-      
-      console.log(form);
-      
+            
       if (form.$valid) {
         Employee.api.save($scope.employee,
           function (employee, responseHeaders) {            
@@ -60,6 +59,10 @@ angular.module('openbusApp')
       }, function(){
       
       });
-    }
+    };
+    
+    $scope.countrySelected = function($item) {
+      $scope.employee.address.country = $item.cca2;
+    };
     
   });

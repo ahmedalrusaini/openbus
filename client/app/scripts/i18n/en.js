@@ -11,6 +11,7 @@
 
 var en = {
   action: {
+    new: "New",
     edit: "Edit",
     save: "Save",
     create: "Create",
@@ -22,7 +23,8 @@ var en = {
     add: "Add",
     search: "Search",
     clear: "Clear",
-    toggleFilters: 'Show/Hide filters'
+    toggleFilters: 'Show/Hide filters',
+    close: "Close"
   },
   operator: {
     eq: {
@@ -76,6 +78,7 @@ var en = {
     }
   },
   common: {
+    all: "All",
     list: "List",
     details: "Details",
     overview: "Overview",
@@ -98,7 +101,8 @@ var en = {
   },
   relationship: {
     one: "Relationship",
-    two: "Relationships"
+    two: "Relationships",
+    type: "Type"
   },
   user: {
     heading: {
@@ -129,9 +133,17 @@ var en = {
     },
     one: "Employee",
     two: "Employees",
+    fullname: "Name",
     firstname: "Firstname",
     lastname: "Lastname",
-    address: "Address"
+    address: "Address",
+    relationship: {
+      type: {
+        responsible: "Responsible",
+        salesrep: "Sales Rep.",
+        technician: "Technician"
+      }
+    }
   },
   login: 'Login',
   messages: {

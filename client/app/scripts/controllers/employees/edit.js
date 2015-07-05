@@ -8,9 +8,10 @@
  * Controller of the openbusApp
  */
 angular.module('openbusApp')
-  .controller('EmployeesEditCtrl', function ($scope, $location, $translate, $routeParams, Employee, $modal, Notification) {
-    
+  .controller('EmployeesEditCtrl', function ($scope, $location, $translate, $routeParams, Employee, Account, $modal, Notification) {
+    $scope.editMode = true;
     $scope.countries = i18n.countries;
+    
     Employee.api.get({id: $routeParams.id}).$promise.then(function(employee) {
       $scope.employee = employee;
       $scope.employeeSafe = angular.copy(employee);
@@ -19,7 +20,20 @@ angular.module('openbusApp')
         $scope.employee.address.countryName = i18n.getCountryName($scope.employee.address.country); 
       } else {
         $scope.employee.address = {};
-      } 
+      }
+      
+      Account.api.query({'employeeRels.empid': $scope.employee.id}).$promise.then(function(accounts){
+        $scope.accountRels = [];
+                
+        _.each(accounts, function(account){
+          var rels = _.filter(account.employeeRels, {empid: $scope.employee.id});
+          _.each(rels, function(rel){
+            $scope.accountRels.push({type: rel.type, account: account});
+          });
+        });
+        
+        $scope.stAccountRelsSafe = $scope.accountRels;
+      });
     });
     
     $scope.openCountriesModal = function(selectedCountry, employeeForm) {
@@ -92,6 +106,12 @@ angular.module('openbusApp')
   
     $scope.isSaveDisabled =   function (employeeForm) {
       return !employeeForm.$dirty || !employeeForm.$valid;
-    }
-
+    };
+    
+    $scope.deleteAccountRel = function(account) {
+      // _.filter(account.employeeRels, function(rel) {
+//         return rel.empid === $scope.employee.id;
+//       });
+    };
+    
   });

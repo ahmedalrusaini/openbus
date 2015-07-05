@@ -12,7 +12,7 @@
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
     <link rel="stylesheet" href="bower_components/angular-ui-select/dist/select.css" />
-    <link rel="stylesheet" href="bower_components/select2/dist/css/select2.css" />
+    <link rel="stylesheet" href="bower_components/select2/select2.css" />
     <link rel="stylesheet" href="bower_components/angular-bootstrap-datetimepicker/src/css/datetimepicker.css" />
     <!-- endbower -->
     <!-- endbuild -->
@@ -26,12 +26,7 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <navbar>
-      <li ng-show="isAdmin()" ng-class="{active: isActive('/users')}" role="presentation" ><a href="/users">{{ 'menu.users.title' | translate }}</a></li>
-      <li ng-show="isAdmin()" ng-class="{active: isActive('/employees')}" role="presentation" ><a href="/employees">{{ 'menu.employees.title' | translate }}</a></li>
-      <li ng-class="{active: isActive('/accounts')}" role="presentation" ><a href="/accounts">{{ 'menu.accounts.title' | translate }}</a></li>
-      <li ng-class="{active: isActive('/service/requests')}" role="presentation" ><a href="/service/requests">{{ 'menu.service.requests.title' | translate }}</a></li>
-    </navbar>
+    <navbar></navbar>
     <div id="page-wrapper" ng-class="{'open': sidebarOpened}" ng-cloak>
       <div id="content-wrapper">
         <div ng-view></div>
@@ -80,14 +75,14 @@
     <script src="bower_components/angular-touch/angular-touch.js"></script>
     <script src="bower_components/angular-translate/angular-translate.js"></script>
     <script src="bower_components/angular-ui-select/dist/select.js"></script>
-    <script src="bower_components/select2/dist/js/select2.js"></script>
+    <script src="bower_components/select2/select2.js"></script>
     <script src="bower_components/angular-smart-table/dist/smart-table.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="bower_components/moment/moment.js"></script>
     <script src="bower_components/angular-bootstrap-datetimepicker/src/js/datetimepicker.js"></script>
     <script src="bower_components/angular-ui-utils/ui-utils.js"></script>
     <script src="bower_components/angular-ui-map/ui-map.js"></script>
-    <script src="bower_components/lodash/lodash.js"></script>
+    <script src="bower_components/lodash/dist/lodash.compat.js"></script>
     <script src="bower_components/angular-google-maps/dist/angular-google-maps.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
@@ -131,6 +126,9 @@
         <script src="scripts/services/employee.js"></script>
         <script src="scripts/controllers/employees/edit.js"></script>
         <script src="scripts/controllers/employees/show.js"></script>
+        <script src="scripts/controllers/accounts/edit.js"></script>
+        <script src="scripts/directives/employee_rel_modal.js"></script>
+        <script src="scripts/directives/employee_search_modal.js"></script>
         <!-- endbuild -->
         
     <!-- injector:js -->

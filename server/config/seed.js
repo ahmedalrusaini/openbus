@@ -6,11 +6,6 @@
 'use strict';
 
 // var Thing = require('../api/thing/thing.model');
-// var User = require('../api/user/user.model');
-// var ServiceRequest = require('../api/service/request/request.model');
-// var Account = require('../api/account/account.model');
-// var Address = require('../api/account/address.model');
-
 //Thing.find({}).remove(function() {
 //  Thing.create({
 //    name : 'Development Tools',
@@ -33,38 +28,13 @@
 //  });
 //});
 
-//ServiceRequest.find({}).remove(function(){
-//  ServiceRequest.create({
-//    description: 'Test request', 
-//    estimatedTime: 10,
-//    estimatedTimeUnit: 'H'
-//  });
-//});
-
-// for(var i=0;i<10;i++){
-//     User.create({
-//       provider: 'local',
-//       email: 'test'+i+'@test.com',
-//       password: 'test'
-//       });
-// } 
-
-// User.find({}).remove(function() {
-//   User.create({
-//     provider: 'local',
-//     email: 'test@test.com',
-//     password: 'test'
-//   }, {
-//     provider: 'local',
-//     role: 'admin',
-//     email: 'admin@admin.com',
-//     password: 'admin',
-//     firstname: 'Gigi',
-//     lastname: 'Pratone'
-//   }, function() {
-//       console.log('finished populating users');
-//     }
-//   );
+// var Account = require('../api/account/account.model');
+// var account = Account.create({
+//     name: "A new account",
+//     employees: [{
+//       type: 'responsible',
+//       empid: '559161feec96fa8f0aa4c49d'
+//     }]
 // });
 
 // var account = new Account({
@@ -85,7 +55,5 @@
 //   city: 'Turin',
 //   country: 'Italy'
 // });
-//
-// Account.find({}).remove(function(){
-//   Account.create(account);
-// });
+
+

@@ -17,5 +17,10 @@
     <sb-item heading="{{'common.details' | translate }}" icon="user">
       <employee-form></employee-form>
     </sb-item>
+    <sb-item heading="{{'account.two' | translate}}" icon="users">
+      <div class="form-horizontal">
+        <ng-include src="'views/employees/partials/_employee.accounts.html'"></ng-include>  
+      </div>
+    </sb-item>
   </sidebar>
 </form>

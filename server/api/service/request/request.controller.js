@@ -40,8 +40,8 @@ exports.index = function(req, res) {
   
   var query = {};
   query.description = new RegExp(req.query.description, "i"); 
-  if(req.query.account)  {query.account = req.query.account }
-    
+  if(req.query["account.id"])  { query["account.id"] = req.query["account.id"] }
+  
   var find = ServiceRequest.find(query);  
   if(req.query.startDate) {
     req.query.startDate = JSON.parse(req.query.startDate);

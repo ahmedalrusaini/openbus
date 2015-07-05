@@ -10,9 +10,7 @@ angular.module('openbusApp')
   .directive('navbar', function () {
     return {
       templateUrl: 'views/directives/navbar.html',
-      restrict: 'E',
-      transclude: true,
-      replace: true
+      restrict: 'E'
     };
   })
   .controller('NavbarCtrl', function($rootScope, $scope, $location, Auth, Notification) {

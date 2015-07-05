@@ -8,7 +8,7 @@
  * Controller of the openbusApp
  */
 angular.module('openbusApp')
-  .controller('AccountsIndexCtrl', function ($scope, Account, TableCommon, Notification, uiGmapGoogleMapApi, ServiceRequest) {
+  .controller('AccountsIndexCtrl', function ($scope, Account, TableCommon, Notification, ServiceRequest) {
     var getAccounts = function() {
       Account.api.query().$promise.then(function(data){
         TableCommon.init($scope);
@@ -67,21 +67,23 @@ angular.module('openbusApp')
           $scope.account.address.countryName = i18n.getCountryName($scope.account.address.country);
       
           var url = 'http://maps.google.com/maps/api/geocode/json?address=' + $scope.account.address.text;
-
+          
           $.get(url, function(data) {
-            var lat = data.results[0].geometry.location.lat;
-            var lng = data.results[0].geometry.location.lng;
+            if(data.results && data.results[0]) {
+              var lat = data.results[0].geometry.location.lat;
+              var lng = data.results[0].geometry.location.lng;
       
-            uiGmapGoogleMapApi.then(function(maps) {
-              $scope.map = { 
-                center: { latitude: lat, longitude: lng }, 
-                zoom: 15,
-                marker: {
-                  idkey: 1,
-                  coords: { latitude: lat, longitude: lng }
-                }
-              };
-            });
+              uiGmapGoogleMapApi.then(function(maps) {
+                $scope.map = { 
+                  center: { latitude: lat, longitude: lng }, 
+                  zoom: 15,
+                  marker: {
+                    idkey: 1,
+                    coords: { latitude: lat, longitude: lng }
+                  }
+                };
+              });
+            }
           });
         }
         

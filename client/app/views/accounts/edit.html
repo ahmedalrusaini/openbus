@@ -20,8 +20,8 @@
     <sb-item heading="{{'address.two' | translate }}" icon="map-marker">
       <ng-include src="'views/accounts/partials/_show.address.html'"></ng-include>  
     </sb-item>
-    <sb-item heading="{{'relationship.two' | translate }}" icon="map-marker">
-      <ng-include src="'views/accounts/partials/_account.relationships.html'"></ng-include>  
+    <sb-item heading="{{'employee.two' | translate }}" icon="users" select="getEmployees()">
+      <ng-include src="'views/accounts/partials/_account.employees.html'"></ng-include>  
     </sb-item>
   </sidebar>
 </form>

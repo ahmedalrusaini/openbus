@@ -49,11 +49,13 @@ angular.module('openbusApp')
     };
     
     $scope.submit = function(form) {
+      Notification.init();
+      
       if(form.$valid) {
         ServiceRequest.api.save($scope.request,
           function (request, responseHeaders) {            
             $translate('messages.service.request.success.created').then(function (msg) {
-              $rootScope.addAlert('success', msg);
+              Notification.add('success', msg);
             });
 
             $location.path("/service/requests/" + request.id).search({ hasAlerts: true });
@@ -61,7 +63,7 @@ angular.module('openbusApp')
           function (httpResponse) {
             $scope.errors = httpResponse.data.errors;            
             var message = httpResponse.data.message || 'Service Request creation failed';
-            $rootScope.addAlert('danger', message );
+            Notification.add('danger', message );
           });
       }
     };

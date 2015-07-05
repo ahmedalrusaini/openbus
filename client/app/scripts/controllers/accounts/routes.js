@@ -21,7 +21,7 @@ angular.module('openbusApp')
       })
       .when('/accounts/:id/edit', {
         templateUrl: 'views/accounts/edit.html',
-        controller: 'AccountsShowCtrl'
+        controller: 'AccountsEditCtrl'
       })
       .when('/accounts', {
         templateUrl: 'views/accounts/index.html',

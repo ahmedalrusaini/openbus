@@ -1,7 +1,7 @@
 <table class="table table-striped table-hover table-condensed" st-table="account.serviceRequests" st-safe-src="stSafeRequests">
   <thead>
     <tr>
-      <th class="text-center"><a href="#" title="Show/Hide filters" data-toggle="tooltip" ng-click="toggleInlineFilters()"><i class="fa fa-filter"></i></a></th>
+      <th class="text-center"><a href="#" tooltip="{{'action.toggleFilters' | translate}}" ng-click="toggleInlineFilters()"><i class="fa fa-filter"></i></a></th>
       <th st-sort="startDate" st-skip-natural="true" >{{'service.request.startDate' | translate}}</th>
       <th st-sort="description" st-skip-natural="true" st-sort-default="description">{{'service.request.description' | translate}}</th>
     </tr>
@@ -23,7 +23,7 @@
       <td>{{request.startDate | date: 'dd/MM/yyyy' }}</td>
       <td>{{request.description}}</td>
     </tr>
-    <tr ng-repeat="i in times(5 - account.serviceRequests.length) track by $index">
+    <tr ng-repeat="i in Utils.times(5 - account.serviceRequests.length) track by $index">
       <td colspan="3">&nbsp;</td>
     </tr>
   </tbody>

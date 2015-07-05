@@ -33,5 +33,11 @@ EmployeeSchema
     return text;
   });
 
+EmployeeSchema
+  .virtual('fullname')
+  .get(function () {
+    var fullname = this.firstname ? this.firstname + " " + this.lastname : this.lastname;;
+    return fullname;
+  });
 
 module.exports = mongoose.model('Employee', EmployeeSchema);

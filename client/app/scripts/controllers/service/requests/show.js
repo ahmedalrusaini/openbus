@@ -52,6 +52,8 @@ angular.module('openbusApp')
     };
     
     $scope.submit = function(form) {
+      Notification.init();
+      
       if(form.$valid) {
         $scope.request.$update({},
           function (request, responseHeaders) {

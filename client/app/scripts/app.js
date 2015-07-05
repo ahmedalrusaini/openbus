@@ -88,4 +88,14 @@ angular
         }
       });
     });
+    
+    $rootScope.Utils = {
+      times: function(num) {
+        if(num <= 0) {
+          return [];
+        }
+        
+        return new Array(num);
+      }
+    };
   });

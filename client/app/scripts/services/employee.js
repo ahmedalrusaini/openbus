@@ -12,6 +12,7 @@ angular.module('openbusApp')
     return {
       api: $resource('/api/employees/:id', { id: '@_id' }, {
         update: { method: 'PUT' }
-      })
+      }),
+      RelationshipTypes: $resource('/api/employee/reltypes')
     }
   });

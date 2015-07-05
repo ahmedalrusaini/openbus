@@ -31,6 +31,11 @@
     "errors": {
       "addresses": {
         "multipleStandard": "There can only be one standard address"
+      },
+      "employee": {
+        "relationship": {
+          "multiple": "Multiple relationships found with the same type and employee"
+        }
       }
     }
   },

@@ -18,14 +18,6 @@ angular.module('openbusApp')
         scope.toggleInlineFilters = function() {
           scope.showInlineFilters = !scope.showInlineFilters;
         };
-        
-        scope.times = function(num) {
-          if(num <= 0) {
-            return [];
-          }
-          
-          return new Array(num);
-        }
   
         $("[data-toggle='tooltip']").tooltip();
       }
