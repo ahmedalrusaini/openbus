@@ -14,7 +14,7 @@ var validationError = function(res, err) {
           error.message = res.__(error.message);  
         }
       }
-    })
+    });
   }
   
   var theErr = {
@@ -25,12 +25,15 @@ var validationError = function(res, err) {
 };
 
 exports.index = function(req, res) {
-  // Account.find({}, function (err, accounts) {
-  //   if(err) return res.status(500).json(err);
-  //   res.status(200).json(accounts);
-  // });
+  var query = {};
+
+  query.name = new RegExp(req.query.name, "i"); 
   
-  Account.find(req.query).sort("name").exec(function (err, accounts) {
+  if(req.query.street)  { query["addresses.street"] = new RegExp(req.query.street, "i") }
+  if(req.query.city)  { query["addresses.city"] = new RegExp(req.query.city, "i") }
+  if(req.query.type) { query.type = req.query.type };
+
+  Account.find(query).sort("name").exec(function (err, accounts) {
     if(err) return res.status(500).json(err);
     res.status(200).json(accounts);
   });

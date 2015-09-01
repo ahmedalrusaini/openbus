@@ -1,18 +1,18 @@
-<sidebar>
-  <sb-main heading="{{'service.request.heading.index' | translate}}" nav-to="/service/requests"></sb-main>
-  <sb-item heading="{{ 'common.details' | translate }}" icon="search">
-    <form name="requestForm" novalidate>
-      <page-header heading="{{'service.request.heading.new' | translate}}">
-        <div class="btn-group" role="group" aria-label="...">
-          <button class="btn btn-default" type="submit" ng-click="submit(requestForm)" ng-disabled="isSaveDisabled(requestForm)">
-            <i class="fa fa-save"></i> {{'action.save' | translate}}
-          </button>
-          <button class="btn btn-default" ng-click="cancel()">
-            <i class="fa fa-undo"></i> {{'action.cancel' | translate}}
-          </button>
-        </div>
-      </page-header>
-      <ng-include src="'views/service/requests/partials/_request.form.html'"></ng-include>
-    </form>
-  </sb-item>
-</sidebar>
+<form name="requestForm" novalidate>
+  <sidebar>
+    <sb-main heading="{{'service.request.heading.index' | translate}}" nav-to="/service/requests"></sb-main>
+    <sb-item heading="{{ 'common.details' | translate }}" icon="search">
+        <page-header heading="{{'service.request.heading.new' | translate}}">
+          <div class="btn-group" role="group" aria-label="...">
+            <button class="btn btn-default" type="submit" ng-click="submit(requestForm)" ng-disabled="isSaveDisabled(requestForm)">
+              <i class="fa fa-save"></i> {{'action.save' | translate}}
+            </button>
+            <button class="btn btn-default" ng-click="cancel()">
+              <i class="fa fa-undo"></i> {{'action.cancel' | translate}}
+            </button>
+          </div>
+        </page-header>
+        <ng-include src="'views/service/requests/partials/_request.form.html'"></ng-include>
+    </sb-item>
+  </sidebar>
+</form>

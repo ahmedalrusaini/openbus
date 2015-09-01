@@ -8,10 +8,8 @@
  * Controller of the openbusApp
  */
 angular.module('openbusApp')
-  .controller('AccountsEditCtrl', function ($scope, $routeParams, $location, $translate, Account, TableCommon, $modal, Notification, ServiceRequest, Employee) {
+  .controller('AccountsEditCtrl', function ($scope, $routeParams, $location, $translate, Account, $modal, Notification, ServiceRequest, Employee) {
     var updated = false;
-    
-    TableCommon.init($scope);
     
     $scope.editMode = true;
     $scope.i18n = i18n;
@@ -22,27 +20,27 @@ angular.module('openbusApp')
       $scope.displayedAddresses = [].concat($scope.account.addresses);
       $scope.stEmployeeRelsSafe = [].concat($scope.account.employeeRels);
     
-      $scope.getServiceRequests();
+      $scope.getEmployees = function() {
+        angular.forEach($scope.account.employeeRels, function(rel) {
+          Employee.api.get({id: rel.empid}).$promise.then(function(emp){
+            rel.employee = emp;
+            rel.employeeFullname = emp.fullname;
+          });
+        });
+      };
+
+      $scope.getAddresses = function() {
+        _.each($scope.account.addresses, function(addr) {
+          if(addr.country) {
+            addr.countryName = i18n.getCountryName(addr.country);
+          }
+        });
+      };
     });
   
     Account.Types.query().$promise.then(function(types) {
       $scope.types = types;
     });
-  
-    $scope.getEmployees = function() {
-      angular.forEach($scope.account.employeeRels, function(rel) {
-        Employee.api.get({id: rel.empid}).$promise.then(function(emp){
-          rel.employee = emp;
-        });
-      });
-    };
-  
-    $scope.getServiceRequests = function() {
-      ServiceRequest.api.query({'account.id': $scope.account.id, _limit: 10}).$promise.then(function(requests){      
-        $scope.account.serviceRequests = requests;
-        $scope.stSafeRequests = requests;
-      });
-    };
   
     $scope.followups = [{
       id: "1",

@@ -3,7 +3,7 @@
     <button type="button" class="close" aria-label="Close" ng-click="cancelModal( )"><span aria-hidden="true">&times;</span></button>
     <h4 class="modal-title" id="myModalLabel">{{'account.two' | translate}}</h4>
   </div>
-  <div class="modal-body">
+  <div class="modal-body no-padding">
     <div>
       <table class="table table-striped table-hover" st-table="accounts" st-safe-src="stSafeAccounts">
         <thead>
@@ -12,8 +12,8 @@
             <th st-sort="type" st-skip-natural="true" >{{'account.type' | translate}}</th>
           </tr>
           <tr class="filters">
-            <th><input st-search="'name'" st-delay="100" class="inline-table-filter input-sm" placeholder="Search for name"></th>
-            <th><input st-search="'type'" st-delay="100" class="inline-table-filter input-sm" placeholder="Search for type"></th>
+            <th><input st-search="'name'" st-delay="100" class="inline-table-filter input-sm" placeholder="{{'common.filterFor' | translate}} name"></th>
+            <th><input st-search="'type'" st-delay="100" class="inline-table-filter input-sm" placeholder="{{'common.filterFor' | translate}} type"></th>
           </tr>
         </thead>
         <tbody>

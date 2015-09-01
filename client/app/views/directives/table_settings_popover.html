@@ -1,0 +1,20 @@
+<a class="btn btn-default" 
+  popover-template="'settingsPopover.html'" 
+  popover-title="Settings" 
+  popover-placement="left" 
+  popover-append-to-body="true"
+  popover-trigger="click"
+  popover-class="page-header-popover"
+  tooltip-trigger="mouseover">
+  <i class="fa fa-cog"></i>
+  <script type="text/ng-template" id="settingsPopover.html">
+    <div ng-controller="TableSettingsPopoverCtrl">
+      <form name="settingsForm" novalidate ng-submit="settingsForm.$valid && submit()">
+        <div class="form-group" ng-class="{ 'has-error': settingsForm.itemsByPage.$invalid }">
+          <label class="control-label">Visible lines</label>
+          <input name="itemsByPage" type="number" ng-model="itemsByPage" class="form-control" min="1" max="100">
+        </div>
+      </form>
+    </div>
+  </script>
+</a>

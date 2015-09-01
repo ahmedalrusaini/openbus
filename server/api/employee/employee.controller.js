@@ -25,7 +25,12 @@ var validationError = function(res, err) {
 };
 
 exports.index = function(req, res) {
-  Employee.find({}).sort("lastname").exec(function (err, employees) {
+  var query = {};  
+  query.lastname = new RegExp(req.query.lastname, "i");
+  if(req.query.street)  { query["address.street"] = new RegExp(req.query.street, "i") }
+  if(req.query.city)  { query["address.city"] = new RegExp(req.query.city, "i") }
+  
+  Employee.find(query).sort("lastname").exec(function (err, employees) {
     if(err) return res.status(500).json(err);
     res.status(200).json(employees);
   });
@@ -42,9 +47,7 @@ exports.show = function(req, res) {
 };
 
 exports.create = function (req, res, next) {
-  console.log(req.body);
   var newObj = new Employee(req.body);
-  console.log(newObj);
   newObj.save(function(err, obj) {
     if (err) return validationError(res, err);
     res.json(obj);

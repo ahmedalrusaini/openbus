@@ -8,24 +8,35 @@
           <input id="description" name="description" type="text" class="form-control" ng-model="request.description" />
         </div>
         <!-- Account id -->
-        <div class="row">
-          <div class="col-sm-9">
-            <div class="form-group" ng-class="{ 'has-error': requestForm.accountId.$invalid }">
-              <label class="control-label" for="accountId">{{'service.request.account' | translate}}</label>
-              <input id="accountId" name="accountId" type="hidden" class="form-control" ng-model="request.account.id" required />
-              <div class="input-group">
-                <input type="text" class="form-control" ng-model="request.account.name" readonly/>
-                <span class="input-group-btn">
-                  <button class="btn btn-default" type="button" ng-click="clearAccount()"><i class="fa fa-remove"></i></button>
-                  <button class="btn btn-default" type="button" ng-click="openAccountSearchModal()"><i class="fa fa-lightbulb-o"></i></button>
-                </span>
-              </div>
-              <div ng-messages="requestForm.accountId.$error" ng-show="requestForm.accountId.$invalid" class="help-block">
-                <div ng-message="required">{{'messages.general.errors.required' | translate}}</div>
-              </div>
-            </div>
+        <div class="form-group" ng-class="{ 'has-error': requestForm.accountId.$invalid }">
+          <label class="control-label" for="accountId">{{'service.request.account' | translate}}</label>
+          <input id="accountId" name="accountId" type="hidden" class="form-control" ng-model="request.account.id" required />
+          <div class="input-group">
+            <input type="text" class="form-control" ng-model="request.account.name" readonly/>
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button" ng-click="clearAccount()"><i class="fa fa-remove"></i></button>
+              <button class="btn btn-default" type="button" ng-click="openAccountSearchModal()"><i class="fa fa-lightbulb-o"></i></button>
+            </span>
+          </div>
+          <div ng-messages="requestForm.accountId.$error" ng-show="requestForm.accountId.$invalid" class="help-block">
+            <div ng-message="required">{{'messages.general.errors.required' | translate}}</div>
           </div>
         </div>
+        <!-- Technician -->
+        <div class="form-group" ng-class="{ 'has-error': requestForm.employeeId.$invalid }">
+          <label class="control-label" for="employeeId">{{'service.request.employee' | translate}}</label>
+          <input id="employeeId" name="employeeId" type="hidden" class="form-control" ng-model="request.employee.id" required />
+          <div class="input-group">
+            <input type="text" class="form-control" ng-model="request.employee.fullname" readonly/>
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button" ng-click="clearEmployee()"><i class="fa fa-remove"></i></button>
+              <button class="btn btn-default" type="button" ng-click="openEmployeeSearchModal()"><i class="fa fa-lightbulb-o"></i></button>
+            </span>
+          </div>
+          <div ng-messages="requestForm.employeeId.$error" ng-show="requestForm.employeeId.$invalid" class="help-block">
+            <div ng-message="required">{{'messages.general.errors.required' | translate}}</div>
+          </div>
+        </div>        
       </panel-body>
     </panel>
   </div>
@@ -103,3 +114,4 @@
 </div>
 
 <account-search-modal></account-search-modal>
+<employee-search-modal></employee-search-modal>

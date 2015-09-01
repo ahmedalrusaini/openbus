@@ -31,7 +31,15 @@ var validationError = function(res, err) {
  * restriction: 'admin'
  */
 exports.index = function(req, res) {
-  User.find({}, '-salt -hashedPassword', function (err, users) {
+  var query = {};
+  
+  query.firstname = new RegExp(req.query.firstname, "i");
+  query.lastname = new RegExp(req.query.lastname, "i");
+  query.email = new RegExp(req.query.email, "i");
+  
+  if(req.query.role) { query.role = req.query.role };
+  
+  User.find(query, '-salt -hashedPassword', function (err, users) {
     if(err) return res.status(500).json(err);
     res.status(200).json(users);
   });
@@ -84,13 +92,7 @@ exports.update = function(req, res, next) {
   
   User.findById(userId, function(err, user) {
     if (err) return validationError(res, err);
-    
     user = extend(user, props);
-    
-    // for(var f in props) {
-//       user[f] = props[f];
-//     }
-    
     user.save();    
     res.send(user);
   });  

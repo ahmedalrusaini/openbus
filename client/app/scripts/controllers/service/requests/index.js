@@ -8,8 +8,7 @@
  * Controller of the openbusApp
  */
 angular.module('openbusApp')
-  .controller('ServiceRequestsIndexCtrl', function ($scope, $location, $translate, ServiceRequest, TableCommon, Account, $modal, Notification) {
-    TableCommon.init($scope);
+  .controller('ServiceRequestsIndexCtrl', function ($scope, $cookieStore, $location, $translate, ServiceRequest,  Account, $modal, Notification) {
     
     $scope.dateOperators = [
       { id: 'eq', name: 'operator.eq.short'}, 
@@ -22,13 +21,20 @@ angular.module('openbusApp')
     
     $scope.query = { }
     
+    $scope.itemsByPage = $cookieStore.get('srvReqSrcResIBP') || 5;
+    $scope.setItemsByPage = function(itemsByPage) {
+      $scope.itemsByPage = itemsByPage;
+      $cookieStore.put('srvReqSrcResIBP', itemsByPage);
+    };
+    
     var accountId = $location.search().account;
     
     var getServiceRequests = function() {
       ServiceRequest.api.query($scope.query).$promise.then(function(requests){
         angular.forEach(requests, function(req, key, obj) {
           Account.api.get({id: req.account.id}).$promise.then(function(account) {
-            req.account.name = account.name;
+            req.account = account;
+            req.accountName = account.name;
           });
         })
       
@@ -69,7 +75,8 @@ angular.module('openbusApp')
     
     $scope.clearForm = function() {
       $scope.account = {};
-      $scope.query = {}
+      $scope.query = {};
+      getServiceRequests();
     };
     
     $scope.openAccountSearchModal = function() {

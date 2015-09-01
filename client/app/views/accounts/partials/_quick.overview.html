@@ -34,7 +34,7 @@
 <panel>
   <panel-heading title="Last 10 Service Requests">
     <a href ng-click="getServiceRequests(10)"><i class="fa fa-refresh"></i></a>
-    <a href="/service/requests">All</a>
+    <a href="/accounts/{{account.id}}?tab=srvRequests">{{'common.all' | translate}}</a>
   </panel-heading>
   <panel-body fill="true">
     <ng-include src="'views/accounts/partials/_srvreq.list.html'"></ng-include>

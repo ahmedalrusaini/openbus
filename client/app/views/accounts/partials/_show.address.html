@@ -3,20 +3,20 @@
     <a href ng-click="openAddressModal()" ng-show="editMode"><i class="fa fa-plus"></i> {{'action.add' | translate}}</a>
   </panel-heading>
   <panel-body fill="true">
-    <table class="table table-hover table-striped" st-table="displayedAddresses" st-safe-src="account.addresses">
+    <table class="table table-hover table-striped" st-table="displayedAddresses" st-safe-src="account.addresses" st-filterable>
       <thead>
         <tr>
-          <th class="text-center"><a href="#" tooltip="{{'action.toggleFilters' | translate}}" ng-click="toggleInlineFilters()"><i class="fa fa-filter"></i></a></th>
+          <th class="text-center"><a href="#" tooltip="{{'action.toggleFilters' | translate}}" ng-click="toggleFilters()"><i class="fa fa-filter"></i></a></th>
           <th st-sort="street" st-skip-natural="true" >{{'address.street' | translate}}</th>
           <th st-sort="city" st-skip-natural="true" st-sort-default="description">{{'address.city' | translate}}</th>
           <th st-sort="country" st-skip-natural="true" st-sort-default="description">{{'address.country' | translate}}</th>
           <th></th>
         </tr>
-        <tr class="filters" ng-show="showInlineFilters">
+        <tr class="filters" ng-show="filtersOn">
           <th></th>
-          <th><input st-search="'street'" st-delay="100" class="inline-table-filter input-sm" placeholder="Search for Street"></th>
-          <th><input st-search="'city'" st-delay="100" class="inline-table-filter input-sm" placeholder="Search for City"></th>
-          <th><input st-search="'countryName'" st-delay="100" class="inline-table-filter input-sm" placeholder="Search for Country"></th>
+          <th><input st-search="'street'" st-delay="100" class="inline-table-filter input-sm" placeholder="{{'common.filterFor' | translate}} Street"></th>
+          <th><input st-search="'city'" st-delay="100" class="inline-table-filter input-sm" placeholder="{{'common.filterFor' | translate}} City"></th>
+          <th><input st-search="'countryName'" st-delay="100" class="inline-table-filter input-sm" placeholder="{{'common.filterFor' | translate}} Country"></th>
           <th></th>
         </tr>
       </thead>

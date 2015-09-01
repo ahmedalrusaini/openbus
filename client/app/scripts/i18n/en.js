@@ -83,7 +83,9 @@ var en = {
     details: "Details",
     overview: "Overview",
     notes: "Notes",
-    filters: "Filters"
+    filters: "Filters",
+    filterFor: "Filter for",
+    map: "Map"
   },
   main: {
     title: "Home",
@@ -265,7 +267,8 @@ var en = {
       startDate: "Start Date",
       endDate: "End Date",
       description: "Description",
-      estimatedTime: "Estimated Time"
+      estimatedTime: "Estimated Time",
+      employee: "Technician"
     }
   }
 };

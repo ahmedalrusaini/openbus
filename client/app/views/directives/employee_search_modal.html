@@ -3,7 +3,7 @@
     <button type="button" class="close" aria-label="Close" ng-click="cancelModal()"><span aria-hidden="true">&times;</span></button>
     <h4 class="modal-title" id="myModalLabel">{{'employee.two' | translate}}</h4>
   </div>
-  <div class="modal-body">
+  <div class="modal-body no-padding">
     <table class="table table-striped table-hover" st-table="employees">
       <thead>
         <tr>
@@ -13,8 +13,8 @@
         </tr>
         <tr class="filters" ng-show="showInlineFilters">
           <th></th>
-          <th><input st-search="'firstname'" st-delay="100" class="inline-table-filter input-sm" placeholder="Search for firstname"></th>
-          <th><input st-search="'lastname'" st-delay="100" class="inline-table-filter input-sm" placeholder="Search for lastname"></th>
+          <th><input st-search="'firstname'" st-delay="100" class="inline-table-filter input-sm" placeholder="{{'common.filterFor' | translate}} firstname"></th>
+          <th><input st-search="'lastname'" st-delay="100" class="inline-table-filter input-sm" placeholder="{{'common.filterFor' | translate}} lastname"></th>
         </tr>
       </thead>
       <tbody>

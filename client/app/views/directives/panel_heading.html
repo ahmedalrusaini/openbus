@@ -5,7 +5,8 @@
       <i class="fa fa-toggle-off" ng-if="isLazy()"></i>
       <i class="fa fa-toggle-on" ng-if="!isLazy()"></i>
     </a>
-    <ng-transclude></ng-transclude>
+
+    <ng-transclude ng-if="!isLazy()"></ng-transclude>
   </div>
   <h4 ng-if="isPageHeader()">
     {{title}}

@@ -13,8 +13,7 @@ angular.module('openbusApp')
       restrict: 'E'
     };
   })
-  .controller("CountriesModalCtrl", function($scope, $modalInstance, country, TableCommon){    
-    TableCommon.init($scope);
+  .controller("CountriesModalCtrl", function($scope, $modalInstance, country){    
     $scope.countries = i18n.countries;
     
     $scope.cancelModal = function() {

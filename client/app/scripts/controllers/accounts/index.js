@@ -8,23 +8,32 @@
  * Controller of the openbusApp
  */
 angular.module('openbusApp')
-  .controller('AccountsIndexCtrl', function ($scope, Account, TableCommon, Notification, ServiceRequest) {
+  .controller('AccountsIndexCtrl', function ($scope, $cookieStore, Account, Notification, ServiceRequest, uiGmapGoogleMapApi) {
+    $scope.query = { }
+    
+    Account.Types.query().$promise.then(function(types) {
+      $scope.types = types;
+    });
+        
     var getAccounts = function() {
-      Account.api.query().$promise.then(function(data){
-        TableCommon.init($scope);
-  
+      Account.api.query($scope.query).$promise.then(function(data){
         $scope.accounts = data;
         $scope.stSafeAccounts = data;
         $scope.account = {};
       });
     };
         
-    $scope.accounts = getAccounts();
-    
+    getAccounts();
+
+    $scope.itemsByPage = $cookieStore.get('accSrcResIBP') || 5;
+    $scope.setItemsByPage = function(itemsByPage) {
+      $scope.itemsByPage = itemsByPage;
+      $cookieStore.put('accSrcResIBP', itemsByPage);
+    };
+        
     $scope.refresh = function() {
       getAccounts();
     };
-    
     
     $scope.delete = function (account) {
       if (confirm("Delete account?")) {
@@ -47,10 +56,6 @@ angular.module('openbusApp')
     };
     
     $scope.getServiceRequests = function() {
-      ServiceRequest.api.count().$promise.then(function(count) {
-        console.log("Count: " + count);
-      });
-      
       ServiceRequest.api.query({'account.id': $scope.account.id}).$promise.then(function(requests){  
         $scope.account.serviceRequests = requests;
         $scope.stSafeRequests = requests;
@@ -88,7 +93,58 @@ angular.module('openbusApp')
         }
         
         $scope.getServiceRequests();
+      }
+    };
+    
+    $scope.searchAccounts = function() {
+      getAccounts();
+    };
+    
+    $scope.clearForm = function() {
+      $scope.query = {}
+      getAccounts();
+    };
+    
+    $scope.map = {
+      center: {
+        latitude: 40.1451,
+        longitude: -99.6680
+      },
+      zoom: 15,
+      bounds: {}
+    };
+    $scope.markers = [];
+    $scope.toggleMap = function() {
+      $scope.showMap = !$scope.showMap;
+      
+      if ($scope.showMap && $scope.markers.length === 0) {
+        var idkey = 1;
         
+        angular.forEach($scope.accounts, function(account) {
+          if(account.address) {
+            account.address.countryName = i18n.getCountryName(account.address.country);
+            
+            var url = 'http://maps.google.com/maps/api/geocode/json?address=' + account.address.text;
+
+            $.get(url, function(data) {
+              if (data.results && data.results[0]) {
+                var lat = data.results[0].geometry.location.lat;
+                var lng = data.results[0].geometry.location.lng;
+
+                uiGmapGoogleMapApi.then(function(maps) {
+                  var marker = {
+                    id: idkey++,
+                    latitude: lat,
+                    longitude: lng,
+                    title: account.name
+                  };
+                  
+                  $scope.markers.push(marker);
+                });
+              }
+            });
+          }
+        });
       }
     };
   });

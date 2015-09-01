@@ -8,22 +8,24 @@
  * Controller of the openbusApp
  */
 angular.module('openbusApp')
-  .controller('EmployeesIndexCtrl', function ($scope, Employee, TableCommon, Notification) {
+  .controller('EmployeesIndexCtrl', function ($scope, $cookieStore, Employee,  Notification) {
+    $scope.query = {};
+    
+    $scope.itemsByPage = $cookieStore.get('empSrcResIBP') || 5;
+    $scope.setItemsByPage = function(itemsByPage) {
+      $scope.itemsByPage = itemsByPage;
+      $cookieStore.put('empSrcResIBP', itemsByPage);
+    };
+    
     var getEmployees = function() {
-      Employee.api.query().$promise.then(function(data){
-        TableCommon.init($scope);
-  
+      Employee.api.query($scope.query).$promise.then(function(data){
         $scope.employees = data;
         $scope.stSafeEmployees = data;
       });
     };
         
-    $scope.employees = getEmployees();
-    
-    $scope.refresh = function() {
-      getEmployees();
-    };
-    
+    getEmployees();
+        
     $scope.delete = function (employee) {
       if (confirm("Delete Employee?")) {
         Notification.init();
@@ -43,6 +45,19 @@ angular.module('openbusApp')
           Notification.add('danger', 'messages.employee.danger.deleted');
         });
       }
+    };
+    
+    $scope.refresh = function() {
+      getEmployees();
+    };
+    
+    $scope.search = function() {
+      getEmployees();
+    };
+    
+    $scope.clearForm = function() {
+      $scope.query = {};
+      getEmployees();
     };
     
   });

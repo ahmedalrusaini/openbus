@@ -4,7 +4,7 @@
     <form name="requestForm" novalidate> 
       <page-header heading="{{'action.edit' | translate}}: {{request.description || '<no description>'}}">
         <div class="btn-group" role="group" aria-label="...">
-          <button class="btn btn-default" ng-click="submit(requestForm)" ng-disabled="isSaveDisabled(userForm)">
+          <button class="btn btn-default" ng-click="submit(requestForm)" ng-disabled="isSaveDisabled(requestForm)">
             <i class="fa fa-save"></i> {{'action.save' | translate}}
           </button>
           <button class="btn btn-default" ng-click="cancel(requestForm)">

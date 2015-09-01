@@ -6,6 +6,7 @@
     <a class="btn btn-default" href ng-click="refresh()">
       <i class="fa fa-refresh"></i> {{'action.refresh' | translate}}
     </a>
+    <a table-settings-popover items-by-page="itemsByPage" on-submit="setItemsByPage"></a>
   </div>
 </page-header>
 

@@ -1,32 +1,35 @@
 <sidebar>
   <sb-main heading="Home" nav-to="/"></sb-main>
-  <sb-item heading="{{'common.list' | translate }}" icon="bars">
+  <sb-item id="search" heading="{{'action.search' | translate }}" icon="search">
     <page-header heading="{{'account.heading.index' | translate}}">
       <div class="btn-group" dropdown>
         <a class="btn btn-default" href="/accounts/new">
           <i class="fa fa-plus"></i> {{'action.create' | translate}}
         </a>
-        <a class="btn btn-default" href ng-click="refresh()">
-          <i class="fa fa-refresh"></i> {{'action.refresh' | translate}}
-        </a>
-      </div>
-    </page-header>
-    <ng-include src="'views/accounts/partials/_account.index.html'"></ng-include>
-  </sb-item>
-  <sb-item heading="{{'action.search' | translate }}" icon="search">
-    <page-header heading="{{'account.heading.index' | translate}}">
-      <div class="btn-group" dropdown>
-        <a class="btn btn-default" href="/accounts/new">
-          <i class="fa fa-plus"></i> {{'action.create' | translate}}
+        <a class="btn btn-default" href ng-click="toggleMap()">
+          <i class="fa fa-map-marker"></i> {{'common.map' | translate}}
         </a>
         <a class="btn btn-default" href ng-click="refresh()">
           <i class="fa fa-refresh"></i> {{'action.refresh' | translate}}
         </a>
-        <a class="btn btn-default">
-          <i class="fa fa-cog"></i>
-        </a>
+        <a table-settings-popover items-by-page="itemsByPage" on-submit="setItemsByPage"></a>
       </div>
     </page-header>
+    
     <ng-include src="'views/accounts/partials/_account.adv.index.html'"></ng-include>
+  </sb-item>
+  <sb-item id="list" heading="{{'common.list' | translate }}" icon="bars">
+    <page-header heading="{{'account.heading.index' | translate}}">
+      <div class="btn-group" dropdown>
+        <a class="btn btn-default" href="/accounts/new">
+          <i class="fa fa-plus"></i> {{'action.create' | translate}}
+        </a>
+        <a class="btn btn-default" href ng-click="refresh()">
+          <i class="fa fa-refresh"></i> {{'action.refresh' | translate}}
+        </a>
+      </div>
+    </page-header>
+    
+    <ng-include src="'views/accounts/partials/_account.index.html'"></ng-include>
   </sb-item>
 </sidebar>

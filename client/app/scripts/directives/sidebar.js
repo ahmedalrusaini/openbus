@@ -7,10 +7,10 @@
  * # sidebar
  */
 angular.module('openbusApp')
-.controller('SidebarCtrl', ['$scope', '$rootScope', '$cookieStore', '$location', function SidebarCtrl($scope, $rootScope, $cookieStore, $location) {
-  var ctrl = this,
-      tabs = ctrl.tabs = $scope.tabs = [];
-        
+.controller('SidebarCtrl', ['$scope', '$rootScope', '$routeParams', '$cookieStore', '$location', function SidebarCtrl($scope, $rootScope, $routeParams, $cookieStore, $location) {
+  var ctrl = this;
+  var tabs = ctrl.tabs = $scope.tabs = [];
+  
   ctrl.select = function(selectedTab) {
     angular.forEach(tabs, function (tab) {
       if (tab.active && tab !== selectedTab) {
@@ -18,6 +18,7 @@ angular.module('openbusApp')
         tab.onDeselect();
       }
     });
+
     selectedTab.active = true;
     selectedTab.onSelect();
   };
@@ -28,16 +29,13 @@ angular.module('openbusApp')
     // since that would select it twice
     if (tabs.length === 1 && tab.active !== false) {
       tab.active = true;
+      tab.onSelect();
     } else if (tab.active) {
       ctrl.select(tab);
     }
     else {
       tab.active = false;
-    }
-    
-    // for (var t in tabs) {
-    //   console.log(tabs[t].active);
-    // }
+    }    
   };
 
   ctrl.removeTab = function removeTab(tab) {
@@ -120,6 +118,7 @@ angular.module('openbusApp')
     templateUrl: '/views/directives/sidebar_item.html',
     transclude: true,
     scope: {
+      id: '@',
       active: '=?',
       heading: '@',
       icon: '@',
@@ -162,6 +161,12 @@ angular.module('openbusApp')
             scope.active = true;
           }
         };
+        
+        scope.deselect = function () {
+          if ( !scope.disabled ) {
+            scope.active = false;
+          }
+        };
 
         sidebarCtrl.addTab(scope);
         scope.$on('$destroy', function() {
@@ -191,9 +196,8 @@ angular.module('openbusApp')
     },
     compile: function(elm, attrs, transclude) {
       return function postLink(scope, elm, attrs, sidebarCtrl) {
-                
+        
         scope.select = function() {
-          // sidebarCtrl.toggleSidebar();
           sidebarCtrl.navTo(scope.navTo);
         };
       };

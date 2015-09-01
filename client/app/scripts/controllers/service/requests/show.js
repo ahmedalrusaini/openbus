@@ -8,25 +8,40 @@
  * Controller of the openbusApp
  */
 angular.module('openbusApp')
-  .controller('ServiceRequestsShowCtrl', function ($scope, $location, $translate, $routeParams, $modal, ShowEditToggle, Account, Units, ServiceRequest, Notification) {
-    ShowEditToggle.init($scope, $location);
-    
+  .controller('ServiceRequestsShowCtrl', function ($scope, $location, $translate, $routeParams, $modal, Account, Employee, Units, ServiceRequest, Notification) {    
     Units.api.time.query().$promise.then(function(units){
       $scope.estTimeUnits = units;
     });
-    
+        
     var getAccount = function(id) {
       Account.api.get({id: id}).$promise.then(function(account) {
         $scope.request.account = account;
+        
+        console.log(_.filter(account.employeeRels, {type:'technician'}));
+        
+        $scope.request.account.technicianRels = _.filter(account.employeeRels, {type:'technician'});
       });
     };
     
+    var getEmployee = function(id) {
+      console.log("Emp id: " + id)
+      Employee.api.get({id: id}).$promise.then(function(emp) {
+        $scope.request.employee = emp;
+      });
+    }
+    
     ServiceRequest.api.get({id: $routeParams.id}).$promise.then(function(request) {
-      if(request.account.id) {
+      $scope.request = request;
+      
+      if(request.account && request.account.id) {
         getAccount(request.account.id);
       }
       
-      $scope.request = request;
+      if(request.employee && request.employee.id) {
+        getEmployee(request.employee.id);
+      } else {
+        getEmployee($scope.request.account.technicianRels[0].empid);
+      }
     });
     
     $scope.$watch("request.estimatedTime", function(newValue, oldValue) {
@@ -63,6 +78,7 @@ angular.module('openbusApp')
               Notification.add('success', msg);
               
               getAccount(request.account.id);
+              getEmployee(request.employee.id);
             });
           },
           function (httpResponse) {
@@ -107,7 +123,24 @@ angular.module('openbusApp')
       modal.result.then(function(account) {
         $scope.request.account = account;
       });
-
     };
   
+    $scope.openEmployeeSearchModal = function() {
+      var modal = $modal.open({
+        templateUrl: 'employeeSearchModal.html',
+        controller: 'EmployeeSearchModalCtrl',
+      });
+    
+      modal.result.then(function(employee) {
+        $scope.request.employee = employee;
+      });
+    };
+  
+    $scope.clearEmployee = function() {
+      $scope.request.employee = {};
+    };
+  
+    $scope.isSaveDisabled =   function (form) {
+      return !form.$dirty || !form.$valid;
+    };
   });

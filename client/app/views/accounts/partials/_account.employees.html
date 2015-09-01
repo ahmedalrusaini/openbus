@@ -3,17 +3,17 @@
     <a href ng-click="openRelationshipModal()" ng-if="editMode"><i class="fa fa-plus"></i> {{'action.add' | translate}}</a>
   </panel-heading>
   <panel-body>
-    <table class="table table-striped table-hover" st-table="account.employeeRels" st-safe-src="stEmployeeRelsSafe">
+    <table class="table table-striped table-hover" st-table="account.employeeRels" st-safe-src="stEmployeeRelsSafe" st-filterable>
       <thead>
         <tr>
-          <th class="text-center"><a href="#" tooltip="{{'action.toggleFilters' | translate}}" ng-click="toggleInlineFilters()"><i class="fa fa-filter"></i></a></th>
+          <th class="text-center"><a href="#" tooltip="{{'action.toggleFilters' | translate}}" ng-click="toggleFilters()"><i class="fa fa-filter"></i></a></th>
           <th st-sort="type" st-skip-natural="true" >{{'relationship.type' | translate}}</th>
           <th st-sort="employeeFullname" st-skip-natural="true" >{{'employee.one' | translate}}</th>
         </tr>
-        <tr class="filters" ng-show="showInlineFilters">
+        <tr class="filters" ng-show="filtersOn">
           <th></th>
-          <th><input st-search="'type'" st-delay="100" class="inline-table-filter input-sm" placeholder="Search for Type"></th>
-          <th><input st-search="'employeeFullname'" st-delay="100" class="inline-table-filter input-sm" placeholder="Search for Employee name"></th>
+          <th><input st-search="'type'" st-delay="100" class="inline-table-filter input-sm" placeholder="{{'common.filterFor' | translate}} Type"></th>
+          <th><input st-search="'employeeFullname'" st-delay="100" class="inline-table-filter input-sm" placeholder="{{'common.filterFor' | translate}} Employee name"></th>
         </tr>
       </thead>
       <tbody>

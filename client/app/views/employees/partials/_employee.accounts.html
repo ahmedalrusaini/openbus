@@ -1,17 +1,17 @@
 <panel>
   <panel-body fill="true">
     <div class="table-responsive">
-      <table class="table table-striped table-hover" st-table="accountRels" st-safe-src="stAccountRelsSafe">
+      <table class="table table-striped table-hover" st-table="accountRels" st-safe-src="stAccountRelsSafe" st-filterable>
         <thead>
           <tr>
-            <th class="text-center"><a href="#" tooltip="{{'messages.general.showHideFilters' | translate}}" ng-click="toggleInlineFilters()"><i class="fa fa-filter"></i></a></th>
+            <th class="text-center"><a href="#" tooltip="{{'messages.general.showHideFilters' | translate}}" ng-click="toggleFilters()"><i class="fa fa-filter"></i></a></th>
             <th st-sort="type" st-skip-natural="true" >{{'relationship.type' | translate}}</th>
             <th st-sort="account.name" st-skip-natural="true" st-sort-default="name">{{'account.name' | translate}}</th>
           </tr>
-          <tr class="filters" ng-show="showInlineFilters">
+          <tr class="filters" ng-show="filtersOn">
             <th></th>
-            <th><input st-search="'type'" st-delay="100" class="inline-table-filter input-sm" placeholder="Search for Type"></th>
-            <th><input st-search="'accountName'" st-delay="100" class="inline-table-filter input-sm" placeholder="Search for Account name"></th>
+            <th><input st-search="'type'" st-delay="100" class="inline-table-filter input-sm" placeholder="{{'common.filterFor' | translate}} Type"></th>
+            <th><input st-search="'accountName'" st-delay="100" class="inline-table-filter input-sm" placeholder="{{'common.filterFor' | translate}} Account name"></th>
           </tr>
         </thead>
         <tbody>

@@ -8,9 +8,7 @@
  * Controller of the openbusApp
  */
 angular.module('openbusApp')
-  .controller('EmployeesShowCtrl', function ($scope, $routeParams, Employee, Account, uiGmapGoogleMapApi, TableCommon) {
-    TableCommon.init($scope);
-    
+  .controller('EmployeesShowCtrl', function ($scope, $routeParams, Employee, Account, uiGmapGoogleMapApi) {
     Employee.api.get({id: $routeParams.id}).$promise.then(function(employee) {
       $scope.employee = employee;
       $scope.employeeSafe = angular.copy(employee);

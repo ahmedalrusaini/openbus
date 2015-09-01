@@ -30,7 +30,7 @@
 <panel>
   <panel-heading title="Last 10 Service Requests">
     <a href ng-click="getServiceRequests(10)"><i class="fa fa-refresh"></i></a>
-    <a href="/service/requests?account={{account.id}}">{{'common.all' | translate}}</a>
+    <a href="/accounts/{{account.id}}?tab=srvRequests">{{'common.all' | translate}}</a>
     <a href="/service/requests/new?account={{account.id}}">{{'action.new' | translate}}</a>
   </panel-heading>
   <panel-body fill="true">

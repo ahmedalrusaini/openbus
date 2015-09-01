@@ -13,9 +13,7 @@ angular.module('openbusApp')
         restrict: 'E'
       };
     })
-    .controller("EmployeeSearchModalCtrl", function($scope, $modalInstance, TableCommon, Employee){    
-      TableCommon.init($scope);
-      
+    .controller("EmployeeSearchModalCtrl", function($scope, $modalInstance, Employee){       
       Employee.api.query().$promise.then(function(data){
         $scope.employees = data;
         $scope.stSafeEmployees = data;

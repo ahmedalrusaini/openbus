@@ -8,11 +8,9 @@
  * Controller of the openbusApp
  */
 angular.module('openbusApp')
-.controller('AccountsNewCtrl', function ($scope, $location, Account, TableCommon, $translate, $modal, Notification) {
+.controller('AccountsNewCtrl', function ($scope, $location, Account, $translate, $modal, Notification) {
   $scope.account = { addresses: [] };
   $scope.editMode = true;
-  
-  TableCommon.init($scope);
   
   Account.Types.query().$promise.then(function(types) {
     $scope.types = types;

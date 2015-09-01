@@ -13,8 +13,7 @@ angular.module('openbusApp')
       restrict: 'E'
     };
   })
-  .controller("AccountSearchModalCtrl", function($scope, $modalInstance, TableCommon, Account){    
-    TableCommon.init($scope);
+  .controller("AccountSearchModalCtrl", function($scope, $modalInstance, Account){    
     
     $scope.accounts = Account.api.query().$promise.then(function(data){      
       $scope.accounts = data;

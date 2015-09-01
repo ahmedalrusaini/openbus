@@ -1,4 +1,4 @@
-<panel page-header="true">
+<panel page-header="true" lazy="true">
   <panel-heading title="{{'action.search' | translate}}"></panel-heading>
   <panel-body>
     <form class="form-horizontal">
@@ -71,8 +71,8 @@
       <div class="form-group">
         <div class="col-sm-11">
           <div class="text-right">
-            <button type="submit" class="btn btn-default" ng-click="searchRequests()">{{'action.search' | translate}}</button>
-            <button class="btn btn-default" ng-click="clearForm()">{{'action.clear' | translate}}</button>
+            <button type="submit" class="btn btn-default" ng-click="searchRequests()" tooltip="{{'action.search' | translate}}"><i class="fa fa-search"></i></button>
+            <button class="btn btn-default" ng-click="clearForm()" tooltip="{{'action.clear' | translate}}"><i class="fa fa-remove"></i></button>
           </div>
         </div>
       </div>
@@ -82,19 +82,21 @@
 
 <panel>
   <panel-body fill="true">
-    <table class="table table-striped table-hover" st-table="requests" st-safe-src="stSafeRequests">
+    <table class="table table-striped table-hover" st-table="requests" st-safe-src="stSafeRequests" st-filterable>
       <thead>
         <tr>
-          <th class="text-center"><a href="#" tooltip="{{'action.toggleFilters' | translate}}" ng-click="toggleInlineFilters()"><i class="fa fa-filter"></i></a></th>
-          <th st-sort="startDate" st-skip-natural="true" >{{'service.request.startDate' | translate}}</th>
-          <th st-sort="account.name" st-skip-natural="true" >{{'service.request.account' | translate}}</th>
-          <th st-sort="description" st-skip-natural="true" st-sort-default="description">{{'service.request.description' | translate}}</th>
+          <th class="text-center"><a href="#" tooltip="{{'action.toggleFilters' | translate}}" ng-click="toggleFilters()"><i class="fa fa-filter"></i></a></th>
+          <th st-sort="startDate" st-skip-natural="true" st-sort-default="reverse">{{'service.request.startDate' | translate}}</th>
+          <th st-sort="accountName" st-skip-natural="true" >{{'service.request.account' | translate}}</th>
+          <th st-sort="description" st-skip-natural="true">{{'service.request.description' | translate}}</th>
         </tr>
-        <tr class="filters" ng-show="showInlineFilters">
+        <tr class="filters" ng-show="filtersOn">
           <th></th>
-          <th><input st-search="'startDate'" st-delay="100" class="inline-table-filter input-sm" placeholder="Search for start date"></th>
-          <th><input st-search="'account.name'" st-delay="100" class="inline-table-filter input-sm" placeholder="Search for account"></th>
-          <th><input st-search="'description'" st-delay="100" class="inline-table-filter input-sm" placeholder="Search for description"></th>
+          <th>
+            <!-- <input st-search="'startDate'" st-delay="100" class="inline-table-filter input-sm" placeholder="{{'common.filterFor' | translate}} {{'service.request.startDate' | translate}}"> -->
+          </th>
+          <th><input st-search="'accountName'" st-delay="100" class="inline-table-filter input-sm" placeholder="{{'common.filterFor' | translate}} {{'account.one' | translate}}"></th>
+          <th><input st-search="'description'" st-delay="100" class="inline-table-filter input-sm" placeholder="{{'common.filterFor' | translate}} {{'service.request.description' | translate}}"></th>
         </tr>
       </thead>
       <tbody>
@@ -110,14 +112,14 @@
           <td>{{request.account.name}}</td>
           <td>{{request.description}}</td>
         </tr>
-        <tr ng-repeat="i in times(5 - requests.length) track by $index">
+        <!-- <tr ng-repeat="i in Utils.times(itemsByPage - requests.length) track by $index">
           <td colspan="4">&nbsp;</td>
-        </tr>
+        </tr> -->
       </tbody>
       <tfoot>
         <tr>
           <td colspan="4" class="text-center">
-            <div st-pagination="" st-items-by-page="5" st-displayed-pages="5" st-template="views/bootstrap/pagination.html"></div>
+            <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="5" st-template="views/bootstrap/pagination.html"></div>
           </td>
         </tr>
       </tfoot>

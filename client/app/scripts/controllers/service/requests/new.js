@@ -8,14 +8,22 @@
  * Controller of the openbusApp
  */
 angular.module('openbusApp')
-  .controller('ServiceRequestsNewCtrl', function ($scope, $rootScope, $location, $translate, Account, Units, ServiceRequest, $modal) {
+  .controller('ServiceRequestsNewCtrl', function ($scope, $rootScope, $location, $translate, Account, Employee, Units, ServiceRequest, $modal, Notification) {
     
     var accountId = $location.search().account;
     $scope.request = { };
-        
+     
+    var getAccountEmployee = function() {
+      var empid = $scope.request.employee && $scope.request.employee.id ? $scope.request.employee.id : _.filter($scope.request.account.employeeRels, {type: 'technician'})[0].empid
+      Employee.api.get({id: empid}, function(employee){
+        $scope.request.employee = employee;
+      });
+    };
+       
     if (accountId) {
       Account.api.get({id: accountId}).$promise.then(function(account) {
         $scope.request.account = account;
+        getAccountEmployee();
       });
     }
     
@@ -85,7 +93,23 @@ angular.module('openbusApp')
       modal.result.then(function(account) {
         $scope.request.account = account;
         $scope.account = account;
+        getAccountEmployee();
       });
+    };
+    
+    $scope.openEmployeeSearchModal = function() {
+      var modal = $modal.open({
+        templateUrl: 'employeeSearchModal.html',
+        controller: 'EmployeeSearchModalCtrl',
+      });
+    
+      modal.result.then(function(employee) {
+        $scope.request.employee = employee;
+      });
+    };
+  
+    $scope.clearEmployee = function() {
+      $scope.request.employee = {};
     };
     
   });
