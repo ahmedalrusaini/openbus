@@ -93,10 +93,10 @@
         <tr class="filters" ng-show="filtersOn">
           <th></th>
           <th>
-            <!-- <input st-search="'startDate'" st-delay="100" class="inline-table-filter input-sm" placeholder="{{'common.filterFor' | translate}} {{'service.request.startDate' | translate}}"> -->
+            <!-- <input st-search="startDate" type="date" st-delay="100" class="inline-table-filter input-sm" placeholder="{{'common.filterFor' | translate}} {{'service.request.startDate' | translate}}"> -->
           </th>
-          <th><input st-search="'accountName'" st-delay="100" class="inline-table-filter input-sm" placeholder="{{'common.filterFor' | translate}} {{'account.one' | translate}}"></th>
-          <th><input st-search="'description'" st-delay="100" class="inline-table-filter input-sm" placeholder="{{'common.filterFor' | translate}} {{'service.request.description' | translate}}"></th>
+          <th><input st-search="accountName" st-delay="100" class="inline-table-filter input-sm" placeholder="{{'common.filterFor' | translate}} {{'account.one' | translate}}"></th>
+          <th><input st-search="description" st-delay="100" class="inline-table-filter input-sm" placeholder="{{'common.filterFor' | translate}} {{'service.request.description' | translate}}"></th>
         </tr>
       </thead>
       <tbody>
@@ -108,7 +108,7 @@
             &nbsp;
             <a href="#" ng-click="delete(request)"><i class="fa fa-trash-o"></i></a>
           </td>
-          <td>{{request.startDate | date: 'dd/MM/yyyy' }}</td>
+          <td>{{request.startDate | date: 'dd/MM/yyyy'}}</td>
           <td>{{request.account.name}}</td>
           <td>{{request.description}}</td>
         </tr>

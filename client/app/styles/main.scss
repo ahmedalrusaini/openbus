@@ -200,6 +200,10 @@ table {
   }
 }
 
+label {
+  @include ellipsis-overflow;
+}
+
 .quick-list {
   position: fixed;
   top: $navbar-height + $page-row-header-height + 15px;

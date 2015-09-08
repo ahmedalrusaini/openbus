@@ -58,40 +58,39 @@
     <div ng-show="editMode">
       <form name="addressForm" novalidate>
         <div class="form-group">
-          <label class="control-label">{{'address.standard' | translate}}</label>
-          <input type="checkbox" ng-model="addressModal.standard" class="pull-left">
+          <label>
+            <input type="checkbox" ng-model="addressModal.standard"> {{'address.standard' | translate}}
+          </label>
         </div>
-        <div class="form-group">
-          <label class="control-label">{{'address.street' | translate}} / {{'address.houseNo' | translate}}</label>
-          <div class="row">
-            <div class="col-sm-5">
-              <input id="street" name="street" type="text" class="form-control" ng-model="addressModal.street" />
-            </div>
-            <div class="col-sm-2">
-              <input id="houseNo" name="houseNo" type="text" class="form-control" ng-model="addressModal.houseNo"/>
-            </div>
-          </div>
-        </div>    
         <div class="row">
-          <div class="form-group col-sm-6" ng-class="{ 'has-error': addressForm.city.$invalid }">
-            <label class="control-label">{{'address.postalCode' | translate}} / {{'address.city' | translate}}</label>
-            <div class="row">
-              <div class="col-sm-4">
-                <input id="postalCode" name="postalCode" type="text" class="form-control" ng-model="addressModal.postalCode"/>
-              </div>
-              <div class="col-sm-8" ng-class="{ 'control-label': !editMode, 'has-error': (addressForm.city.$invalid || errors.name) }">
-                <input id="city" name="city" type="text" class="form-control" ng-model="addressModal.city" required />
-                <div ng-messages="addressForm.city.$error" ng-show="addressForm.city.$invalid" class="help-block">
-                  <div ng-message="required">Required</div>
-                </div>
-                <div class="help-block" ng-show="errors.name.message">
-                  <div>{{errors.name.message | translate}}</div>
-                </div>
-              </div>
+          <div class="form-group col-sm-9">
+            <label>{{'address.street' | translate}}</label>
+            <input id="street" name="street" type="text" class="form-control" ng-model="addressModal.street" />
+          </div>
+          <div class="form-group col-sm-3">
+            <label>{{'address.houseNo' | translate}}</label>
+            <input id="houseNo" name="houseNo" type="text" class="form-control" ng-model="addressModal.houseNo"/>
+          </div>    
+        </div>      
+        <div class="row">
+          <div class="form-group col-sm-3">
+            <label>{{'address.postalCode' | translate}}</label>
+            <input id="postalCode" name="postalCode" type="text" class="form-control" ng-model="addressModal.postalCode"/>
+          </div>
+          <div class="form-group col-sm-9" ng-class="{ 'control-label': !editMode, 'has-error': (addressForm.city.$invalid || errors.name) }">
+            <label>{{'address.city' | translate}}</label>
+            <input id="city" name="city" type="text" class="form-control" ng-model="addressModal.city" required />
+            <div ng-messages="addressForm.city.$error" ng-show="addressForm.city.$invalid" class="help-block">
+              <div ng-message="required">Required</div>
+            </div>
+            <div class="help-block" ng-show="errors.name.message">
+              <div>{{errors.name.message | translate}}</div>
             </div>
           </div>
-          <div class="form-group col-sm-5" ng-class="{ 'control-label': !editMode, 'has-error': (addressForm.country.$invalid || errors.name) }">
-            <label class="control-label">{{'address.country' | translate}}</label>
+        </div> 
+        <div class="row">
+          <div class="form-group col-sm-7" ng-class="{ 'control-label': !editMode, 'has-error': (addressForm.country.$invalid || errors.name) }">
+            <label>{{'address.country' | translate}}</label>
             <div class="input-group">
               <input id="country" name="country" type="text" class="form-control" ng-model="addressModal.countryName" 
                 typeahead="country.name.common for country in countries | filter:$viewValue | limitTo: 10" 
@@ -105,18 +104,14 @@
               <div ng-message="required">Required</div>
             </div>
           </div>
-        </div>    
-        
-        <div class="row">
-          
         </div>
         <div class="row">
-          <div class="form-group col-sm-3 ">
-            <label class="control-label">{{'address.telephone' | translate}}</label>
+          <div class="form-group col-sm-6 ">
+            <label>{{'address.telephone' | translate}}</label>
             <input id="telephone" name="telephone" type="tel" class="form-control" ng-model="addressModal.telephone" />
           </div>
-          <div class="form-group col-sm-4" ng-class="{ 'has-error': addressForm.email.$invalid }">
-            <label class="control-label">{{'address.email' | translate}}</label>
+          <div class="form-group col-sm-6" ng-class="{ 'has-error': addressForm.email.$invalid }">
+            <label>{{'address.email' | translate}}</label>
             <input id="email" name="email" type="email" class="form-control" ng-model="addressModal.email" required  />
             <div ng-messages="addressForm.email.$error" ng-show="addressForm.email.$invalid" class="help-block">
               <div ng-message="required">{{'messages.general.errors.required' | translate}}</div>
@@ -129,9 +124,9 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button type="submit" class="btn btn-default" ng-show="editMode" ng-click="saveModal(addressForm)" ng-disabled="isSaveDisabled(addressForm)">Save</button>
-    <button type="button" class="btn btn-default" ng-show="editMode" ng-click="cancelModal()">Cancel</button>
-    <button type="button" class="btn btn-default" ng-hide="editMode" ng-click="cancelModal()">Close</button>
+    <button type="submit" class="btn btn-default btn-sm" ng-show="editMode" ng-click="saveModal(addressForm)" ng-disabled="isSaveDisabled(addressForm)">Save</button>
+    <button type="button" class="btn btn-default btn-sm" ng-show="editMode" ng-click="cancelModal()">Cancel</button>
+    <button type="button" class="btn btn-default btn-sm" ng-hide="editMode" ng-click="cancelModal()">Close</button>
   </div>
   <countries-modal></countries-modal>
 </script>

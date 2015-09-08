@@ -1,7 +1,7 @@
 <sidebar>
   <sb-main heading="{{'user.heading.index' | translate}}" nav-to="/users"></sb-main>
   <sb-item heading="Details" icon="info">
-    <form name="userForm" class="form-horizontal" novalidate>
+    <form name="userForm" novalidate>
       <page-header heading="{{'action.edit' | translate}}: {{user.name || user.email}}">
         <div class="btn-group">
           <button type="submit" class="btn btn-primary" ng-click="submit(userForm)" ng-disabled="isSaveDisabled(userForm)">
@@ -15,7 +15,11 @@
           </button>
         </div>
       </page-header>
-      <user-form></user-form>
+      <div class="row">
+        <div class="col-sm-offset-2 col-sm-8">
+          <user-form></user-form>
+        </div>
+      </div>
     </form>
   </sb-item>
 </sidebar>

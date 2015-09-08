@@ -43,12 +43,12 @@
           <th>{{'address.street' | translate}}</th>
           <th>{{'address.city' | translate}}</th>
         </tr>
-        <tr class="filters" ng-show="showInlineFilters">
+        <tr class="filters" ng-show="filtersOn">
           <th></th>
-          <th><input st-search="firstname" st-delay="100" class="inline-table-filter input-sm" placeholder="{{'common.filterFor' | translate}} firstname"></th>
-          <th><input st-search="lastname" st-delay="100" class="inline-table-filter input-sm" placeholder="{{'common.filterFor' | translate}} lastname"></th>
-          <th>{{'address.street' | translate}}</th>
-          <th>{{'address.city' | translate}}</th>          
+          <th><input st-search="firstname" st-delay="100" class="inline-table-filter input-sm" placeholder="{{'common.filterFor' | translate}} {{'employee.firstname' | translate}}"></th>
+          <th><input st-search="lastname" st-delay="100" class="inline-table-filter input-sm" placeholder="{{'common.filterFor' | translate}} {{'employee.lastname' | translate}}"></th>
+          <th><input st-search="address.street" st-delay="100" class="inline-table-filter input-sm" placeholder="{{'common.filterFor' | translate}} {{'address.street' | translate}}"></th>
+          <th><input st-search="address.city" st-delay="100" class="inline-table-filter input-sm" placeholder="{{'common.filterFor' | translate}} {{'address.city' | translate}}"></th>
         </tr>
       </thead>
       <tbody>

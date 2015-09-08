@@ -70,26 +70,27 @@ angular.module('openbusApp')
         
         if($scope.account.address) {
           $scope.account.address.countryName = i18n.getCountryName($scope.account.address.country);
-      
+
           var url = 'http://maps.google.com/maps/api/geocode/json?address=' + $scope.account.address.text;
-          
+
           $.get(url, function(data) {
-            if(data.results && data.results[0]) {
+            if (data.results && data.results[0]) {
               var lat = data.results[0].geometry.location.lat;
               var lng = data.results[0].geometry.location.lng;
-      
+              
+              $scope.map = {
+                center: { latitude: 1, longitude: 2 },
+                zoom: 15
+              };
+              
               uiGmapGoogleMapApi.then(function(maps) {
-                $scope.map = { 
-                  center: { latitude: lat, longitude: lng }, 
-                  zoom: 15,
-                  marker: {
-                    idkey: 1,
-                    coords: { latitude: lat, longitude: lng }
-                  }
-                };
+                console.log(maps.Map)
+                
+//                $scope.map.refresh();
               });
             }
           });
+                    
         }
         
         $scope.getServiceRequests();
@@ -110,41 +111,65 @@ angular.module('openbusApp')
         latitude: 40.1451,
         longitude: -99.6680
       },
-      zoom: 15,
-      bounds: {}
+      zoom: 3,
+      bounds: {
+        northeast: { latitude: 100, longitude: 0 },
+        southeast: { latitude: 0, longitude: 180 }
+      }
     };
     $scope.markers = [];
+
     $scope.toggleMap = function() {
       $scope.showMap = !$scope.showMap;
       
       if ($scope.showMap && $scope.markers.length === 0) {
-        var idkey = 1;
-        
-        angular.forEach($scope.accounts, function(account) {
-          if(account.address) {
-            account.address.countryName = i18n.getCountryName(account.address.country);
-            
-            var url = 'http://maps.google.com/maps/api/geocode/json?address=' + account.address.text;
+        uiGmapGoogleMapApi.then(function(maps) {
+          var idkey = 1;
+          angular.forEach($scope.accounts, function(account) {
+            if(account.address) {
+              account.address.countryName = i18n.getCountryName(account.address.country);
 
-            $.get(url, function(data) {
-              if (data.results && data.results[0]) {
-                var lat = data.results[0].geometry.location.lat;
-                var lng = data.results[0].geometry.location.lng;
+              var url = 'http://maps.google.com/maps/api/geocode/json?address=' + account.address.text;
 
-                uiGmapGoogleMapApi.then(function(maps) {
+              $.get(url, function(data) {
+                if (data.results && data.results[0]) {
+                  var lat = data.results[0].geometry.location.lat;
+                  var lng = data.results[0].geometry.location.lng;
+                  
                   var marker = {
                     id: idkey++,
                     latitude: lat,
                     longitude: lng,
                     title: account.name
                   };
-                  
+
                   $scope.markers.push(marker);
-                });
-              }
-            });
-          }
-        });
+                  
+                  if (lat < $scope.map.bounds.southeast.latitude) {
+                    $scope.map.bounds.southeast.latitude = lat;
+                  }
+                  
+                  if(lat > $scope.map.bounds.northeast.latitude) {
+                    $scope.map.bounds.northeast.latitude = lat;
+                  }
+                  
+                  if(lng < $scope.map.bounds.northeast.longitude) {
+                    $scope.map.bounds.northeast.longitude = lng;
+                  }
+                  
+                  if(lng > $scope.map.bounds.southeast.longitude) {
+                    $scope.map.bounds.southeast.longitude = lng;
+                  }
+                }
+              });
+            }
+          });
+          
+          $scope.map.center.latitude = ($scope.map.bounds.northeast.latitude - $scope.map.bounds.southeast.latitude) / 2;
+          $scope.map.center.longitude = ( $scope.map.bounds.southeast.longitude - $scope.map.bounds.northeast.longitude) / 2;
+          
+          $scope.map.refresh($scope.map.center);
+        });        
       }
     };
   });

@@ -8,9 +8,7 @@
  * Controller of the openbusApp
  */
 angular.module('openbusApp')
-  .controller('AccountsEditCtrl', function ($scope, $routeParams, $location, $translate, Account, $modal, Notification, ServiceRequest, Employee) {
-    var updated = false;
-    
+  .controller('AccountsEditCtrl', function ($scope, $rootScope, $routeParams, $location, $translate, Account, $modal, Notification, ServiceRequest, Employee) {    
     $scope.editMode = true;
     $scope.i18n = i18n;
         
@@ -50,7 +48,6 @@ angular.module('openbusApp')
     
     $scope.submit = function (form) {
       Notification.init();
-      form.$submitted = true;
     
       if (form.$valid) {
         $scope.account.$update({},
@@ -66,9 +63,9 @@ angular.module('openbusApp')
                 Notification.add('warning', 'No default address set!');
               }
             });
-          
+            
             $scope.displayedAddresses = [].concat($scope.account.addresses);
-            updated = false; 
+            $scope.accountForm.$setPristine();
             $location.path("/accounts/" + account.id).search({ hasAlerts: true });
           },
           function (httpResponse) {
@@ -102,7 +99,11 @@ angular.module('openbusApp')
     };
   
     $scope.isSaveDisabled =   function (accountForm) {
-      return !(accountForm.$dirty || updated) || !accountForm.$valid;
+      if(!accountForm) {
+        accountForm = $scope.accountForm;
+      }
+
+      return accountForm.$pristine || !accountForm.$valid;
     }
   
     $scope.createFollowup = function(id) {
@@ -121,7 +122,7 @@ angular.module('openbusApp')
     $scope.deleteAddress = function(address) {
       var index = $scope.account.addresses.indexOf(address)
       $scope.account.addresses.splice(index, 1);
-      updated = true;
+      $scope.accountForm.$pristine = false;
     };
   
     $scope.openAddressModal = function(selectedAddress) {
@@ -129,7 +130,7 @@ angular.module('openbusApp')
       var modal = $modal.open({
         templateUrl: 'addressModal.html',
         controller: 'AddressModalCtrl',
-        size: 'lg',
+        // size: 'lg',
         resolve: {
           address: function() {
             return isNew ? {} : selectedAddress;
@@ -153,8 +154,7 @@ angular.module('openbusApp')
           });
         }
         
-        updated = true;
-      
+        $scope.accountForm.$pristine = false;
         $scope.displayedAddresses = [].concat($scope.account.addresses);
       }, function () {
         // console.log('Modal dismissed');
@@ -165,7 +165,7 @@ angular.module('openbusApp')
       var index = $scope.account.employeeRels.indexOf(rel)
       $scope.account.employeeRels.splice(index, 1);
       $scope.stEmployeeRelsSafe = [].concat($scope.account.employeeRels);
-      updated = true;
+      $scope.accountForm.$pristine = false;
     }
     
     $scope.editRelationship = function(rel) {
@@ -202,10 +202,18 @@ angular.module('openbusApp')
         }
 
         $scope.stEmployeeRelsSafe = [].concat($scope.account.employeeRels);
-        updated = true;
+        $scope.accountForm.$pristine = false;
       }, function () {
         // console.log('Modal dismissed');
       });
     };
+    
+    $scope.$on('$routeChangeStart', function(event, next, current) { 
+      if(!$scope.accountForm.$pristine) {
+        if(!confirm("Some changes are not saved! Do you want to proceed?")) {
+           event.preventDefault();
+        }
+      }
+    });
     
   });
