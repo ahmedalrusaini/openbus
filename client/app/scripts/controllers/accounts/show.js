@@ -29,7 +29,7 @@ angular.module('openbusApp')
         if (data.results && data.results[0]) {
           var lat = data.results[0].geometry.location.lat;
           var lng = data.results[0].geometry.location.lng;
-    
+          
           uiGmapGoogleMapApi.then(function(maps) {
             $scope.map = { 
               center: { latitude: lat, longitude: lng }, 
