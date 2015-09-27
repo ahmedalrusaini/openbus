@@ -37,11 +37,17 @@ AccountSchema
 
 AccountSchema.pre("save", function(next) {
   var account = this;
+  
   var stdAddresses = _.filter(account.addresses, {standard: true});
   
   if (stdAddresses.length > 1) {
     next(new Error('account.errors.addresses.multipleStandard'));
   } else {
+    console.log(account.addresses);
+    
+    if(stdAddresses.length == 0 && account.addresses.length == 1) {
+      account.addresses[0].standard = true;
+    }
     
     _.each(account.employeeRels, function(rel) {
       if(_.filter(account.employeeRels,{empid: rel.empid, type: rel.type}).length > 1) {

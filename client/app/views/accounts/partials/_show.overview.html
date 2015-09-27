@@ -11,7 +11,7 @@
       </div>
       <div class="col-sm-9">
         <div class="panel panel-default" ng-show="account.address">
-          <ui-gmap-google-map>
+          <ui-gmap-google-map center='map.center' zoom='map.zoom'>
             <ui-gmap-marker coords="map.marker.coords" options="map.marker.options" idkey="map.marker.idkey">
               <ui-gmap-window>
                 <address>
