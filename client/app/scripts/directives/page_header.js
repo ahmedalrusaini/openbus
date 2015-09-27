@@ -15,6 +15,7 @@ angular.module('openbusApp')
       transclude: true,
       scope: {
         heading: "@",
+        subheading: "@",
         backUrl: "@",
         backTitle: "@"
       }

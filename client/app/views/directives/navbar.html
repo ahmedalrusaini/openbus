@@ -27,10 +27,12 @@
         </li>
         <li dropdown>
           <a href="#" class="dropdown-toggle" role="button" aria-expanded="false" dropdown-toggle>
-            <span class="label label-{{getAlertsBadge().type}}" ng-show="getAlertsBadge().num > 0">
+            <!-- <span class="label label-{{getAlertsBadge().type}}" ng-show="getAlertsBadge().num > 0">
               {{getAlertsBadge().num}} <i class="fa fa-{{getAlertsBadge().icon}}"></i>
             </span>
-            &nbsp;
+            &nbsp;  
+             -->
+            <span class="label label-danger" ng-show="getAlertsBadge().num > 0">{{getAlertsBadge().num}}</span>
             <i class="fa fa-bell-o"></i> 
             <span class="caret"></span>
           </a>

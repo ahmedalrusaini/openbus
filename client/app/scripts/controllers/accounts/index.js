@@ -65,8 +65,10 @@ angular.module('openbusApp')
     $scope.select = function (account) {
       if (!account.isSelected) {
         $scope.account = {};
+        $scope.map = {};
       } else {
         $scope.account = account;
+        $scope.map = {};
         
         if($scope.account.address) {
           $scope.account.address.countryName = i18n.getCountryName($scope.account.address.country);
@@ -78,19 +80,18 @@ angular.module('openbusApp')
               var lat = data.results[0].geometry.location.lat;
               var lng = data.results[0].geometry.location.lng;
               
-              $scope.map = {
-                center: { latitude: 1, longitude: 2 },
-                zoom: 15
-              };
-              
-              uiGmapGoogleMapApi.then(function(maps) {
-                console.log(maps.Map)
-                
-//                $scope.map.refresh();
+              uiGmapGoogleMapApi.then(function(maps) {                
+                $scope.map = {
+                  center: { latitude: lat, longitude: lng },
+                  zoom: 15,
+                  marker: {
+                    idkey: 1,
+                    coords: { latitude: lat, longitude: lng }
+                  }
+                };
               });
             }
           });
-                    
         }
         
         $scope.getServiceRequests();

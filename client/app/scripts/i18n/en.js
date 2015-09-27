@@ -220,7 +220,9 @@ var en = {
   account: {
     heading: {
       index: 'Account list',
-      new: "Create new Account"
+      new: "Create new Account",
+      show: "Account",
+      edit: "Edit Account"
     },
     followups: {
       modal: {

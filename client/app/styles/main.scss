@@ -1,43 +1,53 @@
 @import "bootstrap-sass-official/assets/stylesheets/bootstrap/_variables.scss";
 @import "font-awesome/scss/font-awesome.scss";
 
-$selected-bg: $component-active-bg; //lighten($component-active-bg, 40%);
+//$selected-bg: $component-active-bg; //lighten($component-active-bg, 40%);
 
 $font-size-medium: ceil(($font-size-base * 0.92));
 
-//$navbar-default-bg: #30426a;
-//$navbar-default-link-color: #fff;
-//$navbar-default-link-hover-color: #aaa;
+$brand-danger: #f05050;
+
+$navbar-default-bg: #23b7e5;
+$navbar-default-link-color: #fff;
+$navbar-default-link-hover-color: #117391;
+$navbar-default-brand-color: #fff;
+$navbar-default-brand-hover-color: $navbar-default-brand-color;
 
 $navbar-default-link-active-bg: $navbar-default-bg;
 $navbar-default-link-active-color: $navbar-default-link-hover-color;
 
-$sidebar-bg: $navbar-default-bg;
+//$component-active-bg: $page-row-header-bg;
+$table-bg-accent: #fafbfc;
+$table-bg-hover: #f5f7fa;
+$selected-bg: #23b7e5; //#f5f7fa;
+
+$sidebar-bg: #fafbfc;
 $sidebar-width: 250px;
 $sidebar-width-closed: 70px;
-$sidebar-list-item-height: 60px;
-$sidebar-list-item-color: $navbar-default-link-color;
-$sidebar-list-item-hover-color: $navbar-default-link-hover-color;
-$sidebar-list-item-active-color: $navbar-default-link-active-color;
-$sidebar-list-title-color: darken($navbar-default-link-color, 5%);
-$sidebar-footer-link-hover-color: $navbar-default-link-hover-color;
-$sidebar-footer-link-color: $navbar-default-link-color;
+$sidebar-list-item-height: 50px;
+$sidebar-list-item-color: #929292;//$navbar-default-link-color;
+$sidebar-list-item-hover-color: #23b7e5; //$navbar-default-link-hover-color;
+$sidebar-list-item-active-color: #23b7e5; //$navbar-default-link-active-color;
+$sidebar-list-title-color: #23b7e5; //darken($navbar-default-link-color, 5%);
+$sidebar-footer-link-hover-color: $sidebar-list-item-hover-color; //$navbar-default-link-hover-color;
+$sidebar-footer-link-color: $sidebar-list-item-color; //$navbar-default-link-color;
 
-$sidebar-main-bg: darken($sidebar-bg, 10%);
-$sidebar-main-hover-bg: darken($sidebar-bg, 15%);
-$sidebar-main-color: darken($navbar-default-link-color, 15%);
-$sidebar-main-hover-color: $navbar-default-link-hover-color;
+$sidebar-main-bg: $sidebar-bg; //darken($sidebar-bg, 10%);
+$sidebar-main-hover-bg: $sidebar-main-bg; //darken($sidebar-bg, 15%);
+$sidebar-main-color: $sidebar-list-item-color; //darken($navbar-default-link-color, 15%);
+$sidebar-main-hover-color: $sidebar-list-item-color; //$navbar-default-link-hover-color;
 
-$page-row-header-height: $navbar-height;
-$page-row-header-bg: darken($sidebar-bg, 5%);
-$page-row-header-border-color: $page-row-header-bg;
-$page-row-header-color: $navbar-default-link-color;
-$page-row-header-btn-color: $navbar-default-link-color; //#b2bfdc;
+$page-row-header-height: $sidebar-list-item-height;
+$page-row-header-bg: #f5f7fa; //darken($sidebar-bg, 5%);
+$page-row-header-border-color: $navbar-default-border; //$page-row-header-bg;
+$page-row-header-color: $sidebar-list-item-color;
+$page-row-header-btn-color: $sidebar-list-item-color; //$navbar-default-link-color; //#b2bfdc;
 $page-row-header-btn-border-color: $navbar-default-link-color; //#b2bfdc;
-$page-row-header-btn-hover-color: $navbar-default-link-hover-color; //#fff;
-$page-row-header-btn-active-color: $gray-light; //lighten($page-row-header-btn-color, 10%);
+$page-row-header-btn-hover-color: $sidebar-list-item-hover-color; //$navbar-default-link-hover-color; //#fff;
+$page-row-header-btn-active-color: $sidebar-list-item-hover-color; //$gray-light; //lighten($page-row-header-btn-color, 10%);
 
-$navbar-default-border: $page-row-header-bg;
+
+//$navbar-default-border: $page-row-header-bg;
 
 $quick-list-width: 225px;
 
@@ -53,6 +63,7 @@ $longer-ease-transition: all .7s ease .0s;
 $icon-font-path: "/bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
 //$fa-font-path: "../bower_components/font-awesome/fonts";
 // bower:scss
+@import "bootstrap-sass/assets/stylesheets/_bootstrap.scss";
 @import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
 // endbower
 
@@ -304,8 +315,7 @@ label {
   margin-bottom: 20px;
 }
 
-.header-block {
-  
+.header-block {  
   h4,
   .panel-title {
     //@extend .text-muted;
@@ -464,8 +474,13 @@ label {
   }
   
   .label {
-    border-radius: 12px !important;
+    position: absolute;
+    border-radius: 4px !important;
     margin-bottom: 0;
+    top: 8px;
+    right: 17px;
+    z-index: 1000;
+    font-size: 65%;
   }
 }
 
@@ -496,11 +511,18 @@ ul.dropdown-menu {
   
   .meta {
     .page {
-//      font-size: 18px; //120%;
       font-size: 1.3em;
-      line-height: $page-row-header-height;
-      color: darken($navbar-default-link-color, 15%);;
+      //line-height: $page-row-header-height;
+      color: $sidebar-list-item-color; //darken($navbar-default-link-color, 15%);;
       margin-left: 30px;
+      margin-top: 10px;
+    }
+    
+    .subpage {
+      display: block;
+      font-size: 0.6em;
+       margin-bottom: 10px;
+//      line-height: $page-row-header-height / 2;
     }
       
     div {
@@ -520,6 +542,8 @@ ul.dropdown-menu {
       display: inline-block;
       text-align: center;
       vertical-align: middle;
+      margin-top: 5px;
+      margin-bottom: 5px;
     }
     
     & > .item {
@@ -632,16 +656,13 @@ ul.dropdown-menu {
     font-weight: 500;
   
     li {
-      &.active {
-        background-color: $body-bg;
-      }
-    
       a {
+        @include ellipsis-overflow;
         color: $sidebar-list-item-color;
         display: block;
         float: left;
         text-decoration: none;
-        width: $sidebar-width;
+        width: $sidebar-width - 1px;
       }
     }
 
@@ -661,24 +682,28 @@ ul.dropdown-menu {
       &:last-child {
         border-bottom: none;
       
-        &.active {
-          border-bottom: 1px solid $page-row-header-border-color;
-        }
+        //&.active {
+//          border-bottom: 1px solid $page-row-header-border-color;
+//        }
       }
     
       &.active {
-        border-bottom: 1px solid $page-row-header-border-color;
-        border-top: 1px solid $page-row-header-border-color;
+//        border-bottom: 1px solid $page-row-header-border-color;
+//        border-top: 1px solid $page-row-header-border-color;
+      
+      border-left: 5px solid $sidebar-list-item-active-color;
+      
         a {
-          text-indent: 25px;
+          text-indent: 20px;
           color: $sidebar-list-item-active-color;
-        
+          width: $sidebar-width - 6px;
+          
           &:hover {
-            text-indent: 25px;
-            border: none;
+            text-indent: 20px;
+            //border: none;
             color: $sidebar-list-item-active-color;
           }
-        
+
          .menu-icon {
            text-indent: 25px;
          }
@@ -687,19 +712,19 @@ ul.dropdown-menu {
     
       a {
         text-indent: 25px;
-        font-size: 1.1em;
+//        font-size: 1.1em;
         color: $sidebar-list-item-color;
         line-height: $sidebar-list-item-height;
         margin: 0;
-      
+
         i {
           transition: border .4s ease 0s;
-        }  
-      
+        }
+
         &:hover {
           color: $sidebar-list-item-hover-color;
           text-indent: 25px;
-                  
+
           i {
             transition: none;
           }
@@ -718,13 +743,17 @@ ul.dropdown-menu {
     .sidebar-main {
       position: fixed;
       top: 50px;
-      border-bottom: 1px solid $page-row-header-border-color;
-    
+//      border-bottom: 1px solid $page-row-header-border-color;
+      border-right: none;
+      font-size: 1.1em;
+      
       a {
         background: $sidebar-main-bg;
-        font-size: 1.3em;
         line-height: $page-row-header-height;
 //        height: $sidebar-list-item-height;
+        text-indent: 25px;
+        width: $sidebar-width - 1px;
+        float: left;
         
         .heading {
           @include ellipsis-overflow;
@@ -732,29 +761,29 @@ ul.dropdown-menu {
           max-width: $sidebar-width - $sidebar-width-closed;
         }
         
-        &:after {
-        	content: "";  
-        	border-top: $page-row-header-height / 2 solid $page-row-header-bg;
-        	border-bottom: $page-row-header-height / 2 solid $page-row-header-bg;
-        	border-left: 15px solid $sidebar-main-bg;
-          position: absolute;
-          right: 0;
-          top: 0;
-        }
-        
-        &:hover {
-          cursor: pointer;
-          background: $sidebar-main-hover-bg;
-          transition: $longer-ease-transition;
-          color: $sidebar-main-hover-color;
-        
-          &:after {
-            transition: $longer-ease-transition;
-            border-top: $page-row-header-height / 2 solid $page-row-header-bg;
-            border-bottom:$page-row-header-height / 2 solid $page-row-header-bg;
-          	border-left: 15px solid $sidebar-main-hover-bg;
-          }
-        }
+//        &:after {
+//          content: "";
+//          border-top: $page-row-header-height / 2 solid $page-row-header-bg;
+//          border-bottom: $page-row-header-height / 2 solid $page-row-header-bg;
+//          border-left: 15px solid $sidebar-main-bg;
+//          position: absolute;
+//          right: 0;
+//          top: 0;
+//        }
+//
+//        &:hover {
+//          cursor: pointer;
+//          background: $sidebar-main-hover-bg;
+//          transition: $longer-ease-transition;
+//          color: $sidebar-main-hover-color;
+//
+//          &:after {
+//            transition: $longer-ease-transition;
+//            border-top: $page-row-header-height / 2 solid $page-row-header-bg;
+//            border-bottom:$page-row-header-height / 2 solid $page-row-header-bg;
+//            border-left: 15px solid $sidebar-main-hover-bg;
+//          }
+//        }
       
         .menu-icon {
           float: right; 
@@ -843,18 +872,21 @@ ul.dropdown-menu {
       }
     
       .sidebar-list {
+       
         &.active {
-          border-left: none;
+          //border-left: none;
           text-indent: 25px;
-          
+
           a {
             i {
-              text-indent: 25px;
+              transition: none;
+              text-indent: 20px;
+              border-left: 5px solid $sidebar-list-item-active-color;
             }
             
             &:hover i {
-              border-left: none;
-              text-indent: 25px;
+//              border-left: none;//$
+              text-indent: 20px;
             }
           }
         }

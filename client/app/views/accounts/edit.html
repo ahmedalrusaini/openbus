@@ -1,5 +1,5 @@
 <form name="accountForm" novalidate>
-  <page-header heading="{{'action.edit' | translate}} {{account.typename}}: {{account.name}}">
+  <page-header heading="{{accountSafe.name}}" subheading="{{accountSafe.typename}}">
       <div class="btn-group" role="group" aria-label="...">
         <button class="btn btn-primary" type="submit" ng-click="submit(accountForm)" ng-disabled="isSaveDisabled(accountForm)">
           <i class="fa fa-save"></i> {{'action.save' | translate}}
@@ -13,7 +13,7 @@
       </div>
   </page-header>
   <sidebar>
-    <sb-main heading="{{'account.heading.index' | translate}}" nav-to="/accounts"></sb-main>
+    <sb-main heading="{{'account.heading.edit' | translate}}" icon="edit"></sb-main>
     <sb-item heading="{{'common.details' | translate}}" icon="info">  
       <account_form></account_form>
     </sb-item>
