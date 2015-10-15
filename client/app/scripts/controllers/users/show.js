@@ -8,9 +8,21 @@
  * Controller of the openbusApp
  */
 angular.module('openbusApp')
-.controller('UsersShowCtrl', function ($scope, $routeParams, $location, $translate, User, $locale, Notification) {
-  $scope.user = User.api.get({ id: $routeParams.id });
+.controller('UsersShowCtrl', function ($scope, $routeParams, $location, $translate, User, $locale, Notification, $modal, Employee) {
+  var getEmployee = function(id) {
+    Employee.api.get({id: id}).$promise.then(function(emp) {
+      $scope.user.employee = emp;
+    });
+  }
+  
+  User.api.get({ id: $routeParams.id }).$promise.then(function(user) {
+    $scope.user = user;
     
+    if($scope.user.employee && $scope.user.employee.id) {
+      getEmployee($scope.user.employee.id);
+    }
+  });
+  
   User.Roles.query().$promise.then(function(data){
     $scope.roles = data;
   });
@@ -22,15 +34,16 @@ angular.module('openbusApp')
       $scope.user.$update({},
         function (user, responseHeaders) {
           $scope.user = user;
+          console.log($scope.user)
+          if($scope.user.employee && $scope.user.employee.id) {
+            getEmployee($scope.user.employee.id);
+          }
+          
           $translate('messages.user.success.updated', {
-              user: $scope.user.fullname || $scope.user.email
-            }).then(function (msg) {
-              Notification.add('success', msg);
-              
-              Notification.add('danger', "msg");
-              Notification.add('info', "sdfasdfads");
-              Notification.add('warning', "maaaaaasg");
-            });
+            user: $scope.user.fullname || $scope.user.email
+          }).then(function (msg) {
+            Notification.add('success', msg);
+          });
         },
         function (httpResponse) {
           $scope.errors = httpResponse.data.errors;
@@ -63,7 +76,23 @@ angular.module('openbusApp')
   };
   
   $scope.isSaveDisabled = function (form) {
-    return !form.$valid;
+    return !form.$valid || !form.$dirty;
+  };
+  
+  $scope.openEmployeeSearchModal = function() {
+    var modal = $modal.open({
+      templateUrl: 'employeeSearchModal.html',
+      controller: 'EmployeeSearchModalCtrl',
+    });
+  
+    modal.result.then(function(employee) {
+      $scope.user.employee = employee;
+      $scope.userForm.$setDirty(true);
+    });
+  };
+
+  $scope.clearEmployee = function() {
+    $scope.user.employee = {};
   };
 
 });

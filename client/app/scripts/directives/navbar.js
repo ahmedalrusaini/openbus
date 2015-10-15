@@ -38,6 +38,7 @@ angular.module('openbusApp')
     $rootScope.isAdmin = Auth.isAdmin;
     $rootScope.getCurrentUser = Auth.getCurrentUser;  
     $scope.logout = Auth.logout;
+    $rootScope.isMe = Auth.isMe;
 
     $scope.isActive = function(route) {
       if(route === '/') {

@@ -20,22 +20,19 @@
         <li ng-class="{active: isActive('/service/requests')}" role="presentation" ><a href="/service/requests">{{ 'menu.service.requests.title' | translate }}</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right" ng-show="isLoggedIn()">
-        <li ng-show="pageHasSidebar()" ng-click="toggleSidebar()" tooltip="{{'menu.toggleSidebar' | translate}}" tooltip-placement="left" tooltip-popup-delay="500">
+        <li ng-show="pageHasSidebar()" ng-click="toggleSidebar()"> <!-- tooltip="{{'menu.toggleSidebar' | translate}}" tooltip-placement="left" tooltip-popup-delay="500"> -->
           <a href>
+            <span class="label label-primary no-caret" ng-show="!sidebarOpened">!</span>
             <i class="fa fa-list-ul"></i>
           </a>
         </li>
         <li dropdown>
           <a href="#" class="dropdown-toggle" role="button" aria-expanded="false" dropdown-toggle>
-            <!-- <span class="label label-{{getAlertsBadge().type}}" ng-show="getAlertsBadge().num > 0">
-              {{getAlertsBadge().num}} <i class="fa fa-{{getAlertsBadge().icon}}"></i>
-            </span>
-            &nbsp;  
-             -->
             <span class="label label-danger" ng-show="getAlertsBadge().num > 0">{{getAlertsBadge().num}}</span>
             <i class="fa fa-bell-o"></i> 
             <span class="caret"></span>
           </a>
+          <!-- Notification menu -->
           <ul class="dropdown-menu dropdown-menu-right" role="menu">
             <li class="dropdown-header">
               {{'menu.notifications.title' | translate}} 
@@ -61,7 +58,18 @@
             {{loggedUser.email}} <span class="caret"></span>
           </a>
           <ul class="dropdown-menu dropdown-menu-right" role="menu">
-            <li class="dropdown-header">{{'menu.currentUser.title' | translate}}</li>
+            <li class="dropdown-header user-info">
+              <!-- {{'menu.currentUser.title' | translate}} -->
+              <span class="user-avatar">
+                {{loggedUser.firstname.substring(0,1)}}{{loggedUser.lastname.substring(0,1)}} 
+              </span>
+              {{loggedUser.fullname}}
+            </li>
+            <li>
+              <a href="/users/me">
+                <i class="fa fa-user"></i> {{'menu.currentUser.me' | translate}}
+              </a>
+            </li>
             <li><a href="/settings"><i class="fa fa-cog"></i> {{'menu.currentUser.settings' | translate}}</a></li>
             <!-- <li class="divider"></li> -->
             <li><a href="/" ng-click="logout()"><i class="fa fa-sign-out"></i> {{'menu.currentUser.logout' | translate}}</a></li>

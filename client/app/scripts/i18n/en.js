@@ -60,7 +60,8 @@ var en = {
     currentUser: {
       title: "User menu",
       settings: "Settings",
-      logout: "Logout"
+      logout: "Logout",
+      me: "Me"
     },
     users: {
       title: 'Users'
@@ -108,8 +109,10 @@ var en = {
   },
   user: {
     heading: {
-      new: "Create new User",
-      index: 'Users list'
+      new: "Create User",
+      index: 'Users list',
+      show: 'User',
+      edit: 'Edit User'
     },
     one: 'User',
     two: 'Users',
@@ -126,12 +129,15 @@ var en = {
     role: 'Role',
     change_password: 'Change your password',
     createdAt: 'Created on',
-    updatedAt: 'Updated on'
+    updatedAt: 'Updated on',
+    profile: 'Profile'
   },
   employee: {
     heading: {
-      new: "Create new Employee",
-      index: 'Employees list'
+      new: "Create Employee",
+      index: 'Employees',
+      show: "Employee",
+      edit: "Edit Employee"
     },
     one: "Employee",
     two: "Employees",
@@ -219,8 +225,8 @@ var en = {
   },
   account: {
     heading: {
-      index: 'Account list',
-      new: "Create new Account",
+      index: 'Accounts',
+      new: "Create Account",
       show: "Account",
       edit: "Edit Account"
     },
@@ -259,15 +265,19 @@ var en = {
   service: {
     request: {
       heading: {
-        new:  "Create new Service Request",
-        index: "Service Requests list"
+        new:  "Create Service Request",
+        index: "Service Requests",
+        show: "Service Request",
+        edit: "Edit Service Request"
       },
       one: "Service Request",
       two: "Service Requests",
       account: "Account",
       startEndDate: "Start / End Date",
-      startDate: "Start Date",
-      endDate: "End Date",
+      startDate: "Start At",
+      endDate: "End At",
+      actualStartDate: "Actual Start At",
+      actualEndDate: "Actual End At",
       description: "Description",
       estimatedTime: "Estimated Time",
       employee: "Technician"

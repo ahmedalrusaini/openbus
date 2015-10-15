@@ -22,7 +22,10 @@ var UserSchema = new Schema({
   provider: String,
   salt: String,
   createdAt: Date,
-  updatedAt: Date
+  updatedAt: Date,
+  employee: {
+    id: Schema.Types.ObjectId
+  }
 }, {
   toJSON: {
     virtuals: true

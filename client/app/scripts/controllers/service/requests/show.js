@@ -15,16 +15,12 @@ angular.module('openbusApp')
         
     var getAccount = function(id) {
       Account.api.get({id: id}).$promise.then(function(account) {
-        $scope.request.account = account;
-        
-        console.log(_.filter(account.employeeRels, {type:'technician'}));
-        
+        $scope.request.account = account;        
         $scope.request.account.technicianRels = _.filter(account.employeeRels, {type:'technician'});
       });
     };
     
     var getEmployee = function(id) {
-      console.log("Emp id: " + id)
       Employee.api.get({id: id}).$promise.then(function(emp) {
         $scope.request.employee = emp;
       });
@@ -122,6 +118,7 @@ angular.module('openbusApp')
     
       modal.result.then(function(account) {
         $scope.request.account = account;
+        $scope.requestForm.$setDirty(true);
       });
     };
   
@@ -133,6 +130,7 @@ angular.module('openbusApp')
     
       modal.result.then(function(employee) {
         $scope.request.employee = employee;
+        $scope.requestForm.$setDirty(true);
       });
     };
   

@@ -1,4 +1,4 @@
-<page-header heading="{{employeeSafe.lastname }} {{accountSafe.name}}">
+<page-header heading="{{employeeSafe.lastname}}" subheading="{{employeeSafe.firstname}}">
   <div class="btn-group" role="group" aria-label="...">
     <a class="btn btn-default" href="/employees/{{employee.id}}/edit">
        <i class="fa fa-edit"></i> {{'action.edit' | translate}}
@@ -7,7 +7,7 @@
 </page-header>
 
 <sidebar>
-  <sb-main heading="{{'employee.heading.index' | translate}}" nav-to="/employees"></sb-main>
+  <sb-main heading="{{'employee.heading.show' | translate}}" nav-to="/employees"></sb-main>
   <sb-item heading="{{'common.details' | translate}}" icon="info">  
     <div class="form-horizontal">
       <ng-include src="'views/employees/partials/_show.details.html'"></ng-include>  

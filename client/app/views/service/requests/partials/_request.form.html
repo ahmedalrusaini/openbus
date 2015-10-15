@@ -5,7 +5,10 @@
       <panel-body>
         <div class="form-group"> 
           <label class="control-label" for="accountId">{{'service.request.description' | translate}}</label>
-          <input id="description" name="description" type="text" class="form-control" ng-model="request.description" />
+          <input id="description" name="description" type="text" class="form-control" ng-model="request.description" required />
+          <div ng-messages="requestForm.description.$error" ng-show="requestForm.description.$invalid" class="help-block">
+            <div ng-message="required">{{'messages.general.errors.required' | translate}}</div>
+          </div>
         </div>
         <!-- Account id -->
         <div class="form-group" ng-class="{ 'has-error': requestForm.accountId.$invalid }">

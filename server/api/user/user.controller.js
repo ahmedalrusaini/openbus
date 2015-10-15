@@ -52,7 +52,7 @@ exports.create = function (req, res, next) {
   var newUser = new User(req.body);
   newUser.provider = 'local';
   newUser.role = newUser.role || 'user';
-  
+    
   newUser.save(function(err, user) {
     if (err) return validationError(res, err);
     res.json(user);

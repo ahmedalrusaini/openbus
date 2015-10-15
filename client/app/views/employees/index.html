@@ -1,19 +1,7 @@
 <sidebar>
-  <sb-main heading="Home" nav-to="/"></sb-main>
-  <!-- <sb-item heading="{{'common.list' | translate }}" icon="bars">
-    <page-header heading="{{'employee.heading.index' | translate}}">
-      <div class="btn-group">
-        <a class="btn btn-default" href="/employees/new">
-          <i class="fa fa-plus"></i> {{'action.create' | translate}}
-        </a>
-        <a class="btn btn-default" href ng-click="refresh()">
-          <i class="fa fa-refresh"></i> {{'action.refresh' | translate}}
-        </a>
-      </div>
-    </page-header>
-  </sb-item> -->
+  <sb-main heading="{{'employee.heading.index' | translate}}"></sb-main>
   <sb-item heading="{{'action.search' | translate }}" icon="search">
-    <page-header heading="{{'employee.heading.index' | translate}}">
+    <page-header heading="{{'employee.two' | translate}}" subheading="{{'action.search' | translate }}">
       <div class="btn-group" dropdown>
         <a class="btn btn-default" href="/employees/new">
           <i class="fa fa-plus"></i> {{'action.create' | translate}}

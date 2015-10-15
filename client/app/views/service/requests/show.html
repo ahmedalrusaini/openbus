@@ -1,15 +1,15 @@
-<page-header heading="{{'service.request.one' | translate }}: {{request.description}}">
-  <div class="btn-group" role="group" aria-label="...">
-    <a class="btn btn-default" href="/service/requests/{{request.id}}/edit">
-       <i class="fa fa-edit"></i> {{'action.edit' | translate}}
-    </a>
-  </div>
-</page-header>
-
 <sidebar>
-  <sb-main heading="{{'service.request.heading.index' | translate}}" nav-to="/service/requests"></sb-main>
-  <sb-item heading="{{'common.details' | translate}}" icon="info">  
+  <sb-main heading="{{'service.request.heading.show' | translate}}"></sb-main>
+  <sb-item heading="{{'common.details' | translate}}" icon="info">
     <div class="form-horizontal">
+      <page-header heading="{{request.description}}" subheading="{{request.startDate | date:'dd/MM/yyyy'}}">
+        <div class="btn-group" role="group" aria-label="...">
+          <a class="btn btn-default" href="/service/requests/{{request.id}}/edit">
+             <i class="fa fa-edit"></i> {{'action.edit' | translate}}
+          </a>
+        </div>
+      </page-header>
+      
       <ng-include src="'views/service/requests/partials/_request.show.html'"></ng-include>  
     </div>
   </sb-item>  

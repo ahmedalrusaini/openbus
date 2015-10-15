@@ -16,9 +16,5 @@ angular.module('openbusApp')
         changePassword: { method: 'PUT', params: { controller:'password' } }
       }),
       Roles: $resource('/api/user/roles')
-//      roles: [
-//        { id: 'user', name: 'user.roles.user' }, 
-//        { id: 'admin', name: 'user.roles.admin' }
-//      ]
     }
   });

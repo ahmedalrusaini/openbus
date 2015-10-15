@@ -141,6 +141,11 @@ angular.module('openbusApp')
        */
       getToken: function() {
         return $cookieStore.get('token');
+      },
+      
+      isMe: function(userId) {
+        console.log(currentUser);
+        return currentUser && currentUser.id === userId;
       }
     };
   });

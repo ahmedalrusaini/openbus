@@ -33,11 +33,12 @@
       <panel-heading title="Date and Time"></panel-heading>
       <panel-body>
         <div class="form-group">
-          <label class="col-sm-3 control-label" for="birthdate">{{'service.request.startEndDate' | translate}}</label>
-          <div class="col-sm-4 control-label">
+          <label class="col-sm-3 control-label" for="birthdate">{{'service.request.startDate' | translate}}</label>
+          <div class="col-sm-3 control-label">
             <span class="pull-left">{{request.startDate | date:'dd/MM/yyyy'}}</span>
           </div>
-          <div class="col-sm-4 control-label">
+          <label class="col-sm-3 control-label" for="birthdate">{{'service.request.endDate' | translate}}</label>
+          <div class="col-sm-3 control-label">
             <span class="pull-left">{{request.endDate | date:'dd/MM/yyyy'}}</span>
           </div>
         </div>

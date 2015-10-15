@@ -1,5 +1,5 @@
 <form name="employeeForm" novalidate>
-  <page-header heading="{{'action.edit' | translate}} {{employee.one}}: {{employee.lastname}} {{employee.firstname}}">
+  <page-header heading="{{employeeSafe.lastname}}" subheading="{{employeeSafe.firstname}}">
     <div class="btn-group" role="group" aria-label="...">
       <button class="btn btn-default" type="submit" ng-click="submit(employeeForm)" ng-disabled="isSaveDisabled(employeeForm)">
         <i class="fa fa-save"></i> {{'action.save' | translate}}
@@ -13,7 +13,7 @@
     </div>    
   </page-header>
   <sidebar>
-    <sb-main heading="{{'employee.heading.index' | translate}}" nav-to="/employees"></sb-main>
+    <sb-main heading="{{'employee.heading.edit' | translate}}" nav-to="/employees"></sb-main>
     <sb-item heading="{{'common.details' | translate }}" icon="user">
       <employee-form></employee-form>
     </sb-item>
