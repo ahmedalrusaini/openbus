@@ -8,7 +8,7 @@
  * Controller of the openbusApp
  */
 angular.module('openbusApp')
-.controller('UsersShowCtrl', function ($scope, $routeParams, $location, $translate, User, $locale, Notification, $modal, Employee) {
+.controller('UsersShowCtrl', function ($scope, $routeParams, $location, $translate, User, $locale, Notification, $uibModal, Employee) {
   var getEmployee = function(id) {
     Employee.api.get({id: id}).$promise.then(function(emp) {
       $scope.user.employee = emp;
@@ -80,7 +80,7 @@ angular.module('openbusApp')
   };
   
   $scope.openEmployeeSearchModal = function() {
-    var modal = $modal.open({
+    var modal = $uibModal.open({
       templateUrl: 'employeeSearchModal.html',
       controller: 'EmployeeSearchModalCtrl',
     });

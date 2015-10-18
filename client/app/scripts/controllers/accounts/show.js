@@ -8,7 +8,7 @@
 * Controller of the openbusApp
 */
 angular.module('openbusApp')
-.controller('AccountsShowCtrl', function ($scope, $routeParams, $modal, Account, uiGmapGoogleMapApi, ServiceRequest, Employee) {    
+.controller('AccountsShowCtrl', function ($scope, $location, $routeParams, $uibModal, Account, uiGmapGoogleMapApi, ServiceRequest, Employee) {    
   var addressesChanged = false;
   
   $scope.i18n = i18n;
@@ -68,21 +68,6 @@ angular.module('openbusApp')
       });
     };
     
-    
-    $scope.followups = [{
-      id: "1",
-      title: "Create service request",
-      url: "/service/requests/new"
-    }];
-  
-    $scope.createFollowup = function(id) {
-      var fup = $.grep($scope.followups, function(fup){
-        return fup.id === id;
-      })[0];
-
-      $location.path(fup.url).search({account: $scope.account.id});
-    };
-    
     $scope.selectAddress = function(address) {    
       address.isSelected = true;
       $scope.openAddressModal(angular.copy(address));
@@ -90,7 +75,7 @@ angular.module('openbusApp')
   
     $scope.openAddressModal = function(selectedAddress) {
       var isNew = !selectedAddress;
-      var modal = $modal.open({
+      var modal = $uibModal.open({
         templateUrl: 'addressModal.html',
         controller: 'AddressModalCtrl',
         size: 'lg',
@@ -125,7 +110,7 @@ angular.module('openbusApp')
     };
   
     $scope.openRelationshipModal = function(selectedRel) {
-      $modal.open({
+      $uibModal.open({
         templateUrl: 'employeeRespModal.html',
         controller: 'EmployeeRelModalCtrl',
         resolve: {
@@ -136,5 +121,25 @@ angular.module('openbusApp')
         }
       });    
     };
+    
+    $scope.openFollowupModal = function() {
+      var modal = $uibModal.open({
+        templateUrl: 'followupModal.html',
+        controller: 'FollowupModalCtrl',
+        resolve: {
+          $followups: function() {
+            return [{
+              id: "1",
+              title: "Create service request",
+              url: "/service/requests/new"
+            }]
+          }
+        }
+      });
+    
+      modal.result.then(function(fup) {
+         $location.path(fup.url).search({account: account.id});
+      }, function() {});
+    };
   });
-})
+});

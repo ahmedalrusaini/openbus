@@ -54,7 +54,7 @@
         <table class="table table-striped table-hover" st-table="accounts" st-safe-src="stSafeAccounts" st-filterable>
         <thead>
           <tr>
-            <th class="text-center"><a href="#" tooltip="{{'messages.general.showHideFilters' | translate}}" ng-click="toggleFilters()"><i class="fa fa-filter"></i></a></th>
+            <th class="text-center"><a href="#" uib-tooltip="{{'messages.general.showHideFilters' | translate}}" ng-click="toggleFilters()"><i class="fa fa-filter"></i></a></th>
             <th st-sort="name" st-skip-natural="true" st-sort-default="name">{{'account.name' | translate}}</th>
             <th st-sort="type" st-skip-natural="true">{{'account.type' | translate}}</th>
             <th st-sort="address.street" st-skip-natural="true">{{'address.street' | translate}}</th>
@@ -71,11 +71,11 @@
         <tbody>
           <tr ng-repeat="account in accounts | filter:search:strict">
             <td width="80px">
-              <a ng-href="/accounts/{{account._id}}" tooltip="{{'action.display' | translate}}"><i class="fa fa-search"></i></a>
+              <a ng-href="/accounts/{{account._id}}" uib-tooltip="{{'action.display' | translate}}"><i class="fa fa-search"></i></a>
               &nbsp;
-              <a ng-href="/accounts/{{account.id}}/edit" tooltip="{{'action.edit' | translate}}"><i class="fa fa-edit"></i></a>
+              <a ng-href="/accounts/{{account.id}}/edit" uib-tooltip="{{'action.edit' | translate}}"><i class="fa fa-edit"></i></a>
               &nbsp;
-              <a href="#" ng-click="delete(account)" tooltip="{{'action.delete' | translate}}"><i class="fa fa-trash-o"></i></a>
+              <a href="#" ng-click="delete(account)" uib-tooltip="{{'action.delete' | translate}}"><i class="fa fa-trash-o"></i></a>
             </td>
             <td>{{account.name}}</td>
             <td>{{account.typename}}</td>

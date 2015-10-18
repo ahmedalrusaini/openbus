@@ -6,7 +6,7 @@
     <table class="table table-striped table-hover" st-table="account.employeeRels" st-safe-src="stEmployeeRelsSafe" st-filterable>
       <thead>
         <tr>
-          <th class="text-center"><a href="#" tooltip="{{'action.toggleFilters' | translate}}" ng-click="toggleFilters()"><i class="fa fa-filter"></i></a></th>
+          <th class="text-center"><a href="#" uib-tooltip="{{'action.toggleFilters' | translate}}" ng-click="toggleFilters()"><i class="fa fa-filter"></i></a></th>
           <th st-sort="type" st-skip-natural="true" >{{'relationship.type' | translate}}</th>
           <th st-sort="employeeFullname" st-skip-natural="true" >{{'employee.one' | translate}}</th>
         </tr>
@@ -20,8 +20,8 @@
         <tr ng-repeat="rel in account.employeeRels | filter:search:strict">
           <td width="60px" class="text-center">
             <span ng-if="editMode">
-              <a href ng-click="editRelationship(rel)" tooltip="{{'action.edit' | translate}}"><i class="fa fa-edit"></i></a>&nbsp;
-              <a href ng-click="deleteRelationship(rel)" tooltip="{{'action.delete' | translate}}"><i class="fa fa-trash-o"></i></a>
+              <a href ng-click="editRelationship(rel)" uib-tooltip="{{'action.edit' | translate}}"><i class="fa fa-edit"></i></a>&nbsp;
+              <a href ng-click="deleteRelationship(rel)" uib-tooltip="{{'action.delete' | translate}}"><i class="fa fa-trash-o"></i></a>
             </span>
           </td>
           <td width="130px">{{'employee.relationship.type.' + rel.type | translate}}</td>

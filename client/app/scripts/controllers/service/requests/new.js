@@ -8,7 +8,7 @@
  * Controller of the openbusApp
  */
 angular.module('openbusApp')
-  .controller('ServiceRequestsNewCtrl', function ($scope, $rootScope, $location, $translate, Account, Employee, Units, ServiceRequest, $modal, Notification) {
+  .controller('ServiceRequestsNewCtrl', function ($scope, $rootScope, $location, $translate, Account, Employee, Units, ServiceRequest, $uibModal, Notification) {
     
     var accountId = $location.search().account;
     $scope.request = { };
@@ -85,7 +85,7 @@ angular.module('openbusApp')
     };
     
     $scope.openAccountSearchModal = function() {
-      var modal = $modal.open({
+      var modal = $uibModal.open({
         templateUrl: 'accountSearchModal.html',
         controller: 'AccountSearchModalCtrl',
       });
@@ -98,7 +98,7 @@ angular.module('openbusApp')
     };
     
     $scope.openEmployeeSearchModal = function() {
-      var modal = $modal.open({
+      var modal = $uibModal.open({
         templateUrl: 'employeeSearchModal.html',
         controller: 'EmployeeSearchModalCtrl',
       });

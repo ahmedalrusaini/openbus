@@ -4,7 +4,7 @@
       <table class="table table-striped table-hover" st-table="accountRels" st-safe-src="stAccountRelsSafe" st-filterable>
         <thead>
           <tr>
-            <th class="text-center"><a href="#" tooltip="{{'messages.general.showHideFilters' | translate}}" ng-click="toggleFilters()"><i class="fa fa-filter"></i></a></th>
+            <th class="text-center"><a href="#" uib-tooltip="{{'messages.general.showHideFilters' | translate}}" ng-click="toggleFilters()"><i class="fa fa-filter"></i></a></th>
             <th st-sort="type" st-skip-natural="true" >{{'relationship.type' | translate}}</th>
             <th st-sort="account.name" st-skip-natural="true" st-sort-default="name">{{'account.name' | translate}}</th>
           </tr>
@@ -17,12 +17,12 @@
         <tbody>
           <tr ng-repeat="rel in accountRels | filter:search:strict">
             <td width="80px" class="text-center">
-              <a ng-href="/accounts/{{rel.account._id}}" tooltip="{{'action.display' | translate}}"><i class="fa fa-search"></i></a>
+              <a ng-href="/accounts/{{rel.account._id}}" uib-tooltip="{{'action.display' | translate}}"><i class="fa fa-search"></i></a>
               &nbsp;
               <span ng-if="editMode">
-                <a ng-href="/accounts/{{rel.account.id}}/edit" tooltip="{{'action.edit' | translate}}"><i class="fa fa-edit"></i></a>
+                <a ng-href="/accounts/{{rel.account.id}}/edit" uib-tooltip="{{'action.edit' | translate}}"><i class="fa fa-edit"></i></a>
                 &nbsp;
-                <a href="#" ng-click="deleteAccountRel(rel)" tooltip="{{'action.delete' | translate}}"><i class="fa fa-trash-o"></i></a>
+                <a href="#" ng-click="deleteAccountRel(rel)" uib-tooltip="{{'action.delete' | translate}}"><i class="fa fa-trash-o"></i></a>
               </span>
             </td>
             <td>{{'employee.relationship.type.' + rel.type | translate}}</td>

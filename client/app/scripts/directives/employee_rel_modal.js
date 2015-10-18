@@ -13,7 +13,7 @@ angular.module('openbusApp')
       restrict: 'E'
     };
   })
-  .controller("EmployeeRelModalCtrl", function($scope, relationship, editMode, $modal, $modalInstance, Employee) {
+  .controller("EmployeeRelModalCtrl", function($scope, relationship, editMode, $uibModal, $modalInstance, Employee) {
     $scope.editMode = editMode;
     $scope.relationship = relationship;
     // $scope.employeeRelTypes = [{id:"responsible", name:"Responsible"}, {id:"salesrep", name:"Sales Rep."}];
@@ -37,7 +37,7 @@ angular.module('openbusApp')
     };
    
     $scope.openEmployeeSearchModal = function() {
-      var modal = $modal.open({
+      var modal = $uibModal.open({
         templateUrl: 'employeeSearchModal.html',
         controller: 'EmployeeSearchModalCtrl'
       });

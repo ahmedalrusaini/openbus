@@ -13,7 +13,7 @@ angular.module('openbusApp')
       restrict: 'E'
     };
   })
-  .controller("AddressModalCtrl", function($scope, $modalInstance, address, editMode, $modal){
+  .controller("AddressModalCtrl", function($scope, $modalInstance, address, editMode, $uibModal){
     
     var formatAddressText = function() {
       $scope.addressModal.text = $scope.addressModal.street || "";
@@ -50,7 +50,7 @@ angular.module('openbusApp')
     };
     
     $scope.openCountriesModal = function(selectedCountry, addressForm) {
-      var modal = $modal.open({
+      var modal = $uibModal.open({
         templateUrl: 'countriesModal.html',
         controller: 'CountriesModalCtrl',
         resolve: {

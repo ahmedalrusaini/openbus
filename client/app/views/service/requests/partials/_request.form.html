@@ -39,7 +39,20 @@
           <div ng-messages="requestForm.employeeId.$error" ng-show="requestForm.employeeId.$invalid" class="help-block">
             <div ng-message="required">{{'messages.general.errors.required' | translate}}</div>
           </div>
-        </div>        
+        </div>  
+        <!-- Status -->
+        <div class="form-group" ng-class="{ 'has-error': requestForm.status.$invalid }">
+          <label class="control-label" for="status">{{'service.request.status' | translate}}</label>
+          <ui-select name="status" id="status" ng-model="request.status" required>
+            <ui-select-match allow-clear="false">{{$select.selected.name | translate}}</ui-select-match>
+            <ui-select-choices repeat="value.id as value in statuses | filter: $select.search">
+              <div ng-bind-html="value.name | translate | highlight: $select.search"></div>
+            </ui-select-choices>
+          </ui-select>
+          <div ng-messages="requestForm.status.$error" ng-show="requestForm.status.$invalid" class="help-block">
+            <div ng-message="required">{{'messages.general.errors.required' | translate}}</div>
+          </div>
+        </div>      
       </panel-body>
     </panel>
   </div>
@@ -48,26 +61,23 @@
       <panel-heading title="Date and Time"></panel-heading>
       <panel-body>
          <div class="row">
+           <!-- Start Date -->
            <div class="form-group col-sm-6" ng-class="{ 'has-error': requestForm.startDate.$invalid }">
-             <label class="control-label" for="birthdate">{{'service.request.startEndDate' | translate}}</label>
-             <div class="dropdown">
-               <a class="dropdown-toggle" id="dropdown1" role="button" data-toggle="dropdown" data-target="#" href="#">
-                 <input type="hidden" id="startDate" name="startDate" class="form-control" ng-model="request.startDate" required/>
-                 <div class="input-group">
-                   <input value="{{request.startDate | date:'dd/MM/yyyy'}}" class="form-control"/>
-                   <span class="input-group-btn">
-                     <span class="btn btn-default"><i class="fa fa-calendar"></i></span>
-                   </span>
-                 </div>
-               </a>
-               <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                 <datetimepicker 
-                   data-ng-model="request.startDate" 
-                   data-datetimepicker-config="{ dropdownSelector: '#dropdown1', startView:'day', minView:'day' }"></datetimepicker>
-               </ul>
-               <div ng-messages="requestForm.startDate.$error" ng-show="requestForm.startDate.$invalid" class="help-block">
-                 <div ng-message="required">{{'messages.general.errors.required' | translate}}</div>
-               </div>
+             <label class="control-label" for="startDate">{{'service.request.startEndDate' | translate}}</label>
+             <div class="input-group" ng-controller="CommonDatepickerCtrl" ng-init="init(request.startDate)">
+               <input type="text" id="startDate" name="startDate" class="form-control" ng-model="request.startDate" ng-required="true" 
+                 ng-readonly="isStartDateReadonly()"
+                 uib-datepicker-popup="{{format}}" is-open="status.opened" 
+                 datepicker-append-to-body="true" show-button-bar="true"
+                 datepicker-popup-template-url="/views/directives/datepicker/popup.html"
+                 datepicker-template-url="/views/directives/datepicker/datepicker.html"/>
+               <span class="input-group-btn">
+                 <button type="button" class="btn btn-default" ng-click="openDatepicker($event)" ng-disabled="isStartDateReadonly()"><i class="fa fa-calendar"></i></button>
+               </span>
+             </div>
+             <div ng-messages="requestForm.startDate.$error" ng-show="requestForm.startDate.$invalid" class="help-block">
+               <div ng-message="required">{{'messages.general.errors.required' | translate}}</div>
+               <div ng-message="date">Invalid date</div>
              </div>
            </div>
            <div class="form-group col-sm-6" ng-class="{ 'has-error': requestForm.endDate.$invalid }">

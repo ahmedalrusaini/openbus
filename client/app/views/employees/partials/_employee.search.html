@@ -23,8 +23,8 @@
       <div class="form-group">
         <div class="col-sm-11">
           <div class="text-right">
-            <button type="submit" class="btn btn-default" ng-click="search()" tooltip="{{'action.search' | translate}}"><i class="fa fa-search"></i></button>
-            <button class="btn btn-default" ng-click="clearForm()" tooltip="{{'action.clear' | translate}}"><i class="fa fa-remove"></i></button>
+            <button type="submit" class="btn btn-default" ng-click="search()" uib-tooltip="{{'action.search' | translate}}"><i class="fa fa-search"></i></button>
+            <button class="btn btn-default" ng-click="clearForm()" uib-tooltip="{{'action.clear' | translate}}"><i class="fa fa-remove"></i></button>
           </div>
         </div>
       </div>
@@ -37,7 +37,7 @@
     <table class="table table-striped table-hover" st-table="employees" st-safe-src="stSafeEmployees" st-filterable>
       <thead>
         <tr>
-          <th class="text-center"><a href="#" tooltip="{{'action.toggleFilters' | translate}}" ng-click="toggleFilters()"><i class="fa fa-filter"></i></a></th>
+          <th class="text-center"><a href="#" uib-tooltip="{{'action.toggleFilters' | translate}}" ng-click="toggleFilters()"><i class="fa fa-filter"></i></a></th>
           <th st-sort="'firstname'" st-skip-natural="true" >{{'employee.firstname' | translate}}</th>
           <th st-sort="'lastname'" st-skip-natural="true" st-sort-default="lastname">{{'employee.lastname' | translate}}</th>
           <th>{{'address.street' | translate}}</th>
@@ -54,11 +54,11 @@
       <tbody>
         <tr ng-repeat="employee in employees">
           <td width="80px">
-            <a ng-href="/employees/{{employee._id}}" tooltip="{{'action.display' | translate}}"><i class="fa fa-search"></i></a>
+            <a ng-href="/employees/{{employee._id}}" uib-tooltip="{{'action.display' | translate}}"><i class="fa fa-search"></i></a>
             &nbsp;
-            <a ng-href="/employees/{{employee.id}}/edit" tooltip="{{'action.edit' | translate}}"><i class="fa fa-edit"></i></a>
+            <a ng-href="/employees/{{employee.id}}/edit" uib-tooltip="{{'action.edit' | translate}}"><i class="fa fa-edit"></i></a>
             &nbsp;
-            <a href="#" ng-click="delete(employee)" tooltip="{{'action.delete' | translate}}"><i class="fa fa-trash-o"></i></a>
+            <a href="#" ng-click="delete(employee)" uib-tooltip="{{'action.delete' | translate}}"><i class="fa fa-trash-o"></i></a>
           </td>
           <td>{{employee.firstname}}</td>
           <td>{{employee.lastname}}</td>

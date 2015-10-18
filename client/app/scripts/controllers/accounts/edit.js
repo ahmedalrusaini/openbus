@@ -8,7 +8,7 @@
  * Controller of the openbusApp
  */
 angular.module('openbusApp')
-  .controller('AccountsEditCtrl', function ($scope, $rootScope, $routeParams, $location, $translate, Account, $modal, Notification, ServiceRequest, Employee) {    
+  .controller('AccountsEditCtrl', function ($scope, $rootScope, $routeParams, $location, $translate, Account, $uibModal, Notification, ServiceRequest, Employee) {    
     $scope.editMode = true;
     $scope.i18n = i18n;
         
@@ -127,7 +127,7 @@ angular.module('openbusApp')
   
     $scope.openAddressModal = function(selectedAddress) {
       var isNew = !selectedAddress;
-      var modal = $modal.open({
+      var modal = $uibModal.open({
         templateUrl: 'addressModal.html',
         controller: 'AddressModalCtrl',
         // size: 'lg',
@@ -176,7 +176,7 @@ angular.module('openbusApp')
     $scope.openRelationshipModal = function(selectedRel) {
       var isNew = !selectedRel;
 
-      var modal = $modal.open({
+      var modal = $uibModal.open({
         templateUrl: 'employeeRespModal.html',
         controller: 'EmployeeRelModalCtrl',
         resolve: {

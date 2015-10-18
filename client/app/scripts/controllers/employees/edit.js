@@ -8,7 +8,7 @@
  * Controller of the openbusApp
  */
 angular.module('openbusApp')
-  .controller('EmployeesEditCtrl', function ($scope, $location, $translate, $routeParams, Employee, Account, $modal, Notification) {
+  .controller('EmployeesEditCtrl', function ($scope, $location, $translate, $routeParams, Employee, Account, $uibModal, Notification) {
     $scope.editMode = true;
     $scope.countries = i18n.countries;
     
@@ -37,7 +37,7 @@ angular.module('openbusApp')
     });
     
     $scope.openCountriesModal = function(selectedCountry, employeeForm) {
-      var modal = $modal.open({
+      var modal = $uibModal.open({
         templateUrl: 'countriesModal.html',
         controller: 'CountriesModalCtrl',
         resolve: {

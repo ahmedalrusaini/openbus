@@ -71,8 +71,8 @@
       <div class="form-group">
         <div class="col-sm-11">
           <div class="text-right">
-            <button type="submit" class="btn btn-default" ng-click="searchRequests()" tooltip="{{'action.search' | translate}}"><i class="fa fa-search"></i></button>
-            <button class="btn btn-default" ng-click="clearForm()" tooltip="{{'action.clear' | translate}}"><i class="fa fa-remove"></i></button>
+            <button type="submit" class="btn btn-default" ng-click="searchRequests()" uib-tooltip="{{'action.search' | translate}}"><i class="fa fa-search"></i></button>
+            <button class="btn btn-default" ng-click="clearForm()" uib-tooltip="{{'action.clear' | translate}}"><i class="fa fa-remove"></i></button>
           </div>
         </div>
       </div>
@@ -85,7 +85,7 @@
     <table class="table table-striped table-hover" st-table="requests" st-safe-src="stSafeRequests" st-filterable>
       <thead>
         <tr>
-          <th class="text-center"><a href="#" tooltip="{{'action.toggleFilters' | translate}}" ng-click="toggleFilters()"><i class="fa fa-filter"></i></a></th>
+          <th class="text-center"><a href="#" uib-tooltip="{{'action.toggleFilters' | translate}}" ng-click="toggleFilters()"><i class="fa fa-filter"></i></a></th>
           <th st-sort="startDate" st-skip-natural="true" st-sort-default="reverse">{{'service.request.startDate' | translate}}</th>
           <th st-sort="accountName" st-skip-natural="true" >{{'service.request.account' | translate}}</th>
           <th st-sort="description" st-skip-natural="true">{{'service.request.description' | translate}}</th>

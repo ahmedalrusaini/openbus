@@ -22,9 +22,10 @@ module.exports = function(app) {
   app.use('/api/account/types', require('./api/account/types'));
   
   app.use('/api/service/requests', require('./api/service/request'));
+  app.use('/api/service/reqstat', require('./api/service/request/statuses'));
 
   app.use('/api/units/time', require('./api/unit/time'));
-
+  
   app.use('/auth', require('./auth'));
   
   // All undefined asset or api routes should return a 404

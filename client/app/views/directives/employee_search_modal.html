@@ -7,7 +7,7 @@
     <table class="table table-striped table-hover" st-table="employees">
       <thead>
         <tr>
-          <th class="text-center"><a href="#" tooltip="{{'action.toggleFilters' | translate}}" ng-click="toggleInlineFilters()"><i class="fa fa-filter"></i></a></th>
+          <th class="text-center"><a href="#" uib-tooltip="{{'action.toggleFilters' | translate}}" ng-click="toggleInlineFilters()"><i class="fa fa-filter"></i></a></th>
           <th st-sort="firstname" st-skip-natural="true" >{{'employee.firstname' | translate}}</th>
           <th st-sort="lastname" st-skip-natural="true" st-sort-default="lastname">{{'employee.lastname' | translate}}</th>
         </tr>

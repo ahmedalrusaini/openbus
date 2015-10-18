@@ -8,9 +8,13 @@
              <i class="fa fa-edit"></i> {{'action.edit' | translate}}
           </a>
         </div>
+        <button class="btn btn-default" ng-click="openFollowupModal()">
+          <i class="fa fa-ellipsis-v"></i> {{'action.followup' | translate}}
+          <followup-modal></followup-modal>
+        </button>        
       </page-header>
       
       <ng-include src="'views/service/requests/partials/_request.show.html'"></ng-include>  
-    </div>
+    </div> 
   </sb-item>  
 </sidebar>

@@ -1,4 +1,5 @@
 <div class="row">
+  <!-- Details -->
   <div class="col-sm-6">
     <panel page-header="true" closable="false">
       <panel-heading title="{{'common.details' | translate}}"></panel-heading>
@@ -23,7 +24,13 @@
             <span class="pull-left">{{request.employee.fullname}}</span>
           </div>
         </div>
-
+        <!-- Status -->
+        <div class="form-group">
+          <label class="col-sm-3 control-label">{{'service.request.status' | translate}}</label>
+          <div class="col-sm-6 control-label">
+            <span class="pull-left">{{request.statusname}}</span>
+          </div>
+        </div>
       </panel-body>
     </panel>
   </div>

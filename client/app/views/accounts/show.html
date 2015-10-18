@@ -3,25 +3,11 @@
     <a class="btn btn-default" href="/accounts/{{account.id}}/edit">
        <i class="fa fa-edit"></i> {{'action.edit' | translate}}
     </a>
-    <button class="btn btn-default" data-toggle="modal" data-target="#followupModal">
-      <i class="fa fa-ellipsis-h"></i> {{'action.followup' | translate}}
+    <button class="btn btn-default" ng-click="openFollowupModal()">
+      <i class="fa fa-ellipsis-v"></i> {{'action.followup' | translate}}
     </button>
+    <followup-modal></followup-modal>
   </div>
-  <!-- <div class="btn-group" dropdown>
-    <button type="button" class="btn btn-default"><i class="fa fa-remove"></i> aaa</button>
-    <button type="button" class="btn btn-default"><i class="fa fa-remove"></i> Cancel</button>
-    <button type="button" class="btn btn-default dropdown-toggle" dropdown-toggle>
-      <span class="fa fa-ellipsis-v"></span>
-      <span class="sr-only">More</span>
-    </button>
-    <ul class="dropdown-menu dropdown-menu-right" role="menu">
-      <li><a href="#">Action</a></li>
-      <li><a href="#">Another action</a></li>
-      <li><a href="#">Something else here</a></li>
-      <li class="divider"></li>
-      <li><a href="#">Separated link</a></li>
-    </ul>
-  </div> -->
 </page-header>
 
 <sidebar>
@@ -46,5 +32,3 @@
     <ng-include src="'views/accounts/partials/_account.service.requests.html'"></ng-include>
   </sb-item>
 </sidebar>
-
-<ng-include src="'views/accounts/partials/_followup.modal.html'"></ng-include>

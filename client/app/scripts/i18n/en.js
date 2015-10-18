@@ -280,7 +280,8 @@ var en = {
       actualEndDate: "Actual End At",
       description: "Description",
       estimatedTime: "Estimated Time",
-      employee: "Technician"
+      employee: "Technician",
+      status: "Status"
     }
   }
 };

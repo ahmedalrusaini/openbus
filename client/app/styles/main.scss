@@ -933,8 +933,11 @@ ul.dropdown-menu {
   transition: $default-transition;
 }
 
-
-
+.datepicker {
+  button {
+    border: none;
+  }
+}
 
 /** 
  * Widgets (TODO)

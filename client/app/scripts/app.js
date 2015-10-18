@@ -19,7 +19,6 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'ui.bootstrap.datetimepicker',
     'pascalprecht.translate',
     'ui.select',
     'smart-table',

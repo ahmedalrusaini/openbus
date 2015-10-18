@@ -8,7 +8,7 @@
  * Controller of the openbusApp
  */
 angular.module('openbusApp')
-.controller('AccountsNewCtrl', function ($scope, $location, Account, $translate, $modal, Notification) {
+.controller('AccountsNewCtrl', function ($scope, $location, Account, $translate, $uibModal, Notification) {
   $scope.account = { addresses: [] };
   $scope.editMode = true;
   
@@ -55,7 +55,7 @@ angular.module('openbusApp')
   $scope.openAddressModal = function(selectedAddress) {
     var isNew = !selectedAddress;
     
-    var modal = $modal.open({
+    var modal = $uibModal.open({
       templateUrl: 'addressModal.html',
       controller: 'AddressModalCtrl',
       size: 'lg',

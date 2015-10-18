@@ -8,7 +8,7 @@
  * Controller of the openbusApp
  */
 angular.module('openbusApp')
-  .controller('ServiceRequestsIndexCtrl', function ($scope, $cookieStore, $location, $translate, ServiceRequest,  Account, $modal, Notification) {
+  .controller('ServiceRequestsIndexCtrl', function ($scope, $cookieStore, $location, $translate, ServiceRequest,  Account, $uibModal, Notification) {
     
     $scope.dateOperators = [
       { id: 'eq', name: 'operator.eq.short'}, 
@@ -80,7 +80,7 @@ angular.module('openbusApp')
     };
     
     $scope.openAccountSearchModal = function() {
-      var modal = $modal.open({
+      var modal = $uibModal.open({
         templateUrl: 'accountSearchModal.html',
         controller: 'AccountSearchModalCtrl',
       });

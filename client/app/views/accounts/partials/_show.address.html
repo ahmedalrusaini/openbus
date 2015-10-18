@@ -6,7 +6,7 @@
     <table class="table table-hover table-striped" st-table="displayedAddresses" st-safe-src="account.addresses" st-filterable>
       <thead>
         <tr>
-          <th width="60px" class="text-center"><a href="#" tooltip="{{'action.toggleFilters' | translate}}" ng-click="toggleFilters()"><i class="fa fa-filter"></i></a></th>
+          <th width="60px" class="text-center"><a href="#" uib-tooltip="{{'action.toggleFilters' | translate}}" ng-click="toggleFilters()"><i class="fa fa-filter"></i></a></th>
           <th st-sort="street" st-skip-natural="true" >{{'address.street' | translate}}</th>
           <th st-sort="city" st-skip-natural="true" st-sort-default="description">{{'address.city' | translate}}</th>
           <th st-sort="country" st-skip-natural="true" st-sort-default="description">{{'address.country' | translate}}</th>
@@ -23,10 +23,10 @@
       <tbody>
         <tr ng-repeat="address in displayedAddresses">
           <td width="60px" class="text-center">
-            <a ng-hide="editMode" href="#" id="show" ng-click="selectAddress(address)" tooltip="{{'action.show' | translate}}"><i class="fa fa-search"></i></a>
-            <a ng-show="editMode" href="#" id="edit" ng-click="selectAddress(address)" tooltip="{{'action.edit' | translate}}"><i class="fa fa-edit"></i></a>
+            <a ng-hide="editMode" href="#" id="show" ng-click="selectAddress(address)" uib-tooltip="{{'action.show' | translate}}"><i class="fa fa-search"></i></a>
+            <a ng-show="editMode" href="#" id="edit" ng-click="selectAddress(address)" uib-tooltip="{{'action.edit' | translate}}"><i class="fa fa-edit"></i></a>
             &nbsp;
-            <a ng-show="editMode" href="#" id="delete" ng-click="deleteAddress(address)" tooltip="{{'action.delete' | translate}}"><i class="fa fa-trash-o"></i></a>
+            <a ng-show="editMode" href="#" id="delete" ng-click="deleteAddress(address)" uib-tooltip="{{'action.delete' | translate}}"><i class="fa fa-trash-o"></i></a>
           </td>
           <td>{{address.street}} {{address.houseNo}}</td>
           <td>{{address.city}}</td>

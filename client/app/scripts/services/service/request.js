@@ -13,6 +13,7 @@ angular.module('openbusApp')
       api: $resource('/api/service/requests/:id', { id: '@_id' }, {
         update: { method: 'PUT' },
         count: { method: 'GET', params: { _count: true } }
-      })
+      }),
+      Statuses: $resource('/api/service/reqstat')
     }
   });
