@@ -31,25 +31,25 @@ angular.module('openbusApp')
       $scope.estTimeUnits = units;
     });
     
-    $scope.$watch("request.estimatedTime", function(newValue, oldValue) {
+    $scope.$watch("confirmation.timeSpent", function(newValue, oldValue) {
       setEndDate();
     });
     
-    $scope.$watch("request.estimatedTimeUnit", function(newValue, oldValue) {
+    $scope.$watch("confirmation.timeSpentUnit", function(newValue, oldValue) {
       setEndDate();
     });
     
-    $scope.$watch("request.startDate", function(newValue, oldValue) {
+    $scope.$watch("confirmation.endDate", function(newValue, oldValue) {
       setEndDate();
     });
-    
+      
     var setEndDate = function() {
-      if (!$scope.request.startDate || !$scope.request.estimatedTime || !$scope.request.estimatedTimeUnit) {
-        $scope.request.endDate = "";
+      if (!$scope.confirmation.timeSpent || !$scope.confirmation.timeSpentUnit) {
+        $scope.confirmation.endDate = "";
         return;
       }
       
-      $scope.request.endDate = moment($scope.request.startDate).add($scope.request.estimatedTime, $scope.request.estimatedTimeUnit).toDate();
+      $scope.confirmation.endDate = moment($scope.confirmation.startDate).add($scope.confirmation.timSpent, $scope.confirmation.timeSpentUnit).toDate();
     };
     
     $scope.isSaveDisabled = function (form) {

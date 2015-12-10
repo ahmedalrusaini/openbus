@@ -1,0 +1,190 @@
+#sidebar-wrapper {
+  background: $sidebar-bg;
+  margin-left: -150px;
+  left: -29px;
+  width: $sidebar-width;
+  position: fixed;
+  height: 100%;
+  z-index: 999;
+  border-right: 1px solid $page-row-header-border-color;
+  
+  ul.sidebar {
+    position: absolute;
+    top: $page-row-header-height; //50px;
+    bottom: 100px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    text-indent: 20px;
+    overflow-x: hidden;
+    overflow-y: auto;
+  
+    font-weight: 500;
+  
+    li {
+      a {
+        @include ellipsis-overflow;
+        color: $sidebar-list-item-color;
+        display: block;
+        float: left;
+        text-decoration: none;
+        width: $sidebar-width - 1px;
+      }
+    }
+
+    .sidebar-title {
+      color: $sidebar-list-title-color;
+      height: 35px;
+      line-height: 40px;
+      text-transform: uppercase;
+      transition: all .6s ease 0s;
+      border-bottom: 1px solid $page-row-header-border-color;
+    }
+  
+    .sidebar-list {
+      height: $sidebar-list-item-height;
+      //border-bottom: 1px solid $page-row-header-border-color;
+    
+      &:last-child {
+        border-bottom: none;
+      
+        //&.active {
+//          border-bottom: 1px solid $page-row-header-border-color;
+//        }
+      }
+    
+      &.active {
+//        border-bottom: 1px solid $page-row-header-border-color;
+//        border-top: 1px solid $page-row-header-border-color;
+      
+      border-left: 5px solid $sidebar-list-item-active-color;
+      
+        a {
+          text-indent: 20px;
+          color: $sidebar-list-item-active-color;
+          width: $sidebar-width - 6px;
+          
+          &:hover {
+            text-indent: 20px;
+            //border: none;
+            color: $sidebar-list-item-active-color;
+          }
+
+         .menu-icon {
+           text-indent: 25px;
+         }
+        }
+      }
+    
+      a {
+        text-indent: 25px;
+//        font-size: 1.1em;
+        color: $sidebar-list-item-color;
+        line-height: $sidebar-list-item-height;
+        margin: 0;
+
+        i {
+          transition: border .4s ease 0s;
+        }
+
+        &:hover {
+          color: $sidebar-list-item-hover-color;
+          text-indent: 25px;
+
+          i {
+            transition: none;
+          }
+        }
+      }
+    
+      .menu-icon {
+        float: right;
+        padding-right: 29px;
+        line-height: $sidebar-list-item-height;
+        width: $sidebar-width-closed;
+        text-indent: 25px;
+      }
+    }
+  
+    .sidebar-main {
+      position: fixed;
+      top: 50px;
+//      border-bottom: 1px solid $page-row-header-border-color;
+      border-right: none;
+      font-size: 1.1em;
+      
+      a {
+        background: $sidebar-main-bg;
+        line-height: $page-row-header-height;
+//        height: $sidebar-list-item-height;
+        text-indent: 25px;
+        width: $sidebar-width - 1px;
+        float: left;
+        
+        .heading {
+          @include ellipsis-overflow;
+          color: $sidebar-main-color;
+          max-width: $sidebar-width - $sidebar-width-closed;
+        }
+        
+//        &:after {
+//          content: "";
+//          border-top: $page-row-header-height / 2 solid $page-row-header-bg;
+//          border-bottom: $page-row-header-height / 2 solid $page-row-header-bg;
+//          border-left: 15px solid $sidebar-main-bg;
+//          position: absolute;
+//          right: 0;
+//          top: 0;
+//        }
+//
+//        &:hover {
+//          cursor: pointer;
+//          background: $sidebar-main-hover-bg;
+//          transition: $longer-ease-transition;
+//          color: $sidebar-main-hover-color;
+//
+//          &:after {
+//            transition: $longer-ease-transition;
+//            border-top: $page-row-header-height / 2 solid $page-row-header-bg;
+//            border-bottom:$page-row-header-height / 2 solid $page-row-header-bg;
+//            border-left: 15px solid $sidebar-main-hover-bg;
+//          }
+//        }
+      
+        .menu-icon {
+          float: right; 
+          padding-right: 29px;
+          line-height: $page-row-header-height;
+          font-size: 0.8em;
+        }
+      }
+    }
+  }
+  
+  .sidebar-footer {
+    background: $page-row-header-bg;
+    position: absolute;
+    height: 40px;
+    bottom: 50px;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    transition: all .6s ease 0s;
+    text-align: center;
+    border-top: 1px solid $page-row-header-border-color;
+  
+    div {
+      a {
+        color: $sidebar-footer-link-color;
+        font-size: 12px;
+        line-height: 43px;
+      
+        &:hover {
+          color: $sidebar-footer-link-hover-color; 
+          text-decoration: none;
+        }
+      }
+    }
+  }
+  
+}

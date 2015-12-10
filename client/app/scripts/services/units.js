@@ -11,7 +11,7 @@ angular.module('openbusApp')
   .service('Units', function ($resource) {
     return {
       api: {
-        time: $resource('/api/units/time')
+        time: $resource('/api/units/time', {id: '@id'})
       }
     }
   });

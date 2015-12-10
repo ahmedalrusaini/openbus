@@ -33,7 +33,7 @@ angular.module('openbusApp')
     ServiceRequest.api.get({id: $routeParams.id}).$promise.then(function(request) {
       $scope.request = request;
       
-      $scope.request.startDate = moment(request.startDate).format("DD/MM/YYYY")
+      $scope.request.startDate = moment(request.startDate).toDate(); 
       
       if(request.account && request.account.id) {
         getAccount(request.account.id);

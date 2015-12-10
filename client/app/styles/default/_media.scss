@@ -1,0 +1,35 @@
+@media only screen and (min-width: 561px) {
+  #page-wrapper.open {
+    padding-left: $sidebar-width;
+  }
+}
+
+@media only screen and (max-width: 560px) {
+  .page-row-header {
+    left: $sidebar-width-closed;
+  }
+  
+  #page-wrapper {
+    &:not(.open) {
+      .page-content {
+        &.no-sidebar {
+          margin-left: 0px;
+        }
+      }
+    }
+    
+    &.open {
+      padding-left: $sidebar-width-closed;
+    
+      .page-row-header {
+        left: $sidebar-width;
+      }
+    
+      .page-content {
+        &.no-sidebar {
+          margin-left: $sidebar-width - 15px;
+        }
+      }
+    }
+  }
+}

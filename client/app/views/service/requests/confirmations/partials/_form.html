@@ -1,0 +1,75 @@
+<div id="confirmationContainer" ng-class="{'qv-open' : isQuickViewOpen()}">
+  <div id="confirmation">
+      <panel page-header="true" closable="false">
+        <panel-heading title="{{'common.details' | translate}}">
+          <!-- <div class="btn-group">
+            <label class="btn btn-default" ng-model="srInfo.currentTab" ng-init="srInfo.currentTab='details'" uib-btn-radio="'details'">{{'common.details' | translate}}</label>
+            <label class="btn btn-default" ng-model="srInfo.currentTab" uib-btn-radio="'dateTime'">Date and Time</label>
+          </div> -->
+        </panel-heading>
+        <panel-body>
+            <!-- Technician -->
+            <div class="row form-group">
+              <div class="col-sm-6">
+                <label class="control-label" for="employeeId">{{'service.request.employee' | translate}}</label>
+                <input type="text" class="form-control" ng-model="confirmation.employee.fullname" readonly/>
+              </div>
+              <div class="col-sm-6">
+                <label class="control-label" for="employeeId">{{'service.request.one' | translate}}</label>
+                <div class="input-group">
+                  <input type="text" class="form-control" ng-model="confirmation.request.description" readonly/>
+                  <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="toggleQuickView()"><i class="fa" ng-class="{'fa-arrow-right': !isQuickViewOpen(), 'fa-arrow-left': isQuickViewOpen()}"></i></button>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <!-- Start Date -->
+              <div class="form-group col-sm-3" ng-class="{ 'has-error': requestConfirmationForm.startDate.$invalid }">
+                <label class="control-label" for="startDate">{{'service.request.confirmation.startDate' | translate}}</label>
+                <input type="text" id="startDate" name="startDate" class="form-control" required readonly ng-value="confirmation.request.startDate | date:'dd/MM/yyyy'"/>
+                <div ng-messages="requestConfirmationForm.startDate.$error" ng-show="requestConfirmationForm.startDate.$invalid" class="help-block">
+                  <div ng-message="required">{{'messages.general.errors.required' | translate}}</div>
+                  <div ng-message="date">{{'messages.general.errors.date' | translate}}</div>
+                </div>
+              </div>
+              <div class="form-group col-sm-3" ng-class="{ 'has-error': requestConfirmationForm.endDate.$invalid }">
+                <label class="control-label" for="endDate">{{'service.request.confirmation.endDate' | translate}}</label>
+                <div class="input-group" ng-controller="CommonDatepickerCtrl" ng-init="init(confirmation.endDate)">
+                  <input type="text" id="endDate" name="endDate" class="form-control" ng-model="confirmation.endDate" ng-required="true"
+                    uib-datepicker-popup="{{format}}" is-open="status.opened" 
+                    datepicker-append-to-body="true" show-button-bar="true"
+                    datepicker-popup-template-url="/views/directives/datepicker/popup.html"
+                    datepicker-template-url="/views/directives/datepicker/datepicker.html"/>
+                  <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="openDatepicker($event)"><i class="fa fa-calendar"></i></button>
+                  </span>
+                </div>          
+                <div ng-messages="requestConfirmationForm.endDate.$error" ng-show="requestConfirmationForm.endDate.$invalid" class="help-block">
+                  <div ng-message="required">{{'messages.general.errors.required' | translate}}</div>
+                  <div ng-message="date">{{'messages.general.errors.date' | translate}}</div>
+                </div>
+              </div>
+              <div class="col-sm-2 col-xs-2">
+                <label class="control-label" for="timeSpent">{{'service.request.confirmation.timeSpent' | translate}}</label>
+                <input id="timeSpent" name="timeSpent" type="number" class="form-control"new ng-model="confirmation.timeSpent" />
+              </div>
+              <div class="col-sm-2 col-xs-2">
+                <label class="control-label" for="estimateTime">&nbsp;</label>
+                <ui-select ng-model="confirmation.timeSpentUnit">
+                  <ui-select-match>{{$select.selected.name | translate}}</ui-select-match>
+                  <ui-select-choices repeat="value.id as value in timeUnits | filter: $select.search">
+                    <div ng-bind-html="value.name | translate | highlight: $select.search"></div>
+                  </ui-select-choices>
+                </ui-select>
+              </div>
+            </div>
+        </panel-body>
+      </panel>
+  </div>
+  
+  <div id="serviceRequestQuickView" ng-if="isQuickViewOpen()">
+    <ng-include src="'views/service/requests/confirmations/partials/_request.detail.html'"></ng-include>
+  </div>
+</div>

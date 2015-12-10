@@ -1,0 +1,16 @@
+<form name="requestConfirmationForm" novalidate class="form-horizontal">
+  <sidebar>
+    <sb-main heading="{{'service.request.confirmation.heading.show' | translate}}" icon="plus"></sb-main>
+    <sb-item heading="{{ 'common.details' | translate }}" icon="search">
+        <page-header heading="{{'service.request.confirmation.heading.show' | translate}}"
+                     subheading="{{'service.request.one' | translate}}: {{confirmation.request.description}} {{confirmation.request.startDate | date: 'dd/MM/yyyy'}} - {{confirmation.request.endDate | date: 'dd/MM/yyyy'}}">
+          <div class="btn-group" role="group" aria-label="...">
+            <button class="btn btn-default" type="submit">
+              <i class="fa fa-save"></i> {{'action.edit' | translate}}
+            </button>
+          </div>
+        </page-header>
+        <ng-include src="'views/service/requests/confirmations/partials/_show.html'"></ng-include>
+    </sb-item>
+  </sidebar>
+</form>

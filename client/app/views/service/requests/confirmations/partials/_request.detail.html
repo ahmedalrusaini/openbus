@@ -1,0 +1,54 @@
+<div class="quick-view-header">
+  <span>{{'service.request.one' | translate}}</span>
+  <!-- <i class="close fa fa-close" ng-click="toggleQuickView()"></i> -->
+  <button type="button" class="close" aria-label="Close" ng-click="toggleQuickView( )"><span aria-hidden="true">&times;</span></button>
+</div>
+<form class="form-horizontal">
+  <div class="row form-group">
+    <label class="col-sm-4 control-label">{{'service.request.description' | translate}}</label>
+    <div class="col-sm-8">
+      <span class="pull-left">{{confirmation.request.description}}</span>
+    </div>
+  </div>
+  <div class="row form-group">
+    <label class="col-sm-4 control-label">{{'service.request.account' | translate}}</label>
+    <div class="col-sm-8">
+      <span class="pull-left">{{confirmation.request.account.name}}</span>
+    </div>
+  </div>
+  <!-- Employee -->
+  <div class="row form-group">
+    <label class="col-sm-4 control-label">{{'service.request.employee' | translate}}</label>
+    <div>
+      <span class="col-sm-8 pull-left">{{confirmation.employee.fullname}}</span>
+    </div>
+  </div>
+  <!-- Status -->
+  <div class="row form-group">
+    <label class="col-sm-4 control-label">{{'service.request.status' | translate}}</label>
+    <div class="col-sm-8">
+      <span class="pull-left">{{confirmation.request.statusname}}</span>
+    </div>
+  </div>
+  <!-- Start date -->
+  <div class="row form-group">
+    <label class="col-sm-4 control-label">{{'service.request.startDate' | translate}}</label>
+    <div class="col-sm-8">
+      <span class="pull-left">{{confirmation.request.startDate | date:'dd/MM/yyyy'}}</span>
+    </div>
+  </div>
+  <!-- End date -->
+  <div class="row form-group">
+    <label class="col-sm-4 control-label">{{'service.request.endDate' | translate}}</label>
+    <div class="col-sm-8">
+      <span class="pull-left">{{confirmation.request.endDate | date:'dd/MM/yyyy'}}</span>
+    </div>
+  </div>
+  <!-- Estimated time -->
+  <div class="row form-group">
+    <label class="col-sm-4 control-label">{{'service.request.estimatedTime' | translate}}</label>
+    <div class="col-sm-8">
+      <span class="pull-left">{{confirmation.request.estimatedTime}} {{confirmation.request.estimatedTimeUnitName}}</span>
+    </div>
+  </div>
+</form>

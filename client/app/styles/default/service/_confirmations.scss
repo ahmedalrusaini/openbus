@@ -1,0 +1,54 @@
+$quick-view-width: 30%;
+
+#confirmationContainer {
+  //width: 100%;
+  
+  &.qv-open {
+    #confirmation {
+      width: 90% - $quick-view-width;
+    }
+    
+    #serviceRequestQuickView {
+      width: $quick-view-width;
+    } 
+  }
+}
+
+#confirmation {  
+  display: inline-block;
+  float: left;
+  width: 100%;
+  transition: width .4s ease 0s;
+}
+
+#serviceRequestQuickView {
+  display: hidden;
+  position: fixed;
+  bottom: 0;
+  top: $navbar-height;
+  right: 0;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: $sidebar-bg;
+  display: inline-block;
+  float: right;
+  transition: width .4s ease 0s; 
+  width: 0;
+  border: 1px solid $navbar-default-border;
+  z-index: 1000;
+}
+
+.quick-view-header {
+  @include ellipsis-overflow;
+  color: $sidebar-main-color;  
+  font-size: 1.1em;
+  line-height: $page-row-header-height; 
+  height: $page-row-header-height;
+  font-weight: 500;
+  
+  .close {
+    line-height: $page-row-header-height;
+    //font-size: 1em;
+    font-weight: normal;
+  }
+}

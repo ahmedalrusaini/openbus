@@ -1,0 +1,55 @@
+table {  
+  tr {
+    th {
+      .inline-table-filter {
+        font-weight: normal !important;
+        border: none;
+        padding-left: 0;
+        background-color: transparent;
+        border-radius: 0;
+        box-sizing: none !important;
+        box-shadow: none !important;
+        width: 100%;
+      }
+      &:hover {
+        background-color: $gray-lighter;
+      }
+      &.st-sort-descent:after {
+        @extend .fa;
+        content: "\00a0\00a0" + $fa-var-sort-amount-desc;
+      }
+      &.st-sort-ascent:after {
+        @extend .fa;
+        content: "\00a0\00a0" + $fa-var-sort-amount-asc;
+      }
+    }
+  
+    &.filters {
+      th {
+        &:hover {
+          background-color: inherit;
+        }
+      }
+    }
+
+    &.st-selected {
+      background-color: $selected-bg !important;
+      color: $component-active-color;
+    }
+    
+    td {
+      
+    }
+  }
+  
+  tfoot {
+    .pagination {
+      padding-top: 0px;
+      padding-bottom: 0px;
+      margin-top: 2px;
+      margin-bottom: 0px;
+      
+      font-size: $font-size-small;
+    }
+  }
+}

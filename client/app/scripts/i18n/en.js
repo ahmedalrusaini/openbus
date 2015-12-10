@@ -24,7 +24,8 @@ var en = {
     search: "Search",
     clear: "Clear",
     toggleFilters: 'Show/Hide filters',
-    close: "Close"
+    close: "Close",
+    sort: "Sort"
   },
   operator: {
     eq: {
@@ -159,7 +160,8 @@ var en = {
       showHideFilters: 'Filters',
       errors: {
         required: 'Required',
-        email: 'Not a valid email'
+        email: 'Not a valid email',
+        date: 'Not a valid date'
       }
     },
     user: {
@@ -219,6 +221,14 @@ var en = {
           updated: 'Service Request update failed',
           saved: 'Service Request save failed',
           deleted: 'Service Request deletion failed'
+        },
+        confirmation: {
+          success: {
+            created: 'Service Request Confirmation created successfully',
+            updated: 'Service Request Confirmation updated successfully',
+            saved: 'Service Request Confirmation saved successfully',
+            deleted: 'Service Request Confirmation deleted successfully'
+          }
         }
       }
     }
@@ -230,12 +240,6 @@ var en = {
       show: "Account",
       edit: "Edit Account"
     },
-    followups: {
-      modal: {
-        title: "Choose follow up action",
-        titleHead: "Available follow up"
-      }
-    },
     address: {
       modal: {
         title: "Address"
@@ -245,6 +249,12 @@ var en = {
     two: "Accounts",
     name: "Name",
     type: "Type"
+  },
+  followup: {
+    modal: {
+      title: "Choose follow up",
+      titleHead: "Description"
+    }
   },
   address: {
     one: "Address",
@@ -264,6 +274,23 @@ var en = {
   },
   service: {
     request: {
+      confirmation: {
+        heading: {
+          new: "Create Confirmation",
+          show: "Confirmation"
+        },
+        one: {
+          short: "Confirmation",
+          long: "Service Request Confirmation"
+        },
+        two: {
+          short: "Confirmations",
+          long: "Service Request Confirmations"
+        },
+        startDate: "Start Date",
+        endDate: "End Date",
+        timeSpent: "Time Spent"
+      },
       heading: {
         new:  "Create Service Request",
         index: "Service Requests",

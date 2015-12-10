@@ -27,4 +27,12 @@ angular.module('openbusApp')
       templateUrl: 'views/service/requests/show.html',
       controller: 'ServiceRequestsShowCtrl'
     })
+    .when('/service/requests/:id/confirmations/new', {
+      templateUrl: 'views/service/requests/confirmations/new.html',
+      controller: 'ServiceRequestsConfirmationsNewCtrl'
+    })
+    .when('/service/requests/:id/confirmations/:confirmationId', {
+      templateUrl: 'views/service/requests/confirmations/show.html',
+      controller: 'ServiceRequestsConfirmationsShowCtrl'
+    })
   });

@@ -5,16 +5,14 @@ var Schema = mongoose.Schema;
 var _ = require('lodash');
 var i18n = require('i18n');
 
-var ServiceRequestSchema = new Schema({
-  description: String,
+var ServiceRequestConfirmationSchema = new Schema({
   startDate: Date,
   endDate: Date,
   notes: String,
-  account: { id: Schema.Types.ObjectId },
   employee: { id: Schema.Types.ObjectId },
-  confirmation: { id: Schema.Types.ObjectId },
-  estimatedTime: Number,
-  estimatedTimeUnit: String,
+  request: { id: Schema.Types.ObjectId },
+  timeSpent: Number,
+  timeSpentUnit: String,
   createdAt: Date,
   updatedAt: Date,
   status: { type: String, default: 'open' }
@@ -24,13 +22,13 @@ var ServiceRequestSchema = new Schema({
   }
 });
 
-ServiceRequestSchema
+ServiceRequestConfirmationSchema
   .virtual('statusname')
   .get(function () {
     return i18n.__("status." + this.status);
   });
 
-ServiceRequestSchema.pre('save', function(next) {
+ServiceRequestConfirmationSchema.pre('save', function(next) {
   if(this.isNew) {
     this.createdAt = new Date();
   } else {
@@ -40,4 +38,4 @@ ServiceRequestSchema.pre('save', function(next) {
   next();
 });
 
-module.exports = mongoose.model('ServiceRequest', ServiceRequestSchema);
+module.exports = mongoose.model('ServiceRequestConfirmation', ServiceRequestConfirmationSchema);

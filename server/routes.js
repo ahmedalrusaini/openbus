@@ -22,6 +22,7 @@ module.exports = function(app) {
   app.use('/api/account/types', require('./api/account/types'));
   
   app.use('/api/service/requests', require('./api/service/request'));
+  app.use('/api/service/requests/:serviceRequestId/confirmations', require('./api/service/request/confirmation'));
   app.use('/api/service/reqstat', require('./api/service/request/statuses'));
 
   app.use('/api/units/time', require('./api/unit/time'));

@@ -1,0 +1,32 @@
+.no-padding {
+  padding: 0;
+}
+.user-avatar {
+  width: 40px; 
+  font-size: 20px;
+  border-radius: 20px;
+  text-align: center;
+  background-color: #23b7e5;
+  color: #fff;
+  padding: 5px;
+  margin-right: 10px;
+  display: inline-block;
+}
+.show-hide {
+  -webkit-transition:all linear 0.5s;
+  transition:all linear 0.5s;
+}
+.show-hide.ng-hide {
+  opacity:0;
+}
+.animate-show {
+  opacity: 1;
+  &.ng-hide {
+    opacity: 0;
+  }
+  &.ng-hide-add.ng-hide-add-active,
+  &.ng-hide-remove.ng-hide-remove-active {
+    -webkit-transition: all linear 0.5s;
+    transition: all linear 0.5s;
+  }
+}

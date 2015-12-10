@@ -1,0 +1,55 @@
+<div id="confirmationContainer" ng-class="{'qv-open' : isQuickViewOpen()}">
+  <div id="confirmation">
+    <panel page-header="true" closable="false">
+      <panel-heading title="{{'common.details' | translate}}"></panel-heading>
+      <panel-body>
+        <div class="row">
+          <div class="col-sm-6">
+            <!-- Technician -->
+            <div class="form-group">
+              <label class="col-sm-4 control-label" for="accountId">{{'service.request.employee' | translate}}</label>
+              <div class="col-sm-6 control-label">
+                <span class="pull-left">{{confirmation.employee.fullname}}</span>
+              </div>
+            </div>
+            <!-- Service Request -->
+            <div class="form-group">
+              <label class="col-sm-4 control-label">{{'service.request.one' | translate}}</label>
+              <div class="col-sm-6 control-label">
+                <span class="pull-left">{{confirmation.request.description}}</span>
+                <button type="button" class="btn btn-xs btn-default" ng-click="toggleQuickView()"><i class="fa" ng-class="{'fa-arrow-right': !isQuickViewOpen(), 'fa-arrow-left': isQuickViewOpen()}"></i></button>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <!-- Start Date -->
+            <div class="form-group">
+              <label class="col-sm-4 control-label">{{'service.request.confirmation.startDate' | translate}}</label>
+              <div class="col-sm-6 control-label">
+                <span class="pull-left">{{confirmation.startDate | date:'dd/MM/yyyy'}}</span>
+              </div>
+            </div>
+            <!-- End Date -->
+            <div class="form-group">
+              <label class="col-sm-4 control-label">{{'service.request.confirmation.endDate' | translate}}</label>
+              <div class="col-sm-6 control-label">
+                <span class="pull-left">{{confirmation.endDate | date:'dd/MM/yyyy'}}</span>
+              </div>
+            </div>
+            <!-- Time spent -->
+            <div class="form-group">
+              <label class="col-sm-4 control-label" for="timeSpent">{{'service.request.confirmation.timeSpent' | translate}}</label>
+              <div class="col-sm-6 control-label">
+                <span class="pull-left">{{confirmation.timeSpent}} {{confirmation.timeSpentUnitName}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </panel-body>
+    </panel>
+  </div>
+  
+  <div id="serviceRequestQuickView" ng-if="isQuickViewOpen()">
+    <ng-include src="'views/service/requests/confirmations/partials/_request.detail.html'"></ng-include>
+  </div>
+</div>
