@@ -49,8 +49,8 @@ module.exports = function(app) {
 		app.use(allowCrossDomain);
     app.use(require('connect-livereload')());
     app.use(express.static(path.join(config.root, '.tmp')));
-    app.use(express.static(path.join(config.root, 'client/app-material')));
-    app.set('appPath', path.join(config.root, 'client/app-material'));
+    app.use(express.static(path.join(config.root, 'client/app')));
+    app.set('appPath', path.join(config.root, 'client/app'));
     app.use(morgan('dev'));
     app.use(errorHandler()); // Error handler - has to be last
   }

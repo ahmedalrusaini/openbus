@@ -8,7 +8,7 @@
     "update-webdriver": "node node_modules/grunt-protractor-runner/node_modules/protractor/bin/webdriver-manager update"
   },
   "dependencies": {
-    "body-parser": "~1.10.2",
+    "body-parser": "^1.14.2",
     "cli-color": "^0.3.2",
     "composable-middleware": "^0.3.0",
     "compression": "^1.0.1",
@@ -20,8 +20,10 @@
     "express": "~4.11.1",
     "express-jwt": "^1.0.0",
     "express-session": "^1.0.2",
+    "grunt-build-control": "github:daftmonk/grunt-build-control",
     "i18n": "^0.5.0",
     "jsonwebtoken": "^3.2.2",
+    "kerberos": "0.0.17",
     "lodash": "^2.4.1",
     "method-override": "^1.0.0",
     "mongoose": "^4.0.5",
@@ -60,7 +62,7 @@
     "grunt-mocha-test": "~0.10.2",
     "grunt-newer": "~0.7.0",
     "grunt-ng-annotate": "^0.2.3",
-    "grunt-node-inspector": "~0.1.5",
+    "grunt-node-inspector": ">=0.1.5",
     "grunt-nodemon": "~0.2.0",
     "grunt-open": "~0.2.3",
     "grunt-protractor-runner": "^1.1.0",
