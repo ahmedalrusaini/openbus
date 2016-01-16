@@ -7,9 +7,8 @@ var _ = require('lodash');
 var i18n = require('i18n');
 
 var UserSchema = new Schema({
-  firstname: String,
-  lastname: String,
-  birthdate: Date,
+  firstname: { type: String, default: "" },
+  lastname: { type: String, default: "" },
   email: {
     type: String,
     lowercase: true
@@ -21,6 +20,7 @@ var UserSchema = new Schema({
   hashedPassword: String,
   provider: String,
   salt: String,
+  birthdate: Date,
   createdAt: Date,
   updatedAt: Date,
   employee: {
@@ -56,17 +56,19 @@ UserSchema
       'firstname': this.firstname,
       'lastname': this.lastname,
       'role': this.role,
-      'fullname': this.fullname
+      'fullname': this.fullname,
+      'birthdate': this.birthdate
     };
   });
 
 UserSchema
   .virtual('fullname')
   .get(function () {
-    if (!this.firstname || !this.lastname) {
-      return "";
-    }
-    return (this.firstname || '') + " " + (this.lastname || '');
+    var fullname = "";
+    fullname = this.firstname;
+    if(this.firstname && this.lastname) { fullname += " "; }
+    fullname += this.lastname;    
+    return fullname;
   });
 
 UserSchema

@@ -39,8 +39,11 @@ exports.index = function(req, res) {
   
   if(req.query.role) { query.role = req.query.role };
   
-  User.find(query, '-salt -hashedPassword', function (err, users) {
+  var order = req.query.order || "email";
+
+  User.find(query, '-salt -hashedPassword').sort(order).exec(function (err, users) {
     if(err) return res.status(500).json(err);
+    
     res.status(200).json(users);
   });
 };
@@ -68,6 +71,7 @@ exports.show = function (req, res, next) {
   User.findById(userId, function (err, user) {
     if (err) return next(err);
     if (!user) return res.send(401);
+
     res.json(user);
   });
 };

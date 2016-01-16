@@ -19,8 +19,16 @@ var i18n = require('i18n');
 
 module.exports = function(app) {
   var env = app.get('env');
+	
+	var allowCrossDomain = function(req, res, next) {
+    // res.header('Access-Control-Allow-Origin', 'http://localhost:9001');
+    // res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    // res.header('Access-Control-Allow-Headers', 'Access-Control-Allow-Origin,Content-Type,Authorization');
+    next();
+  }
+
   
-  app.set('views', config.root + '/server/views');
+	app.set('views', config.root + '/server/views');
   app.engine('html', require('ejs').renderFile);
   app.set('view engine', 'html');
   app.use(compression());
@@ -38,10 +46,11 @@ module.exports = function(app) {
   }
 
   if ('development' === env || 'test' === env) {
+		app.use(allowCrossDomain);
     app.use(require('connect-livereload')());
     app.use(express.static(path.join(config.root, '.tmp')));
-    app.use(express.static(path.join(config.root, 'client/app')));
-    app.set('appPath', path.join(config.root, 'client/app'));
+    app.use(express.static(path.join(config.root, 'client/app-material')));
+    app.set('appPath', path.join(config.root, 'client/app-material'));
     app.use(morgan('dev'));
     app.use(errorHandler()); // Error handler - has to be last
   }
@@ -58,7 +67,7 @@ module.exports = function(app) {
   
   app.use(function(req, res, next) {
     try {
-      var appLocale = require(config.root + "/client/app/scripts/i18n/locale.js");
+      var appLocale = require(config.root + "/client/app-material/scripts/i18n/locale.js");
       res.setLocale(appLocale.language);  
     } catch(e) {}
     

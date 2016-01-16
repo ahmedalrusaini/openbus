@@ -28,14 +28,46 @@
 //  });
 //});
 
-// var Account = require('../api/account/account.model');
-// var account = Account.create({
-//     name: "A new account",
-//     employees: [{
-//       type: 'responsible',
-//       empid: '559161feec96fa8f0aa4c49d'
-//     }]
+// var User = require('../api/user/user.model');
+// User.find({}).remove(function(){
+//   User.create({
+//     firstname: "Gigi",
+//     lastname: "Pratone",
+//     email: "admin@admin.com",
+//     password: "admin",
+//     role: 'admin',
+//     birthdate: new Date()
+//   });
+//
+//   User.create({
+//     firstname: "Master",
+//     lastname: "Mister",
+//     email: "test@test.com",
+//     password: "test",
+//     role: 'user'
+//   });
 // });
+
+var Account = require('../api/account/account.model');
+
+Account.find({}).remove(function(){
+  Account.create({
+    name: "Alphaboats",
+    type: "organization"
+  });
+
+  Account.create({
+    name: "General Iron",
+    type: "organization"
+    
+  });
+
+  Account.create({
+    name: "Ermeto S.r.l.",
+    type: "person"
+  });
+  
+});
 
 // var account = new Account({
 //     name: "Test Account",

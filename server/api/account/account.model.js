@@ -43,8 +43,6 @@ AccountSchema.pre("save", function(next) {
   if (stdAddresses.length > 1) {
     next(new Error('account.errors.addresses.multipleStandard'));
   } else {
-    console.log(account.addresses);
-    
     if(stdAddresses.length == 0 && account.addresses.length == 1) {
       account.addresses[0].standard = true;
     }
